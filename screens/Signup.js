@@ -12,7 +12,7 @@ class Signup extends React.Component {
         password: ''
     }
 
-
+   
     handleSignUp = () => {
         this.props.signup()
         this.props.navigation.navigate('Profile')
@@ -43,6 +43,7 @@ class Signup extends React.Component {
                     onPress={() => this.props.navigation.navigate('Login')}
                 />
             </View>
+            /*BSPM2021T6-142 */
         )
     }
 }
