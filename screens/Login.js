@@ -9,6 +9,7 @@ class Login extends React.Component {
     
     componentDidMount = () => {
         Firebase.auth().onAuthStateChanged(user => {
+            /*BSPM2021T6-115 UnitTesting */
             if (user) {
                 this.props.getUser(user.uid)
                 if (this.props.user != null) {
