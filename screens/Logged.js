@@ -7,6 +7,7 @@ class Profile extends React.Component {
     handleSignout = () => {
         Firebase.auth().signOut()
         this.props.navigation.navigate('Login')
+        /*BSPM2021T6-113 BackEnd */
     }
 
     render() {
@@ -15,6 +16,7 @@ class Profile extends React.Component {
                 <Text>Profile Screen</Text>
                 <Text>{this.props.user.email}</Text>
                 <Button title='Logout' onPress={this.handleSignout} />
+                {/*BSPM2021T6-112 FrontEnd*/}
             </View>
         )
     }
