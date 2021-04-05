@@ -15,6 +15,7 @@ class Profile extends React.Component {
                 <Text>Profile Screen</Text>
                 <Text>{this.props.user.email}</Text>
                 <Button title='Logout' onPress={this.handleSignout} />
+                {/*BSPM2021T6-112 FrontEnd*/}
             </View>
         )
     }
