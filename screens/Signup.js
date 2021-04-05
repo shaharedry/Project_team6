@@ -16,6 +16,7 @@ class Signup extends React.Component {
     handleSignUp = () => {
         this.props.signup()
         this.props.navigation.navigate('Profile')
+        /*BSPM2021T6-144 BackEnd */
     }
 
     render() {
@@ -43,7 +44,7 @@ class Signup extends React.Component {
                     onPress={() => this.props.navigation.navigate('Login')}
                 />
             </View>
-            /*BSPM2021T6-142 */
+            /*BSPM2021T6-142 FrontEnd*/
         )
     }
 }
