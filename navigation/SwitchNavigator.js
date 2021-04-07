@@ -24,4 +24,6 @@ const SwitchNavigator = createSwitchNavigator(
     }
 )
 
+
+
 export default createAppContainer(SwitchNavigator)
