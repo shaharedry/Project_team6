@@ -6,6 +6,10 @@ import Logged from '../screens/Logged'
 
 const SwitchNavigator = createSwitchNavigator(
     {
+        FirstScreen: {
+            screen: FirstScreen
+        },
+
         Login: {
             screen: Login
         },
@@ -20,8 +24,10 @@ const SwitchNavigator = createSwitchNavigator(
 
     },
     {
-        initialRouteName: 'Login'
+        initialRouteName: 'FirstScreen'
     }
 )
+
+
 
 export default createAppContainer(SwitchNavigator)
