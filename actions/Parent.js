@@ -10,7 +10,7 @@ export const SIGNUP = 'SIGNUP'
 export const updateEmail = email => {
     return {
         type: UPDATE_EMAIL,
-        payload: email 
+        payload: email
     }
 }
 
@@ -25,7 +25,7 @@ export const login = () => {
     return async (dispatch, getState) => {
         try {
             const { username, id, email, password } = getState().user
-            const response = await Firebase.auth().signInWithEmailAndPassword(username, id, email, password)
+            const response = await Firebase.auth().signInWithEmailAndPassword(email, password)
 
             dispatch(getUser(response.user.uid))
         } catch (e) {
@@ -54,11 +54,11 @@ export const signup = () => {
     return async (dispatch, getState) => {
         try {
             const { username, id, email, password } = getState().user
-            const response = await Firebase.auth().createUserWithEmailAndPassword(username, id, email, password)
+            const response = await Firebase.auth().createUserWithEmailAndPassword(email, password)
             if (response.user.uid) {
                 const user = {
                     uid: response.user.uid,
-                    email: email
+                    email: email,
                 }
 
                 db.collection('Parent')

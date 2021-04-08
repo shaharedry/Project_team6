@@ -1,6 +1,6 @@
 import React from 'react'
 import {Button, View, Text, StyleSheet, TextInput, TouchableOpacity} from 'react-native'
-import Firebase from '../config/Firebase'
+import Firebase from '../../config/Firebase'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { updateEmail, updatePassword, signup } from '../../actions/Parent'
@@ -23,14 +23,14 @@ class Signup extends React.Component {
             <View style={styles.container}>
                 <TextInput
                     style={styles.inputBox}
-                    value={this.props.parent.email}
+                    value={this.props.email}
                     onChangeText={email => this.props.updateEmail(email)}
                     placeholder='Email'
                     autoCapitalize='none'
                 />
                 <TextInput
                     style={styles.inputBox}
-                    value={this.props.parent.password}
+                    value={this.props.password}
                     onChangeText={password => this.props.updatePassword(password)}
                     placeholder='Password'
                     secureTextEntry={true}
