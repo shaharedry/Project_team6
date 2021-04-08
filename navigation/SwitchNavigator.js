@@ -8,6 +8,9 @@ import PSignup from '../screens/Parent/PSignup'
 import PLogged from '../screens/Parent/PLogged'
 import FirstScreen from '../screens/FirstScreen'
 import TypeSignin from '../screens/TypeSignin'
+import TLogin from '../screens/Techer/TLogin'
+import TSignup from '../screens/Techer/TSignup'
+import TLogged from '../screens/Techer/TLogged'
 
 const SwitchNavigator = createSwitchNavigator(
     {
@@ -30,6 +33,7 @@ const SwitchNavigator = createSwitchNavigator(
         Logged: {
             screen: Logged
         },
+
         PLogin: {
             screen: PLogin
         },
@@ -40,9 +44,19 @@ const SwitchNavigator = createSwitchNavigator(
 
         PLogged: {
             screen: PLogged
-        }
+        },
         
+        TLogin: {
+            screen: TLogin
+        },
 
+        TSignup: {
+            screen: TSignup
+        },
+
+        TLogged: {
+            screen: TLogged
+        }
     },
     {
         initialRouteName: 'FirstScreen'
