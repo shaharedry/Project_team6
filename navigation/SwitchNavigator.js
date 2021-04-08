@@ -8,6 +8,9 @@ import PSignup from '../screens/Parent/PSignup'
 import PLogged from '../screens/Parent/PLogged'
 import FirstScreen from '../screens/FirstScreen'
 import TypeSignin from '../screens/TypeSignin'
+import PLogin from '../screens/Child/CLogin'
+import PLogin from '../screens/Child/CLooged'
+import CLogin from '../screens/Child/CLogin'
 
 const SwitchNavigator = createSwitchNavigator(
     {
@@ -40,8 +43,13 @@ const SwitchNavigator = createSwitchNavigator(
 
         PLogged: {
             screen: PLogged
+        },
+        CLogged: {
+            screen: CLogged
+        }, 
+        CLogin: {
+            screen: CLogin
         }
-        
 
     },
     {
