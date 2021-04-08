@@ -29,6 +29,12 @@ class Signup extends React.Component {
                     autoCapitalize='none'
                 />
                 <TextInput
+                    style={styles.inputStyle}
+                    placeholder="ID"
+                    value={this.state.displayName}
+                    onChangeText={(val) => this.updateInputVal(val, 'displayID')}
+                />
+                <TextInput
                     style={styles.inputBox}
                     value={this.props.password}
                     onChangeText={password => this.props.updatePassword(password)}
