@@ -1,7 +1,7 @@
 import Firebase, { db } from '../config/Firebase.js'
 
 // define types
- /*Takes care of all action*/
+
 export const UPDATE_EMAIL = 'UPDATE_EMAIL'
 export const UPDATE_PASSWORD = 'UPDATE_PASSWORD'
 export const LOGIN = 'LOGIN'
@@ -38,7 +38,7 @@ export const getUser = uid => {
     return async (dispatch, getState) => {
         try {
             const user = await db
-                .collection('users')
+                .collection('Teacher')
                 .doc(uid)
                 .get()
 
@@ -61,7 +61,7 @@ export const signup = () => {
                     email: email
                 }
 
-                db.collection('users')
+                db.collection('Teacher')
                     .doc(response.user.uid)
                     .set(user)
 
