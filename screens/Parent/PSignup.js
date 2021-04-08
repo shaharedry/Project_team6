@@ -42,6 +42,10 @@ class Signup extends React.Component {
                     title="Back to Login"
                     onPress={() => this.props.navigation.navigate('PLogin')}
                 />
+                <Button
+                    title="Back To Main"
+                    onPress={() => this.props.navigation.navigate('FirstScreen')}
+                />
             </View>
         )
     }

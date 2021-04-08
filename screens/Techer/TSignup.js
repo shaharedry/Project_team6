@@ -1,10 +1,9 @@
 import React from 'react'
 import {Button, View, Text, StyleSheet, TextInput, TouchableOpacity} from 'react-native'
-import Firebase from '../config/Firebase'
+import Firebase from '../../config/Firebase'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { updateEmail, updatePassword, signup } from '../actions/user'
-import Colors from '../constants/Colors'
+import { updateEmail, updatePassword, signup } from '../../actions/Parent'
 
 class Signup extends React.Component {
     state = {
@@ -16,39 +15,43 @@ class Signup extends React.Component {
 
     handleSignUp = () => {
         this.props.signup();
-        this.props.navigation.navigate('Logged')
+        this.props.navigation.navigate('TLogged')
     }
 
     render() {
-        return(
-            <View style={styles.screen}>
-                <View style={styles.buttonContainer}>
-                    <Button title="Sign Up as Teacher" onPress={() => {this.props.navigation.navigate('TSignup')}} color={Colors.secondery}/>
-                </View>
-                <View style={styles.buttonContainer}>
-                    <Button title="Sign Up as Parent" onPress={() => {this.props.navigation.navigate('PSignup')}} color={Colors.secondery}/>
-                </View>
+        return (
+            <View style={styles.container}>
+                <TextInput
+                    style={styles.inputBox}
+                    value={this.props.email}
+                    onChangeText={email => this.props.updateEmail(email)}
+                    placeholder='Email'
+                    autoCapitalize='none'
+                />
+                <TextInput
+                    style={styles.inputBox}
+                    value={this.props.password}
+                    onChangeText={password => this.props.updatePassword(password)}
+                    placeholder='Password'
+                    secureTextEntry={true}
+                />
+                <TouchableOpacity style={styles.button} onPress={this.handleSignUp}>
+                    <Text style={styles.buttonText}>Signup</Text>
+                </TouchableOpacity>
+                <Button
+                    title="Back to Login"
+                    onPress={() => this.props.navigation.navigate('TLogin')}
+                />
+                <Button
+                    title="Back To Main"
+                    onPress={() => this.props.navigation.navigate('FirstScreen')}
+                />
             </View>
-            );
-          }
+        )
+    }
 }
 
 const styles = StyleSheet.create({
-    screen: {
-        flex: 1,
-        padding : 100,
-        alignItems: 'center',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    buttonContainer:{
-        width: 250,
-        height: 150,
-        justifyContent: 'center',
-        paddingBottom: 100 ,
-        borderRadius: 10
-    },
     container: {
         flex: 1,
         backgroundColor: '#fff',
@@ -91,7 +94,7 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
     return {
-        user: state.parent
+        user: state.Techer
     }
 }
 

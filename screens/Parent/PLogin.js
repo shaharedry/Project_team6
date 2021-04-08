@@ -52,6 +52,10 @@ class Login extends React.Component {
                     title="Don't have an account yet? Sign up"
                     onPress={() => this.props.navigation.navigate('PSignup')}
                 />
+                 <Button
+                    title="Back To Main"
+                    onPress={() => this.props.navigation.navigate('FirstScreen')}
+                />
             </View>
         )
     }
