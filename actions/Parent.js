@@ -10,7 +10,7 @@ export const SIGNUP = 'SIGNUP'
 export const updateEmail = email => {
     return {
         type: UPDATE_EMAIL,
-        payload: email
+        payload: email 
     }
 }
 
