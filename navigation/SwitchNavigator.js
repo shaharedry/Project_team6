@@ -3,6 +3,9 @@ import { createSwitchNavigator, createAppContainer } from 'react-navigation'
 import Login from '../screens/Login'
 import Signup from '../screens/Signup'
 import Logged from '../screens/Logged'
+import PLogin from '../screens/Parent/PLogin'
+import PSignup from '../screens/Parent/PSignup'
+import PLogged from '../screens/Parent/PLogged'
 
 const SwitchNavigator = createSwitchNavigator(
     {
@@ -16,7 +19,19 @@ const SwitchNavigator = createSwitchNavigator(
 
         Logged: {
             screen: Logged
+        },
+        PLogin: {
+            screen: PLogin
+        },
+
+        PSignup: {
+            screen: PSignup
+        },
+
+        PLogged: {
+            screen: PLogged
         }
+        
 
     },
     {
