@@ -26,7 +26,19 @@ const SwitchNavigator = createSwitchNavigator(
 
         Logged: {
             screen: Logged
+        },
+        PLogin: {
+            screen: PLogin
+        },
+
+        PSignup: {
+            screen: PSignup
+        },
+
+        PLogged: {
+            screen: PLogged
         }
+        
 
     },
     {

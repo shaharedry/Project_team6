@@ -24,8 +24,8 @@ export const updatePassword = password => {
 export const login = () => {
     return async (dispatch, getState) => {
         try {
-            const { email, password } = getState().user
-            const response = await Firebase.auth().signInWithEmailAndPassword(email, password)
+            const { username, id, email, password } = getState().user
+            const response = await Firebase.auth().signInWithEmailAndPassword(username, id, email, password)
 
             dispatch(getUser(response.user.uid))
         } catch (e) {
@@ -53,8 +53,8 @@ export const getUser = uid => {
 export const signup = () => {
     return async (dispatch, getState) => {
         try {
-            const { email, password } = getState().user
-            const response = await Firebase.auth().createUserWithEmailAndPassword(email, password)
+            const { username, id, email, password } = getState().user
+            const response = await Firebase.auth().createUserWithEmailAndPassword(username, id, email, password)
             if (response.user.uid) {
                 const user = {
                     uid: response.user.uid,
