@@ -8,7 +8,7 @@ class FirstScreen extends React.Component {
       return(
         <View style={styles.screen}>
             <View style={styles.buttonContainer}>
-                <Button title="Sign In" onPress={() => {this.props.navigation.navigate('Login')}} color='#1e90ff'/>
+                <Button title="Sign In" onPress={() => {this.props.navigation.navigate('TypeSignin')}} color='#1e90ff'/>
             </View>
             <View style={styles.buttonContainer}>
                 <Button title="Sign Up" onPress={() => {this.props.navigation.navigate('Signup')}} color='#1e90ff'/>
