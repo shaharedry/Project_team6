@@ -4,6 +4,7 @@ import Firebase from '../config/Firebase'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { updateEmail, updatePassword, login, getUser} from '../actions/user'
+import Colors from '../constants/Colors'
 
 class TypeSignin extends React.Component {
     state = {
@@ -18,7 +19,7 @@ class TypeSignin extends React.Component {
                     <Button title="Teacher" onPress={() => {this.props.navigation.navigate('Login')}} color={Colors.secondery}/>
                 </View>
                 <View style={styles.buttonContainer}>
-                    <Button title="Perent" onPress={() => {this.props.navigation.navigate('Login')}} color={Colors.secondery}/>
+                    <Button title="Perent" onPress={() => {this.props.navigation.navigate('PLogin')}} color={Colors.secondery}/>
                 </View>
                 <View style={styles.buttonContainer}>
                     <Button title="Child" onPress={() => {this.props.navigation.navigate('Login')}} color={Colors.secondery}/>
@@ -29,6 +30,14 @@ class TypeSignin extends React.Component {
     };
 
 const styles = StyleSheet.create({
+    screen: {
+        flex: 1,
+        padding : 100,
+        alignItems: 'center',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
     buttonContainer:{
         width: 250,
         height: 150,
