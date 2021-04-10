@@ -13,8 +13,8 @@ class Profile extends React.Component {
         return (
             <View style={styles.container}>
                 <Text>Profile Screen</Text>
-                <Text>{this.props.user.email}</Text>
-                <Button title='Logout' onPress={this.handleSignout} />
+                <Text >{this.props.user.email}</Text>
+                <Button title='return' onPress={this.handleSignout} />
             </View>
         )
     }
