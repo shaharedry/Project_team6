@@ -45,7 +45,7 @@ class Signup extends React.Component {
                     <Text style={styles.buttonText}>Signup</Text>
                 </TouchableOpacity>
                 <Button
-                    title="Back to Login"
+                    title="Back to Login us Parent"
                     onPress={() => this.props.navigation.navigate('PLogin')}
                 />
                 <Button
