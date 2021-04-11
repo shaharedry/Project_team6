@@ -23,6 +23,13 @@ class Signup extends React.Component {
             <View style={styles.container}>
                 <TextInput
                     style={styles.inputBox}
+                    //value={this.props.email}
+                    //onChangeText={email => this.props.updateEmail(email)}
+                    placeholder='User name'
+                    autoCapitalize='none'
+                />
+                <TextInput
+                    style={styles.inputBox}
                     value={this.props.email}
                     onChangeText={email => this.props.updateEmail(email)}
                     placeholder='Email'
@@ -35,11 +42,25 @@ class Signup extends React.Component {
                     placeholder='Password'
                     secureTextEntry={true}
                 />
+                <TextInput
+                    style={styles.inputBox}
+                    //value={this.props.password}
+                    //onChangeText={password => this.props.updatePassword(password)}
+                    placeholder='School name'
+                    secureTextEntry={true}
+                />
+                <TextInput
+                    style={styles.inputBox}
+                    //value={this.props.password}
+                    //onChangeText={password => this.props.updatePassword(password)}
+                    placeholder='ID'
+                    secureTextEntry={true}
+                />
                 <TouchableOpacity style={styles.button} onPress={this.handleSignUp}>
                     <Text style={styles.buttonText}>Signup</Text>
                 </TouchableOpacity>
                 <Button
-                    title="Back to Login"
+                    title="Back to Login us Teacher"
                     onPress={() => this.props.navigation.navigate('TLogin')}
                 />
                 <Button
