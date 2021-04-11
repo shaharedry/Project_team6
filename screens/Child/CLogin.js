@@ -48,10 +48,6 @@ class Login extends React.Component {
                 <TouchableOpacity style={styles.button} onPress={() => this.props.login()}>
                     <Text style={styles.buttonText}>Login</Text>
                 </TouchableOpacity> 
-                <Button
-                    title="Don't have an account yet? Sign up"
-                    onPress={() => this.props.navigation.navigate('PSignup')}
-                />
                  <Button
                     title="Back To Main"
                     onPress={() => this.props.navigation.navigate('FirstScreen')}
