@@ -23,13 +23,10 @@ class Signup extends React.Component {
         return(
             <View style={styles.screen}>
                 <View style={styles.buttonContainer}>
-                    <Button title="Sign Up as Teacher" onPress={() => {this.props.navigation.navigate('Login')}} color={Colors.secondery}/>
+                    <Button title="Sign Up as Teacher" onPress={() => {this.props.navigation.navigate('TSignup')}} color={Colors.secondery}/>
                 </View>
                 <View style={styles.buttonContainer}>
                     <Button title="Sign Up as Parent" onPress={() => {this.props.navigation.navigate('PSignup')}} color={Colors.secondery}/>
-                </View>
-                <View style={styles.buttonContainer}>
-                    <Button title="Sign Up as Child" onPress={() => {this.props.navigation.navigate('Login')}} color={Colors.secondery}/>
                 </View>
             </View>
             );

@@ -3,7 +3,7 @@ import {Button, View, Text, StyleSheet, TextInput, TouchableOpacity} from 'react
 import Firebase from '../../config/Firebase'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { updateEmail, updatePassword, signup } from '../../actions/Parent'
+import { updateEmail, updatePassword, signup } from '../../actions/Teacher'
 
 class Signup extends React.Component {
     state = {
@@ -15,7 +15,7 @@ class Signup extends React.Component {
 
     handleSignUp = () => {
         this.props.signup();
-        this.props.navigation.navigate('PLogged')
+        this.props.navigation.navigate('TLogged')
     }
 
     render() {
@@ -29,12 +29,6 @@ class Signup extends React.Component {
                     autoCapitalize='none'
                 />
                 <TextInput
-                    style={styles.inputStyle}
-                    placeholder="ID"
-                    value={this.state.displayName}
-                    onChangeText={(val) => this.updateInputVal(val, 'displayID')}
-                />
-                <TextInput
                     style={styles.inputBox}
                     value={this.props.password}
                     onChangeText={password => this.props.updatePassword(password)}
@@ -46,7 +40,7 @@ class Signup extends React.Component {
                 </TouchableOpacity>
                 <Button
                     title="Back to Login"
-                    onPress={() => this.props.navigation.navigate('PLogin')}
+                    onPress={() => this.props.navigation.navigate('TLogin')}
                 />
                 <Button
                     title="Back To Main"
@@ -100,7 +94,7 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
     return {
-        user: state.parent
+        user: state.Techer
     }
 }
 

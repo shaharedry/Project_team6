@@ -14,15 +14,15 @@ class TypeSignin extends React.Component {
 
     render() {
         return(
-            <View style={styles.screen}>
+                <View style={styles.screen}>
                 <View style={styles.buttonContainer}>
-                    <Button title="Teacher" onPress={() => {this.props.navigation.navigate('Login')}} color={Colors.secondery}/>
+                    <Button title="Sign In as Teacher" onPress={() => {this.props.navigation.navigate('TLogin')}} color={Colors.secondery}/>
                 </View>
                 <View style={styles.buttonContainer}>
-                    <Button title="Perent" onPress={() => {this.props.navigation.navigate('PLogin')}} color={Colors.secondery}/>
+                    <Button title="Sign In as Parent" onPress={() => {this.props.navigation.navigate('PLogin')}} color={Colors.secondery}/>
                 </View>
                 <View style={styles.buttonContainer}>
-                    <Button title="Child" onPress={() => {this.props.navigation.navigate('Login')}} color={Colors.secondery}/>
+                    <Button title="Sign In as Child" onPress={() => {this.props.navigation.navigate('Login')}} color={Colors.secondery}/>
                 </View>
             </View>
             );
