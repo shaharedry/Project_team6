@@ -11,6 +11,9 @@ import TypeSignin from '../screens/TypeSignin'
 import TLogin from '../screens/Techer/TLogin'
 import TSignup from '../screens/Techer/TSignup'
 import TLogged from '../screens/Techer/TLogged'
+import EnterGrades from '../screens/Techer/EnterGrades'
+import EnterPresence from '../screens/Techer/EnterPresence'
+
 
 const SwitchNavigator = createSwitchNavigator(
     {
@@ -56,6 +59,12 @@ const SwitchNavigator = createSwitchNavigator(
 
         TLogged: {
             screen: TLogged
+        },
+        EnterGrades: {
+            screen: EnterGrades
+        },
+        EnterPresence: {
+            screen: EnterPresence
         }
     },
     {
