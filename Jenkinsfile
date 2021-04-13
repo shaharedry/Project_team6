@@ -26,7 +26,7 @@ pipeline {
                 echo 'Finished backend Tests'
             }
         }
-        
+        /*
         stage('Static Analysis') {
             agent {
                 docker {
@@ -51,6 +51,6 @@ pipeline {
                 echo 'Finished Code Coverage'
             }
         }
-        
+        */
     }
 }
