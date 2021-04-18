@@ -8,6 +8,7 @@ class Profile extends React.Component {
         Firebase.auth().signOut()
         this.props.navigation.navigate('PLogin')
     }
+    //Harel is the best!
 
     render() {
         return (
