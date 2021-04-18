@@ -3,7 +3,7 @@ import {Button, View, Text, StyleSheet, TextInput, TouchableOpacity} from 'react
 import Firebase from '../../config/Firebase'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { updateEmail, updatePassword, signup } from '../../actions/Teacher'
+import { updateEmail, updatePassword, signup } from '../../actions/user'
 
 class Signup extends React.Component {
     state = {
@@ -57,15 +57,12 @@ class Signup extends React.Component {
                     secureTextEntry={true}
                 />
                 <TouchableOpacity style={styles.button} onPress={this.handleSignUp}>
-                    <Text style={styles.buttonText}>Signup</Text>
+                    <Text style={styles.buttonText}>Add A Child</Text>
                 </TouchableOpacity>
-                <Button
-                    title="Back to Login us Teacher"
-                    onPress={() => this.props.navigation.navigate('TLogin')}
-                />
+
                 <Button
                     title="Back To Main"
-                    onPress={() => this.props.navigation.navigate('FirstScreen')}
+                    onPress={() => this.props.navigation.navigate('PLogged')}
                 />
             </View>
         )

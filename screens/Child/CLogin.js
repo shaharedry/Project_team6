@@ -3,7 +3,7 @@ import { View, TextInput, StyleSheet, TouchableOpacity, Text, Button } from 'rea
 import Firebase from '../../config/Firebase'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { updateEmail, updatePassword, login, getUser} from '../../actions/Child'
+import { updateEmail, updatePassword, login, getUser} from '../../actions/user'
 
 class Login extends React.Component {
     

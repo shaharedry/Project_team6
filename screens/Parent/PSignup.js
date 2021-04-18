@@ -29,10 +29,11 @@ class Signup extends React.Component {
                     autoCapitalize='none'
                 />
                 <TextInput
-                    style={styles.inputStyle}
-                    placeholder="ID"
-                    value={this.state.displayName}
-                    onChangeText={(val) => this.updateInputVal(val, 'displayID')}
+                    style={styles.inputBox}
+                    //value={this.props.password}
+                    //onChangeText={password => this.props.updatePassword(password)}
+                    placeholder='ID'
+                    secureTextEntry={true}
                 />
                 <TextInput
                     style={styles.inputBox}
@@ -45,7 +46,7 @@ class Signup extends React.Component {
                     <Text style={styles.buttonText}>Signup</Text>
                 </TouchableOpacity>
                 <Button
-                    title="Back to Login us Parent"
+                    title="Have an account? Login as Parent"
                     onPress={() => this.props.navigation.navigate('PLogin')}
                 />
                 <Button

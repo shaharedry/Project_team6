@@ -22,7 +22,7 @@ class TypeSignin extends React.Component {
                     <Button title="Sign In as Parent" onPress={() => {this.props.navigation.navigate('PLogin')}} color={Colors.secondery}/>
                 </View>
                 <View style={styles.buttonContainer}>
-                    <Button title="Sign In as Child" onPress={() => {this.props.navigation.navigate('Login')}} color={Colors.secondery}/>
+                    <Button title="Sign In as Child" onPress={() => {this.props.navigation.navigate('CLogin')}} color={Colors.secondery}/>
                 </View>
             </View>
             );

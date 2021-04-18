@@ -12,6 +12,8 @@ class Profile extends React.Component {
     render() {
         return (
             <View style={styles.container}>
+                <Text>Profile Screen</Text>
+                <Text>{this.props.user.email}</Text>
                 <Button
                     title="Enter Grades"
                     onPress={() => this.props.navigation.navigate('EnterGrades')}
@@ -21,16 +23,8 @@ class Profile extends React.Component {
                     title="Enter presence"
                     onPress={() => this.props.navigation.navigate('EnterPresence')}
                 />
-
-                <Button
-                    title="Add a child"
-                    onPress={() => this.props.navigation.navigate('CSignup')}
-                />
                 
-                 <Button
-                    title="Back To Main"
-                    onPress={() => this.props.navigation.navigate('FirstScreen')}
-                />
+                <Button title='Logout' onPress={this.handleSignout} />
             </View>
         )
     }

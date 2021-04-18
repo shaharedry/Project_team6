@@ -14,6 +14,15 @@ class Profile extends React.Component {
             <View style={styles.container}>
                 <Text>Profile Screen</Text>
                 <Text>{this.props.user.email}</Text>
+
+                <Button
+                    title="Add a child"
+                    onPress={() => this.props.navigation.navigate('CSignup')}
+                />
+                <Button
+                    title="Child profile"
+                    onPress={() => this.props.navigation.navigate('Clogged')}
+                />
                 <Button title='Logout' onPress={this.handleSignout} />
             </View>
         )

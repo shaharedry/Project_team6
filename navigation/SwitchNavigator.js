@@ -13,7 +13,11 @@ import TSignup from '../screens/Techer/TSignup'
 import TLogged from '../screens/Techer/TLogged'
 import EnterGrades from '../screens/Techer/EnterGrades'
 import EnterPresence from '../screens/Techer/EnterPresence'
-
+import CSignup from '../screens/Child/CSignup'
+import CLogin from '../screens/Child/CLogin'
+import Clogged from '../screens/Child/Clogged'
+import Grades from '../screens/Child/Grades'
+import Presence from '../screens/Child/Presence'
 
 const SwitchNavigator = createSwitchNavigator(
     {
@@ -44,7 +48,7 @@ const SwitchNavigator = createSwitchNavigator(
         PSignup: {
             screen: PSignup
         },
-
+        
         PLogged: {
             screen: PLogged
         },
@@ -60,12 +64,35 @@ const SwitchNavigator = createSwitchNavigator(
         TLogged: {
             screen: TLogged
         },
+
         EnterGrades: {
             screen: EnterGrades
         },
+
         EnterPresence: {
             screen: EnterPresence
-        }
+        },
+        
+        CSignup: {
+            screen: CSignup
+        },
+
+        CLogin: {
+            screen: CLogin
+        },
+
+        Clogged: {
+            screen: Clogged
+        },
+
+        Grades: {
+            screen: Grades
+        },
+
+        Presence: {
+            screen: Presence
+        },
+
     },
     {
         initialRouteName: 'FirstScreen'
