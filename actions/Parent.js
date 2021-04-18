@@ -6,6 +6,7 @@ export const UPDATE_EMAIL = 'UPDATE_EMAIL'
 export const UPDATE_PASSWORD = 'UPDATE_PASSWORD'
 export const LOGIN = 'LOGIN'
 export const SIGNUP = 'SIGNUP'
+export const SIGNOUT = 'SIGNOUT'
 
 export const updateEmail = email => {
     return {
@@ -49,8 +50,19 @@ export const getUser = uid => {
     }
 }
 
+export const logout = () => {
+    return async (dispatch, getState) => {
+        try {
+            const response = await Firebase.auth().signOut();
+            dispatch({ type: SIGNOUT, payload: user })
+        }
+        catch (e) {
+           alert(e)
+        }
+    }
+}
 
-export const signup = () => {
+export const signup = (state) => {
     return async (dispatch, getState) => {
         try {
             const { email, password } = getState().user
@@ -59,8 +71,8 @@ export const signup = () => {
                 const user = {
                     uid: response.user.uid,
                     email: email,
-                    id: idnum,
-                    display: displayname
+                    Role: 'Parent', 
+                    CatchPhrase: user.getState.name
                 }
 
                 db.collection('Parent')
