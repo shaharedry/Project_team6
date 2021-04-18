@@ -30,6 +30,13 @@ class Signup extends React.Component {
                 />
                 <TextInput
                     style={styles.inputBox}
+                    //value={this.props.password}
+                    //onChangeText={password => this.props.updatePassword(password)}
+                    placeholder='ID'
+                    secureTextEntry={true}
+                />
+                <TextInput
+                    style={styles.inputBox}
                     value={this.props.password}
                     onChangeText={password => this.props.updatePassword(password)}
                     placeholder='Password'
@@ -39,8 +46,12 @@ class Signup extends React.Component {
                     <Text style={styles.buttonText}>Signup</Text>
                 </TouchableOpacity>
                 <Button
-                    title="Back to Login"
+                    title="Have an account? Login as Parent"
                     onPress={() => this.props.navigation.navigate('PLogin')}
+                />
+                <Button
+                    title="Back To Main"
+                    onPress={() => this.props.navigation.navigate('FirstScreen')}
                 />
             </View>
         )
