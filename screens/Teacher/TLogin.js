@@ -1,9 +1,9 @@
 import React from 'react'
 import { View, TextInput, StyleSheet, TouchableOpacity, Text, Button } from 'react-native'
-import Firebase from '../config/Firebase'
+import Firebase from '../../config/Firebase'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { updateEmail, updatePassword, login, getUser} from '../actions/user'
+import { updateEmail, updatePassword, login, getUser} from '../../actions/Teacher'
 
 class Login extends React.Component {
     
@@ -12,7 +12,7 @@ class Login extends React.Component {
             if (user) {
                 this.props.getUser(user.uid)
                 if (this.props.user != null) {
-                    this.props.navigation.navigate('Logged')
+                    this.props.navigation.navigate('TLogged')
                 }
             }
         })
@@ -25,7 +25,7 @@ class Login extends React.Component {
 
      handleLogin = () => {
         this.props.login()
-        this.props.navigation.navigate('Logged')
+        this.props.navigation.navigate('TLogged')
     }
 
     render() {
@@ -49,7 +49,11 @@ class Login extends React.Component {
                     <Text style={styles.buttonText}>Login</Text>
                 </TouchableOpacity> 
                 <Button
-                    title="Don't have an account yet? Sign up"
+                    title="Don't have an account yet? Sign up as Teacher"
+                    onPress={() => this.props.navigation.navigate('TSignup')}
+                />
+                 <Button
+                    title="Back To Main"
                     onPress={() => this.props.navigation.navigate('FirstScreen')}
                 />
             </View>

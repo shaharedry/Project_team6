@@ -4,6 +4,7 @@ import Firebase from '../config/Firebase'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { updateEmail, updatePassword, signup } from '../actions/user'
+import Colors from '../constants/Colors'
 
 class Signup extends React.Component {
     state = {
@@ -12,44 +13,42 @@ class Signup extends React.Component {
         password: ''
     }
 
-   
+
     handleSignUp = () => {
-        this.props.signup()
-        this.props.navigation.navigate('Profile')
-        /*BSPM2021T6-144 BackEnd */
+        this.props.signup();
+        this.props.navigation.navigate('Logged')
     }
 
     render() {
-        return (
-            <View style={styles.container}>
-                <TextInput
-                    style={styles.inputBox}
-                    value={this.props.user.email}
-                    onChangeText={email => this.props.updateEmail(email)}
-                    placeholder='Email'
-                    autoCapitalize='none'
-                />
-                <TextInput
-                    style={styles.inputBox}
-                    value={this.props.user.password}
-                    onChangeText={password => this.props.updatePassword(password)}
-                    placeholder='Password'
-                    secureTextEntry={true}
-                />
-                <TouchableOpacity style={styles.button} onPress={this.handleSignUp}>
-                    <Text style={styles.buttonText}>Signup</Text>
-                </TouchableOpacity>
-                <Button
-                    title="Back to Login"
-                    onPress={() => this.props.navigation.navigate('Login')}
-                />
+        return(
+            <View style={styles.screen}>
+                <View style={styles.buttonContainer}>
+                    <Button title="Sign Up as Teacher" onPress={() => {this.props.navigation.navigate('TSignup')}} color={Colors.secondery}/>
+                </View>
+                <View style={styles.buttonContainer}>
+                    <Button title="Sign Up as Parent" onPress={() => {this.props.navigation.navigate('PSignup')}} color={Colors.secondery}/>
+                </View>
             </View>
-            /*BSPM2021T6-142 FrontEnd*/
-        )
-    }
+            );
+          }
 }
 
 const styles = StyleSheet.create({
+    screen: {
+        flex: 1,
+        padding : 100,
+        alignItems: 'center',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    buttonContainer:{
+        width: 250,
+        height: 150,
+        justifyContent: 'center',
+        paddingBottom: 100 ,
+        borderRadius: 10
+    },
     container: {
         flex: 1,
         backgroundColor: '#fff',
@@ -92,7 +91,7 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
     return {
-        user: state.user
+        user: state.parent
     }
 }
 

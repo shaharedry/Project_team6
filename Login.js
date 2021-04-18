@@ -50,7 +50,7 @@ class Login extends React.Component {
                 </TouchableOpacity> 
                 <Button
                     title="Don't have an account yet? Sign up"
-                    onPress={() => this.props.navigation.navigate('FirstScreen')}
+                    onPress={() => this.props.navigation.navigate('Signup')}
                 />
             </View>
         )

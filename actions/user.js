@@ -6,7 +6,7 @@ export const UPDATE_EMAIL = 'UPDATE_EMAIL'
 export const UPDATE_PASSWORD = 'UPDATE_PASSWORD'
 export const LOGIN = 'LOGIN'
 export const SIGNUP = 'SIGNUP'
-
+ 
 export const updateEmail = email => {
     return {
         type: UPDATE_EMAIL,
@@ -72,3 +72,11 @@ export const signup = () => {
         }
     }
 }
+
+export function writeUserData(userId, id, name, email, imageUrl) {
+    firebase.database().ref('users/' + userId).set({
+      username: name,
+      email: email,
+      id : id
+    });
+  }

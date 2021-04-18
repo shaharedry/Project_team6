@@ -1,12 +1,12 @@
 import React from 'react'
 import { View, Text, StyleSheet, Button } from 'react-native'
 import { connect } from 'react-redux'
-import Firebase from '../config/Firebase'
+import Firebase from '../../config/Firebase'
 
-class Profile extends React.Component {
+class Clogged extends React.Component {
     handleSignout = () => {
         Firebase.auth().signOut()
-        this.props.navigation.navigate('Login')
+        this.props.navigation.navigate('CLogin')
     }
 
     render() {
@@ -14,6 +14,16 @@ class Profile extends React.Component {
             <View style={styles.container}>
                 <Text>Profile Screen</Text>
                 <Text>{this.props.user.email}</Text>
+
+                <Button
+                    title="Watch Grades"
+                    onPress={() => this.props.navigation.navigate('Grades')}
+                />
+                
+                <Button
+                    title="Watch Presence"
+                    onPress={() => this.props.navigation.navigate('Presence')}
+                />
                 <Button title='Logout' onPress={this.handleSignout} />
             </View>
         )
@@ -35,4 +45,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(Profile)
+export default connect(mapStateToProps)(Clogged)

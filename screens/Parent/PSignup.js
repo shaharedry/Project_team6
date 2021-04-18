@@ -1,31 +1,21 @@
 import React from 'react'
-import { View, TextInput, StyleSheet, TouchableOpacity, Text, Button } from 'react-native'
-import Firebase from '../config/Firebase'
+import {Button, View, Text, StyleSheet, TextInput, TouchableOpacity} from 'react-native'
+import Firebase from '../../config/Firebase'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { updateEmail, updatePassword, login, getUser} from '../actions/user'
+import { updateEmail, updatePassword, signup } from '../../actions/Parent'
 
-class Login extends React.Component {
-    
-    componentDidMount = () => {
-        Firebase.auth().onAuthStateChanged(user => {
-            if (user) {
-                this.props.getUser(user.uid)
-                if (this.props.user != null) {
-                    this.props.navigation.navigate('Logged')
-                }
-            }
-        })
+class Signup extends React.Component {
+    state = {
+        name: '',
+        email: '',
+        password: ''
     }
 
-    state = {
-        email: "",
-        password: ""
-     }
 
-     handleLogin = () => {
-        this.props.login()
-        this.props.navigation.navigate('Logged')
+    handleSignUp = () => {
+        this.props.signup();
+        this.props.navigation.navigate('PLogged')
     }
 
     render() {
@@ -33,29 +23,41 @@ class Login extends React.Component {
             <View style={styles.container}>
                 <TextInput
                     style={styles.inputBox}
-                    value={this.props.user.email}
+                    value={this.props.email}
                     onChangeText={email => this.props.updateEmail(email)}
                     placeholder='Email'
                     autoCapitalize='none'
                 />
                 <TextInput
                     style={styles.inputBox}
-                    value={this.props.user.password}
+                    //value={this.props.password}
+                    //onChangeText={password => this.props.updatePassword(password)}
+                    placeholder='ID'
+                    secureTextEntry={true}
+                />
+                <TextInput
+                    style={styles.inputBox}
+                    value={this.props.password}
                     onChangeText={password => this.props.updatePassword(password)}
                     placeholder='Password'
                     secureTextEntry={true}
                 />
-                <TouchableOpacity style={styles.button} onPress={() => this.props.login()}>
-                    <Text style={styles.buttonText}>Login</Text>
-                </TouchableOpacity> 
+                <TouchableOpacity style={styles.button} onPress={this.handleSignUp}>
+                    <Text style={styles.buttonText}>Signup</Text>
+                </TouchableOpacity>
                 <Button
-                    title="Don't have an account yet? Sign up"
+                    title="Have an account? Login as Parent"
+                    onPress={() => this.props.navigation.navigate('PLogin')}
+                />
+                <Button
+                    title="Back To Main"
                     onPress={() => this.props.navigation.navigate('FirstScreen')}
                 />
             </View>
         )
     }
 }
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -77,8 +79,8 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         paddingVertical: 5,
         alignItems: 'center',
-        backgroundColor: '#F6820D',
-        borderColor: '#F6820D',
+        backgroundColor: '#FFA611',
+        borderColor: '#FFA611',
         borderWidth: 1,
         borderRadius: 5,
         width: 200
@@ -94,16 +96,16 @@ const styles = StyleSheet.create({
 })
 
 const mapDispatchToProps = dispatch => {
-    return bindActionCreators({ updateEmail, updatePassword, login, getUser }, dispatch)
+    return bindActionCreators({ updateEmail, updatePassword, signup }, dispatch)
 }
 
 const mapStateToProps = state => {
     return {
-        user: state.user
+        user: state.parent
     }
 }
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Login)
+)(Signup)
