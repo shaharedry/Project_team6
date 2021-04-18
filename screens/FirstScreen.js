@@ -14,6 +14,7 @@ class FirstScreen extends React.Component {
                 <Button title="Sign Up" onPress={() => {this.props.navigation.navigate('Signup')}} color='#1e90ff'/>
             </View>
         </View>
+        //matandbaa
         );
       }
 };
