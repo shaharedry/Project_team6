@@ -7,7 +7,10 @@ class Grades extends React.Component {
     return (
         <View style={styles.container}>
             <Text>Grades</Text>
-            
+            <Button
+                    title="Back To Main"
+                    onPress={() => this.props.navigation.navigate('Clogged')}
+            /> 
 
         </View>
     )
