@@ -21,7 +21,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'npm test -- -u'
+                //sh 'npm test -- -u'
                 echo 'Finished backend Tests'
             }
         }
