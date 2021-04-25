@@ -33,6 +33,7 @@ const ParentSignUp = props => {
                     phonenum: PhoneInput,
                     id:IDInput,
                     Role: 'Parent', 
+                    Children: child
                    
                 }
                 db.collection('Parent')

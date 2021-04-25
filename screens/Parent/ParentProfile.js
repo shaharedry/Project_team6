@@ -16,7 +16,7 @@ const ParentProfile = props => {
                 />
             </View>
             <Button
-                title="Add a child"
+                title="Register a child"
                 onPress={() => {props.navigation.navigate({routeName:'ChildSignUp'})}}
                 style={styles.buttoncontainer}
             />
