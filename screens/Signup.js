@@ -1,36 +1,25 @@
 import React from 'react'
 import {Button, View, Text, StyleSheet, TextInput, TouchableOpacity} from 'react-native'
-import Firebase from '../config/Firebase'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import { updateEmail, updatePassword, signup } from '../actions/user'
-import Colors from '../constants/Colors'
+import Colors from '../constants/colors'
 
-class Signup extends React.Component {
-    state = {
-        name: '',
-        email: '',
-        password: ''
-    }
-
-
-    handleSignUp = () => {
-        this.props.signup();
-        this.props.navigation.navigate('Logged')
-    }
-
-    render() {
-        return(
-            <View style={styles.screen}>
+const Signup = props => {
+    return(
+        <View style={styles.screen}>
+            <Card style={styles.inputcontainer}>
                 <View style={styles.buttonContainer}>
-                    <Button title="Sign Up as Teacher" onPress={() => {this.props.navigation.navigate('TSignup')}} color={Colors.secondery}/>
+                    <Button title="Sign Up as Teacher" onPress={() => {props.navigation.navigate({routeName:'TeacherSignUp'});}} color={Colors.secondery}/>
                 </View>
                 <View style={styles.buttonContainer}>
-                    <Button title="Sign Up as Parent" onPress={() => {this.props.navigation.navigate('PSignup')}} color={Colors.secondery}/>
+                    <Button title="Sign Up as Parent" onPress={() => {props.navigation.navigate({routeName: 'ParentSignUp'});}} color={Colors.secondery}/>
                 </View>
-            </View>
-            );
-          }
+            </Card>
+        </View>
+    );
+}
+
+handleSignUp = () => {
+    this.props.signup();
+    this.props.navigation.navigate('Logged')
 }
 
 const styles = StyleSheet.create({
@@ -85,17 +74,5 @@ const styles = StyleSheet.create({
     }
 })
 
-const mapDispatchToProps = dispatch => {
-    return bindActionCreators({ updateEmail, updatePassword, signup }, dispatch)
-}
 
-const mapStateToProps = state => {
-    return {
-        user: state.parent
-    }
-}
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Signup)
+export default Signup;
