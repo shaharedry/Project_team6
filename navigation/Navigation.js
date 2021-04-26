@@ -1,29 +1,30 @@
 import { createStackNavigator } from 'react-navigation-stack'
 import { createAppContainer } from 'react-navigation';
 
-import colors from '../constants/colors'
+import colors from '../constants/Colors'
 
-import FirstScreen from '../Screens/FirstScreen'
-import TypeSignin from '../Screens/TypeSignin';
+import FirstScreen from '../screens/FirstScreen'
+import TypeSignin from '../screens/TypeSignin';
 
-import ParentLogin from '../Screens/Parent/ParentLogin'
-import ParentProfile from '../Screens/Parent/ParentProfile'
-import ParentSignUp from '../Screens/Parent/ParentSignUp'
-import ParentSignIn from '../Screens/Parent/ParentSignIn'
+import ParentLogin from '../screens/Parent/ParentLogin'
+import ParentProfile from '../screens/Parent/ParentProfile'
+import ParentSignUp from '../screens/Parent/ParentSignUp'
+import ParentSignIn from '../screens/Parent/ParentSignIn'
 
-import TeacherLogin from '../Screens/Teacher/TeacherLogin'
-import TeacherProfile from '../Screens/Teacher/TeacherProfile'
-import TeacherSignUp from '../Screens/Teacher/TeacherSignUp'
+import TeacherLogin from '../screens/Teacher/TeacherLogin'
+import TeacherProfile from '../screens/Teacher/TeacherProfile'
+import TeacherSignUp from '../screens/Teacher/TeacherSignUp'
 
-import EnterGrades from  '../Screens/Teacher/EnterGrades'
-import EnterPresence from  '../Screens/Teacher/EnterPresence'
-import WatchGrades from '../Screens/Child/WatchGrades'
-import WatchPresence from '../Screens/Child/WatchPresence'
+import EnterGrades from  '../screens/Teacher/EnterGrades'
+import EnterPresence from  '../screens/Teacher/EnterPresence'
+import WatchGrades from '../screens/Child/WatchGrades'
+import WatchPresence from '../screens/Child/WatchPresence'
 
-import ChildLogin from '../Screens/Child/ChildLogin'
-import ChildProfile from '../Screens/Child/ChildProfile'
-import ChildSignUp from '../Screens/Child/ChildSignUp'
+import ChildLogin from '../screens/Child/ChildLogin'
+import ChildProfile from '../screens/Child/ChildProfile'
+import ChildSignUp from '../screens/Child/ChildSignUp'
 
+import Signup from '../screens/Signup';
 
 
 
@@ -47,8 +48,9 @@ const AppNavigator = createStackNavigator({
     ChildLogin:{ screen:  ChildLogin ,headerTitle: 'Schovid'},
     ChildProfile:{ screen:  ChildProfile ,headerTitle: 'Schovid'},
     WatchGrades:{ screen:  WatchGrades ,headerTitle: 'Schovid'},
-    WatchPresence:{ screen:  WatchPresence ,headerTitle: 'Schovid'}
-    
+    WatchPresence:{ screen:  WatchPresence ,headerTitle: 'Schovid'},
+
+    Signup:{ screen:  Signup ,headerTitle: 'Schovid'}
 },
 {
     defaultNavigationOptions : {

@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet ,Button ,Image} from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import ProfileImage from '../../components/ProfileImage';
-import colors from '../../constants/colors'
+import colors from '../../constants/Colors'
 
 const ParentProfile = props => {
     return (

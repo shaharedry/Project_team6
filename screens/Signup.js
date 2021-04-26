@@ -1,6 +1,7 @@
 import React from 'react'
 import {Button, View, Text, StyleSheet, TextInput, TouchableOpacity} from 'react-native'
-import Colors from '../constants/colors'
+import Colors from '../constants/Colors'
+import Card from '../components/Card'
 
 const Signup = props => {
     return(
@@ -35,7 +36,8 @@ const styles = StyleSheet.create({
         width: 250,
         height: 150,
         justifyContent: 'center',
-        paddingBottom: 100 ,
+        //paddingBottom: 50 ,
+        //paddingTop: 50,
         borderRadius: 10
     },
     container: {

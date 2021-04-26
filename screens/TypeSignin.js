@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, TextInput, StyleSheet, TouchableOpacity, Text, Button } from 'react-native'
-import colors from '../constants/colors';
+import colors from '../constants/Colors';
 
 const TypeSignin= props => {
     return (

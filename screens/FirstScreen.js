@@ -1,27 +1,44 @@
-import React from 'react';
-import {View, Text, StyleSheet, Button} from 'react-native';
-import { connect } from 'react-redux';
+import React ,{useState} from 'react'
+import {View ,Alert , Text, StyleSheet, Button, TouchableWithoutFeedback, Keyboard} from 'react-native'
 import Card from '../components/Card';
-import colors from '../constants/colors';
+import colors from '../constants/Colors';
+import Input from '../components/Input';
+import ParentSignUp from './Parent/ParentSignUp';
 
 const FirstScreen = props => {
-      return(
-        <View style={styles.screen}>
-            <Card style={styles.inputcontainer}>
-            <View style={styles.buttonContainer}>
-                <Button title="Sign In" onPress={() => {
-                    props.navigation.navigate({routeName: 'TypeSignin'});}} 
-                    color={colors.secondary}/>
+
+    return(
+            <View style={styles.screen}>
+                {/*<Text style={styles.title}>Welcome</Text>*/}
+                <Card style={styles.inputcontainer}>
+                    <View style={styles.buttoncontainer}>
+                        <Button title="Sign Up" onPress={() => {
+                            /*Alert.alert(
+                                'Move To Parent Sign up',
+                                'Your are about to move to the Parent Sign Up screen',
+                                [
+                                  {text: 'OK'}
+                                ],
+                                {cancelable: false},
+                              ); */
+                            props.navigation.navigate({routeName: 'Signup'});
+                        }} color={colors.secondery}/>
+                    </View>    
+                    <View style={styles.buttoncontainer}>
+                        <Button title="Sign In" onPress={() => {
+                             props.navigation.navigate({routeName: 'TypeSignin'});
+                        }} color={colors.secondery} />
+                    </View>
+                    {/*<Input 
+                        style={styles.Input}
+                        blurOnSubmit
+                        onChangeText={InputHandler}
+                        value={enteredInput}
+                        keyBoard='letters'
+                    /> */}
+                </Card>
             </View>
-            <View style={styles.buttonContainer}>
-                <Button title="Sign Up" onPress={() => {
-                    props.navigation.navigate({routeName: 'Signup'});}} 
-                    color={colors.secondary}/>
-            </View>
-            </Card>
-        </View>
-        //matandbaa
-        );
+    );
 };
 
 const styles = StyleSheet.create({
@@ -56,4 +73,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default (FirstScreen)
+export default FirstScreen;
