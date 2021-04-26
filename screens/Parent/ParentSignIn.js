@@ -65,7 +65,7 @@ const ParentSignIn = props => {
                                 }
                                 Firebase.auth().getUser(uid).then((userRecord) => {
                                     // See the UserRecord reference doc for the contents of userRecord.
-                                    console.log(`Successfully fetched user data: ${userRecord.toJSON()}` +userRecord);
+                                    console.log(`Successfully fetched user data: ${userRecord.toJSON()}`);
                                 })
                                 props.navigation.navigate({routeName: 'ParentLogin'});
                                 // ...
