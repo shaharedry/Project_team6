@@ -1,26 +1,36 @@
 import React from 'react'
 import {Button, View, Text, StyleSheet, TextInput, TouchableOpacity} from 'react-native'
+import Firebase from '../config/Firebase'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { updateEmail, updatePassword, signup } from '../actions/user'
 import Colors from '../constants/Colors'
-import Card from '../components/Card'
 
-const Signup = props => {
-    return(
-        <View style={styles.screen}>
-            <Card style={styles.inputcontainer}>
+class Signup extends React.Component {
+    state = {
+        name: '',
+        email: '',
+        password: ''
+    }
+
+
+    handleSignUp = () => {
+        this.props.signup();
+        this.props.navigation.navigate('Logged')
+    }
+
+    render() {
+        return(
+            <View style={styles.screen}>
                 <View style={styles.buttonContainer}>
-                    <Button title="Sign Up as Teacher" onPress={() => {props.navigation.navigate({routeName:'TeacherSignUp'});}} color={Colors.secondery}/>
+                    <Button title="Sign Up as Teacher" onPress={() => {this.props.navigation.navigate('TSignup')}} color={Colors.secondery}/>
                 </View>
                 <View style={styles.buttonContainer}>
-                    <Button title="Sign Up as Parent" onPress={() => {props.navigation.navigate({routeName: 'ParentSignUp'});}} color={Colors.secondery}/>
+                    <Button title="Sign Up as Parent" onPress={() => {this.props.navigation.navigate('PSignup')}} color={Colors.secondery}/>
                 </View>
-            </Card>
-        </View>
-    );
-}
-
-handleSignUp = () => {
-    this.props.signup();
-    this.props.navigation.navigate('Logged')
+            </View>
+            );
+          }
 }
 
 const styles = StyleSheet.create({
@@ -36,8 +46,7 @@ const styles = StyleSheet.create({
         width: 250,
         height: 150,
         justifyContent: 'center',
-        //paddingBottom: 50 ,
-        //paddingTop: 50,
+        paddingBottom: 100 ,
         borderRadius: 10
     },
     container: {
@@ -76,5 +85,17 @@ const styles = StyleSheet.create({
     }
 })
 
+const mapDispatchToProps = dispatch => {
+    return bindActionCreators({ updateEmail, updatePassword, signup }, dispatch)
+}
 
-export default Signup;
+const mapStateToProps = state => {
+    return {
+        user: state.parent
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Signup)

@@ -1,4 +1,4 @@
-import Firebase, { db } from '../firebase/fire'
+import Firebase, { db } from '../config/Firebase.js'
 
 // define types
 
