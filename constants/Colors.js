@@ -1,5 +1,5 @@
 export default{
-    primary: '#87cefa',
-    secondery: '#1e90ff',
+    primary:'#7b68ee' ,
+    secondary:'#87cefa',
     title: 'orange'
 }
