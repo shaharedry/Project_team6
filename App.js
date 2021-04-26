@@ -1,39 +1,33 @@
-import React ,{ useState } from 'react';
+import { StatusBar } from 'expo-status-bar';
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Header from './components/Header';
-import FirstScreen from './screens/FirstScreen';
-import * as Font from 'expo-font';
-import {AppLoading} from 'expo-app-loading';
-import { FontDisplay } from 'expo-font';
-import ReduxThunk from 'redux-thunk';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import Login from './screens/Login';
+import Signup from './screens/Signup';
+import SwitchNavigator from './navigation/SwitchNavigator';
+import { createStore, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
+import thunkMiddleware from 'redux-thunk'
 
-import Navigation from './navigation/Navigation';
+import reducer from './reducers'
 
-/*const FetchFonts =()=>{
-  return Font.loadAsync({
-    'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
-    'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf')
-  })
-}*/
+const middleware = applyMiddleware(thunkMiddleware)
+const store = createStore(reducer, middleware)
 
-
-export default function App() {
-  /*const [FontLoaded,setFontLoaded] = useState(false);
-
-  if(!FontLoaded){
+export default class App extends React.Component {
+  render() {
     return (
-    <AppLoading
-      startAsync={FetchFonts}
-      onFinish={() => setFontLoaded(true)}
-      />
-      );
-    } */
-  return <Navigation/>;
+        <Provider store={store}>
+            <SwitchNavigator />
+        </Provider>
+    )
+}
 }
 
 const styles = StyleSheet.create({
-  screen:{ 
-    flex: 1
-  }
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
