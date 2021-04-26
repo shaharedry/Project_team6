@@ -72,3 +72,11 @@ export const signup = () => {
         }
     }
 }
+
+export function writeUserData(userId, id, name, email, imageUrl) {
+    firebase.database().ref('users/' + userId).set({
+      username: name,
+      email: email,
+      id : id
+    });
+  }

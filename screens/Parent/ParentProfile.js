@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet ,Button ,Image} from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import ProfileImage from '../../components/ProfileImage';
-import colors from '../../constants/colors'
+import colors from '../../constants/Colors'
 
 const ParentProfile = props => {
     return (
@@ -16,7 +16,7 @@ const ParentProfile = props => {
                 />
             </View>
             <Button
-                title="Add a child"
+                title="Register a child"
                 onPress={() => {props.navigation.navigate({routeName:'ChildSignUp'})}}
                 style={styles.buttoncontainer}
             />

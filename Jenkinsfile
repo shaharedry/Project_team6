@@ -10,7 +10,6 @@ pipeline {
             }
             steps {
                 sh 'npm install'
-                sh 'cd backend && npm install'
                 echo 'finished build'
             }
         }
@@ -22,7 +21,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'cd backend && npm run test'
+                //sh 'npm test -- -u'
                 echo 'Finished backend Tests'
             }
         }
