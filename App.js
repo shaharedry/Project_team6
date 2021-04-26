@@ -1,7 +1,7 @@
 import React ,{ useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Header from '../Schovid/components/Header';
-import FirstScreen from './Screens/FirstScreen';
+import Header from './components/Header';
+import FirstScreen from './screens/FirstScreen';
 import * as Font from 'expo-font';
 import {AppLoading} from 'expo-app-loading';
 import { FontDisplay } from 'expo-font';

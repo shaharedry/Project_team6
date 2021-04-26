@@ -8,6 +8,7 @@ import PSignup from '../screens/Parent/PSignup'
 import PLogged from '../screens/Parent/PLogged'
 import FirstScreen from '../screens/FirstScreen'
 import TypeSignin from '../screens/TypeSignin'
+
 import TLogin from '../screens/Teacher/TLogin'
 import TSignup from '../screens/Teacher/TSignup'
 import TLogged from '../screens/Teacher/TLogged'
@@ -52,6 +53,7 @@ const SwitchNavigator = createSwitchNavigator(
         PLogged: {
             screen: PLogged
         },
+
         
         TLogin: {
             screen: TLogin
@@ -92,7 +94,6 @@ const SwitchNavigator = createSwitchNavigator(
         Presence: {
             screen: Presence
         },
-
     },
     {
         initialRouteName: 'FirstScreen'
