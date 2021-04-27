@@ -3,10 +3,27 @@ import {View, Text, StyleSheet ,Button, Alert , TouchableOpacity , Keyboard} fro
 import colors from '../../constants/Colors';
 import Input from '../../components/Input';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+
+import { createParent } from '../../actions/Parent';
 import Firebase ,{db} from '../../firebase/fire';
 
 const ParentSignUp = props => {
-    const signup = async() =>{ 
+
+    /*const [validFname,setValidFname] = useState(false);
+    const [validLname,setValidLname] = useState(false);
+    const [validEmail,setValidEmail] = useState(false);
+    const [validPhone,setValidPhone] = useState(false);
+    const [validPass,setValidPass] = useState(false);
+    const [validID,setValidID] = useState(false); 
+
+    const [enteredInput, setenteredInput] = useState('');
+
+    const InputHandler = inputText => {
+        setenteredInput(inputText.replace(/^[A-Za-z]/));
+    }; */
+
+    const signup = async() =>{
+
         try{
             const response = await Firebase.auth().createUserWithEmailAndPassword(EmailInput, PassInput)
             if (response.user.uid) {
@@ -16,15 +33,16 @@ const ParentSignUp = props => {
                     fullname: FullnameInput,
                     phonenum: PhoneInput,
                     id:IDInput,
-                    Role: 'Teacher', 
-                    //Grade: GradeInput
+
+                    Role: 'Parent', 
+                    Children: child
                    
                 }
-                db.collection('Teacher')
+                db.collection('Parent')
                     .doc(response.user.uid)
                     .set(user)
 
-                props.navigation.navigate({routeName: 'TeacherProfile'});
+                props.navigation.navigate({routeName: 'ParentLogin'});
             }
 
         } catch (e){
@@ -33,13 +51,17 @@ const ParentSignUp = props => {
         }
     }
 
-    const [FullnameInput,setFname]= useState('Harel');
+
+    const [FullnameInput,setFname]= useState('');
+
 
     const FullnameHandler = FullnameText => {
         setFname(FullnameText.replace(/[^A-Za-z]+[^A-Za-z]/))
     }
 
-    const [EmailInput,setEmail]= useState('Elihu@gmail.com');
+
+    const [EmailInput,setEmail]= useState('');
+
 
     const EmailHandler = EmailText => {
         setEmail(EmailText.replace(/^[0-9](9,12)/))
@@ -117,7 +139,8 @@ const ParentSignUp = props => {
                     keyboardType="visible-password"
                     onChangeText={PassHandler}
                     value={PassInput}
-                    secureTextEntry={false}
+                    secureTextEntry={true}
+
                 />
                 <Input 
                     style={styles.inputField}

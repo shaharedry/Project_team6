@@ -2,7 +2,10 @@ import React, { useCallback, useContext, useEffect, useState } from 'react';
 import {View, Text, StyleSheet ,Button, Alert , TouchableOpacity , Keyboard} from 'react-native';
 import colors from '../../constants/Colors';
 import Input from '../../components/Input';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';;
+
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { createParent } from '../../actions/parent';
+
 import Firebase ,{db} from '../../firebase/fire';
 
 const TeacherSignIn = props => {
@@ -12,6 +15,9 @@ const TeacherSignIn = props => {
             try {
                 const response = await Firebase.auth().signInWithEmailAndPassword(EmailInput, PassInput)
                 dispatch(getUser(response.user.uid))
+
+                console.log('got here?');
+
             } catch (e) {
                 alert(e)
             }
@@ -22,7 +28,8 @@ const TeacherSignIn = props => {
         return async (dispatch, getState) => {
             try {
                 const user = await db
-                    .collection('Teacher')
+                    .collection('Parent')
+
                     .doc(uid)
                     .get()
                 } 
@@ -49,7 +56,9 @@ const TeacherSignIn = props => {
     return (
         //<TouchableWithoutFeedback  onPress={Keyboard.dismiss}>
             <View style={styles.InputContainer}>
-                <Text>Teacher Sign In Screen</Text>
+
+                <Text>Parent Sign In Screen</Text>
+
 
                 <Input 
                     style={styles.inputField}
@@ -73,6 +82,9 @@ const TeacherSignIn = props => {
                 <View style={styles.buttoncontainer}>
                         <Button title="Sign In" onPress={() => {
                             login();
+                            console.log('');
+                            console.log('');
+
                         }} color={colors.secondery} />
                 </View>
             </View>
