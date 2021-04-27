@@ -3,6 +3,7 @@ import { createAppContainer } from 'react-navigation';
 
 import colors from '../constants/Colors'
 
+
 import FirstScreen from '../screens/FirstScreen'
 import TypeSignin from '../screens/TypeSignin';
 
@@ -15,7 +16,11 @@ import TeacherLogin from '../screens/Teacher/TeacherLogin'
 import TeacherProfile from '../screens/Teacher/TeacherProfile'
 import TeacherSignUp from '../screens/Teacher/TeacherSignUp'
 
+import createClass from '../screens/Teacher/createClass'
+import ViewPresence from '../screens/Teacher/ViewPresence'
+import ViewGrades from '../screens/Teacher/ViewGrades'
 import EnterGrades from  '../screens/Teacher/EnterGrades'
+
 import EnterPresence from  '../screens/Teacher/EnterPresence'
 import WatchGrades from '../screens/Child/WatchGrades'
 import WatchPresence from '../screens/Child/WatchPresence'
@@ -31,6 +36,7 @@ import Signup from '../screens/Signup';
 //import ParentSignIn from '../screens/Parent/ParentSignIn' //Invariant Violation
 
 
+
 const AppNavigator = createStackNavigator({
     FirstScreen:{ screen: FirstScreen ,headerTitle: 'Schovid'},
     TypeSignin:{ screen: TypeSignin ,headerTitle: 'Schovid',},
@@ -39,6 +45,7 @@ const AppNavigator = createStackNavigator({
     ParentLogin:{ screen:  ParentLogin ,headerTitle: 'Schovid'},
     ParentProfile:{ screen:  ParentProfile ,headerTitle: 'Schovid'},
     ParentSignIn: {screen:  ParentSignIn ,headerTitle: 'Schovid'},
+
     
     TeacherSignUp:{ screen:  TeacherSignUp ,headerTitle: 'Schovid'},
     TeacherLogin:{ screen:  TeacherLogin ,headerTitle: 'Schovid'},
@@ -46,14 +53,20 @@ const AppNavigator = createStackNavigator({
     EnterGrades:{ screen:  EnterGrades ,headerTitle: 'Schovid'},
     EnterPresence:{ screen: EnterPresence ,headerTitle: 'Schovid'},
 
+    ViewGrades:{ screen: ViewGrades ,headerTitle: 'Schovid'},
+    ViewPresence :{screen:ViewPresence,headerTitle: 'Schovid'},
+    createClass :{screen:createClass,headerTitle:'Schovid'},
+
 
     ChildSignUp:{ screen:  ChildSignUp ,headerTitle: 'Schovid'},
     ChildLogin:{ screen:  ChildLogin ,headerTitle: 'Schovid'},
     ChildProfile:{ screen:  ChildProfile ,headerTitle: 'Schovid'},
     WatchGrades:{ screen:  WatchGrades ,headerTitle: 'Schovid'},
+
     WatchPresence:{ screen:  WatchPresence ,headerTitle: 'Schovid'},
 
     Signup:{ screen:  Signup ,headerTitle: 'Schovid'}
+
 },
 {
     defaultNavigationOptions : {

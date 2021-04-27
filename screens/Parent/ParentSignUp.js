@@ -3,6 +3,7 @@ import {View, Text, StyleSheet ,Button, Alert , TouchableOpacity , Keyboard} fro
 import colors from '../../constants/Colors';
 import Input from '../../components/Input';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+
 import { createParent } from '../../actions/Parent';
 import Firebase ,{db} from '../../firebase/fire';
 
@@ -22,6 +23,7 @@ const ParentSignUp = props => {
     }; */
 
     const signup = async() =>{
+
         try{
             const response = await Firebase.auth().createUserWithEmailAndPassword(EmailInput, PassInput)
             if (response.user.uid) {
@@ -31,6 +33,7 @@ const ParentSignUp = props => {
                     fullname: FullnameInput,
                     phonenum: PhoneInput,
                     id:IDInput,
+
                     Role: 'Parent', 
                     Children: child
                    
@@ -41,19 +44,24 @@ const ParentSignUp = props => {
 
                 props.navigation.navigate({routeName: 'ParentLogin'});
             }
+
         } catch (e){
             console.log(e);
             alert(e);
         }
     }
 
+
     const [FullnameInput,setFname]= useState('');
+
 
     const FullnameHandler = FullnameText => {
         setFname(FullnameText.replace(/[^A-Za-z]+[^A-Za-z]/))
     }
 
+
     const [EmailInput,setEmail]= useState('');
+
 
     const EmailHandler = EmailText => {
         setEmail(EmailText.replace(/^[0-9](9,12)/))
@@ -132,6 +140,7 @@ const ParentSignUp = props => {
                     onChangeText={PassHandler}
                     value={PassInput}
                     secureTextEntry={true}
+
                 />
                 <Input 
                     style={styles.inputField}
@@ -222,5 +231,6 @@ const styles = StyleSheet.create({
         borderWidth: 1
     }
 })
+
 
 export default ParentSignUp;

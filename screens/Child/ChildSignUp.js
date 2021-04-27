@@ -1,5 +1,9 @@
-import React from 'react';
-import {View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
+import {View, Text, StyleSheet ,Button, Alert , TouchableOpacity , Keyboard} from 'react-native';
+import colors from '../../constants/Colors';
+import Input from '../../components/Input';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import Firebase ,{db} from '../../firebase/fire';
 
 const ChildSignUp = props => {
     const signup = async() =>{ 

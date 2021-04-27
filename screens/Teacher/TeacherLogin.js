@@ -4,9 +4,6 @@ import colors from '../../constants/Colors'
 import * as firebase from 'firebase'
 
 const TeacherLogin = props => {
-    onLoginPress = () => {
-        
-    }
 
     return (
         <View style={styles.screen}>
