@@ -5,7 +5,6 @@ import Input from '../../components/Input';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 import { createParent } from '../../actions/Parent';
-
 import Firebase ,{db} from '../../firebase/fire';
 
 const TeacherSignUp = props => {

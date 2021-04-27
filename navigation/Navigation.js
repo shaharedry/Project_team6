@@ -32,12 +32,15 @@ import ChildSignUp from '../screens/Child/ChildSignUp'
 import Signup from '../screens/Signup';
 
 
+//import ParentSignUp from '../screens/Parent/ParentSignUp' //Invariant Violation
+//import ParentSignIn from '../screens/Parent/ParentSignIn' //Invariant Violation
 
 
 
 const AppNavigator = createStackNavigator({
     FirstScreen:{ screen: FirstScreen ,headerTitle: 'Schovid'},
     TypeSignin:{ screen: TypeSignin ,headerTitle: 'Schovid',},
+    Signup:{screen: Signup ,headerTitle: 'Schovid',},
     ParentSignUp:{ screen:  ParentSignUp ,headerTitle: 'Schovid'},
     ParentLogin:{ screen:  ParentLogin ,headerTitle: 'Schovid'},
     ParentProfile:{ screen:  ParentProfile ,headerTitle: 'Schovid'},

@@ -1,6 +1,6 @@
 import React ,{ useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import FirstScreen from './screens/FirstScreen';
+
 
 import Navigation from './navigation/Navigation';
 
