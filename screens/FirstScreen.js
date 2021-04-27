@@ -1,6 +1,10 @@
-import React from 'react';
-import {View, Text, StyleSheet, Button} from 'react-native';
-import { connect } from 'react-redux';
+import React ,{useState} from 'react'
+import {View ,Alert , Text, StyleSheet, Button, TouchableWithoutFeedback, Keyboard} from 'react-native'
+import Card from '../components/Card';
+import colors from '../constants/Colors';
+import Input from '../components/Input';
+//import ParentSignUp from './Parent/ParentSignUp';
+
 
 
 class FirstScreen extends React.Component {
