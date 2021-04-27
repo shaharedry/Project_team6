@@ -22,7 +22,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'cd backend && npm run test'
+                sh 'npm test'
                 echo 'Finished backend Tests'
             }
         }
