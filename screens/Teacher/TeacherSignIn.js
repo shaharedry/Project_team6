@@ -3,7 +3,6 @@ import {View, Text, StyleSheet ,Button, Alert , TouchableOpacity , Keyboard} fro
 import colors from '../../constants/Colors';
 import Input from '../../components/Input';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import { createParent } from '../../actions/parent';
 
 import Firebase ,{db} from '../../firebase/fire';
 

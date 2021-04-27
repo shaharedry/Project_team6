@@ -17,7 +17,6 @@ const TeacherSignUp = props => {
                     phonenum: PhoneInput,
                     id:IDInput,
                     Role: 'Teacher', 
-                    //Grade: GradeInput
                    
                 }
                 db.collection('Teacher')
