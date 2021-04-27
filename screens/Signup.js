@@ -18,11 +18,6 @@ const Signup = props => {
     );
 }
 
-handleSignUp = () => {
-    this.props.signup();
-    this.props.navigation.navigate('Logged')
-}
-
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
