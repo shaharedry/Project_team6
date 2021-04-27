@@ -13,11 +13,14 @@ const firebaseConfig = {
 
 // Initialize Firebase
 //if(!firebase.app.length){
-    const Firebase = firebase.initializeApp(firebaseConfig)
+    //const Firebase = firebase.initializeApp(firebaseConfig)
 //}
-export const db = firebase.firestore()
-db.settings({
-    timestampsInSnapshots: true
-})
 
-export default Firebase
+if (!firebase.apps.length) {
+    const Firebase = firebase.initializeApp(firebaseConfig)
+}
+//by commenting this i got my result
+// firebase.firestore.settings({ experimentalForceLongPolling: false })
+const db = firebase.firestore()
+export { db }
+export default firebase
