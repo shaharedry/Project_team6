@@ -1,33 +1,29 @@
 import React from 'react'
 import { View, TextInput, StyleSheet, TouchableOpacity, Text, Button } from 'react-native'
-import Firebase from '../config/Firebase'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import { updateEmail, updatePassword, login, getUser} from '../actions/user'
-import Colors from '../constants/Colors'
+import colors from '../constants/Colors';
 
-class TypeSignin extends React.Component {
-    state = {
-        email: '',
-        password: ''
-    }
-
-    render() {
-        return(
-                <View style={styles.screen}>
-                <View style={styles.buttonContainer}>
-                    <Button title="Sign In as Teacher" onPress={() => {this.props.navigation.navigate('TLogin')}} color={Colors.secondery}/>
-                </View>
-                <View style={styles.buttonContainer}>
-                    <Button title="Sign In as Parent" onPress={() => {this.props.navigation.navigate('PLogin')}} color={Colors.secondery}/>
-                </View>
-                <View style={styles.buttonContainer}>
-                    <Button title="Sign In as Child" onPress={() => {this.props.navigation.navigate('CLogin')}} color={Colors.secondery}/>
-                </View>
+const TypeSignin= props => {
+    return (
+        <View style={styles.screen}>
+            <View style={styles.buttonContainer}>
+                <Button title="Sign In as Teacher" onPress={() => {
+                    props.navigation.navigate({routeName: 'TeacherLogin'})
+                    }} color={colors.secondery} />
             </View>
-            );
-          }
-    };
+            <View style={styles.buttonContainer}>
+                <Button title="Sign In as Parent" onPress={() => {
+                    props.navigation.navigate({routeName: 'ParentSignIn'});
+                    }} color={colors.secondery}/>
+            </View>
+            <View style={styles.buttonContainer}>
+                <Button title="Sign In as Child" onPress={() => {
+                    props.navigation.navigate({routeName: 'ChildLogin'});
+                    }} color={colors.secondery}/>
+            </View>
+        </View>
+    );
+};
+
 
 const styles = StyleSheet.create({
     screen: {
@@ -48,4 +44,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default (TypeSignin)
+export default TypeSignin;
