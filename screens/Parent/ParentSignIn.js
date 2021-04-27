@@ -6,7 +6,6 @@ import colors from '../../constants/Colors';
 import Input from '../../components/Input';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { createParent } from '../../actions/Parent';
-import  AuthContext  from '../../navigation/AuthProvider';
 import Firebase ,{db} from '../../firebase/fire';
 import Navigation from '../../navigation/Navigation';
 

@@ -1,12 +1,5 @@
 import React ,{ useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Header from './components/Header';
-import FirstScreen from './screens/FirstScreen';
-import * as Font from 'expo-font';
-import {AppLoading} from 'expo-app-loading';
-import { FontDisplay } from 'expo-font';
-import ReduxThunk from 'redux-thunk';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
 
 import Navigation from './navigation/Navigation';
 

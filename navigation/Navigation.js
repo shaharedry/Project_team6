@@ -27,20 +27,14 @@ import ChildSignUp from '../screens/Child/ChildSignUp'
 import Signup from '../screens/Signup';
 
 
-<<<<<<< Updated upstream
-=======
-import ParentSignUp from '../screens/Parent/ParentSignUp' //Invariant Violation
-import ParentSignIn from '../screens/Parent/ParentSignIn' //Invariant Violation
->>>>>>> Stashed changes
+//import ParentSignUp from '../screens/Parent/ParentSignUp' //Invariant Violation
+//import ParentSignIn from '../screens/Parent/ParentSignIn' //Invariant Violation
 
 
 const AppNavigator = createStackNavigator({
     FirstScreen:{ screen: FirstScreen ,headerTitle: 'Schovid'},
     TypeSignin:{ screen: TypeSignin ,headerTitle: 'Schovid',},
-<<<<<<< Updated upstream
-=======
     Signup:{screen: Signup ,headerTitle: 'Schovid',},
->>>>>>> Stashed changes
     ParentSignUp:{ screen:  ParentSignUp ,headerTitle: 'Schovid'},
     ParentLogin:{ screen:  ParentLogin ,headerTitle: 'Schovid'},
     ParentProfile:{ screen:  ParentProfile ,headerTitle: 'Schovid'},
