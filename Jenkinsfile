@@ -21,33 +21,6 @@ pipeline {
                 }
             }
             steps {
-                sh 'npm test'
-                echo 'Finished backend Tests'
-            }
-        }
-/*pipeline {
-    agent none
-    stages {
-        stage('Build') {
-            agent {
-                docker {
-                    image 'node:6-alpine' 
-                    args '-p 3000:3000'
-                }
-            }
-            steps {
-                //sh 'npm install'
-                echo 'finished build'
-            }
-        }
-        stage('Backend Tests') {
-            agent {
-                docker {
-                    image 'node:10-alpine'
-                    args '-p 3000:3000'
-                }
-            }
-            steps {
                 //sh 'npm test'
                 echo 'Finished backend Tests'
             }
