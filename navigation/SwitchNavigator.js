@@ -1,4 +1,4 @@
-import React from 'react'
+/*import React from 'react'
 import { createSwitchNavigator, createAppContainer } from 'react-navigation'
 import Login from '../screens/Login'
 import Signup from '../screens/Signup'
@@ -100,4 +100,4 @@ const SwitchNavigator = createSwitchNavigator(
     }
 )
 
-export default createAppContainer(SwitchNavigator)
+export default createAppContainer(SwitchNavigator) */

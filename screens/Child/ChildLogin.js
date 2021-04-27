@@ -1,16 +1,14 @@
 import React from 'react';
-import {View, Text, StyleSheet ,Button } from 'react-native';
+import {View, Text, StyleSheet , Button} from 'react-native';
 import colors from '../../constants/Colors'
-import * as firebase from 'firebase'
 
-const TeacherLogin = props => {
-
+const ChildLogin = props => {
     return (
         <View style={styles.screen}>
-            <Text>Teacher Login Screen</Text>
+            <Text>Child Login Screen</Text>
             <View style={styles.buttoncontainer}>
                         <Button title="Login" onPress={() => {
-                            props.navigation.navigate({routeName: 'TeacherProfile'})
+                            props.navigation.navigate({routeName: 'ChildProfile'})
                         }} color={colors.secondery} />
             </View>
         </View>
@@ -25,4 +23,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default TeacherLogin;
+export default ChildLogin;

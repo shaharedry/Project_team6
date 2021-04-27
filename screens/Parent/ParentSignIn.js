@@ -1,5 +1,6 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import {View, Text, StyleSheet ,Button, Alert , TouchableOpacity , Keyboard} from 'react-native';
+
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import colors from '../../constants/Colors';
@@ -8,6 +9,7 @@ import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { createParent } from '../../actions/Parent';
 import Firebase ,{db} from '../../firebase/fire';
 import Navigation from '../../navigation/Navigation';
+
 
 const ParentSignIn = props => {
 
@@ -64,7 +66,9 @@ const ParentSignIn = props => {
                                 }
                                 Firebase.auth().getUser(uid).then((userRecord) => {
                                     // See the UserRecord reference doc for the contents of userRecord.
+
                                     console.log(`Successfully fetched user data: ${userRecord.toJSON()}`);
+
                                 })
                                 props.navigation.navigate({routeName: 'ParentLogin'});
                                 // ...

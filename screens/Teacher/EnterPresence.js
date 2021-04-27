@@ -1,33 +1,5 @@
-<<<<<<< Updated upstream
-import React from 'react';
-import {View, Text, StyleSheet, Button} from 'react-native';
-import { connect } from 'react-redux';
-
-class EnterPresence extends React.Component {
-    render() {
-        return (
-            <View style={styles.container}>
-                <Text>Enter Presence</Text>
-                <Button
-                    title="Back To Main"
-                    onPress={() => this.props.navigation.navigate('TLogged')}
-                />
-            </View>
-        )
-    }
-}
-
-const styles = StyleSheet.create({
-container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
-}
-}) 
-
 export default (EnterPresence)
-=======
+
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import {View, Text, StyleSheet ,Button, Alert , TouchableOpacity , Keyboard} from 'react-native';
 import colors from '../../constants/Colors';
@@ -184,8 +156,4 @@ return(
             })
             
             
-            export default EnterPresence;
-
-
-                      
->>>>>>> Stashed changes
+            export default EnterPresence

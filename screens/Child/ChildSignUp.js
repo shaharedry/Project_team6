@@ -3,12 +3,9 @@ import {View, Text, StyleSheet ,Button, Alert , TouchableOpacity , Keyboard} fro
 import colors from '../../constants/Colors';
 import Input from '../../components/Input';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
-
-import { createParent } from '../../actions/Parent';
-
 import Firebase ,{db} from '../../firebase/fire';
 
-const TeacherSignUp = props => {
+const ChildSignUp = props => {
     const signup = async() =>{ 
         try{
             const response = await Firebase.auth().createUserWithEmailAndPassword(EmailInput, PassInput)
@@ -19,67 +16,54 @@ const TeacherSignUp = props => {
                     fullname: FullnameInput,
                     phonenum: PhoneInput,
                     id:IDInput,
-                    Role: 'Teacher', 
-
+                    Role: 'Child', 
+                    ChildOf: ChildofUser,
                     Grade: GradeInput
-
                    
                 }
-                db.collection('Teacher')
+                db.collection('Child')
                     .doc(response.user.uid)
                     .set(user)
 
-                props.navigation.navigate({routeName: 'TeacherProfile'});
+                props.navigation.navigate({routeName: 'ChildProfile'});
             }
 
         } catch (e){
             console.log(e);
-
         }
     }
 
     const [FullnameInput,setFname]= useState('');
 
-
     const FullnameHandler = FullnameText => {
         setFname(FullnameText.replace(/[^A-Za-z]+[^A-Za-z]/))
     }
 
-
     const [EmailInput,setEmail]= useState('');
-
 
     const EmailHandler = EmailText => {
         setEmail(EmailText.replace(/^[0-9](9,12)/))
     }
 
-
     const [PhoneInput,setPhone]= useState('');
-
 
     const PhoneHandler = PhoneText => {
         setPhone(PhoneText.replace(/^[0-9](9,12)/))
     }
     
-
     const [PassInput,setPass]= useState('');
-
 
     const PassHandler = PassText => {
         setPass(PassText)
     }
 
-
     const [IDInput,setID]= useState('');
-
 
     const IDHandler = IDText => {
         setID(IDText.replace(/^[0-9](9,9)/))
     }
     
-
     const [VerifyPass, setVerifyPass] = useState ('');
-
 
     const VerifyHandler = VerifyPassText =>{
         setVerifyPass(VerifyPassText)
@@ -97,7 +81,7 @@ const TeacherSignUp = props => {
     return (
         //<TouchableWithoutFeedback  onPress={Keyboard.dismiss}>
             <View style={styles.InputContainer}>
-                <Text>Parent Sign Up Screen</Text>
+                <Text>Register your child</Text>
                 <Input
                     style={styles.inputField}
                     blurOnSubmit
@@ -107,7 +91,7 @@ const TeacherSignUp = props => {
                     onChangeText={FullnameHandler}
                     value={FullnameInput}
                 />
-                <Input 
+                {/*<Input 
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
@@ -115,7 +99,7 @@ const TeacherSignUp = props => {
                     keyboardType="email-address"
                     onChangeText={EmailHandler}
                     value={EmailInput}
-                />
+                />*/}
                 <Input 
                     style={styles.inputField}
                     blurOnSubmit
@@ -226,4 +210,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default TeacherSignUp;
+export default ChildSignUp;

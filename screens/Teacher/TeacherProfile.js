@@ -13,17 +13,22 @@ const TeacherProfile = props => {
                     style={styles.image}
                     />
             </View>
+
             <View style={styles.buttonContainer}>
+
                 <Button
                     title="Enter Grades"
                     onPress={() => props.navigation.navigate({routeName:'EnterGrades'})}
                 />
+
                 </View>
                 <View style={styles.buttonContainer}>
+
                 <Button
                     title="Enter presence"
                     onPress={() => props.navigation.navigate({routeName:'EnterPresence'})}
                 />
+
                 </View>
                 <View style={styles.buttonContainer}>
                 <Button
@@ -43,6 +48,7 @@ const TeacherProfile = props => {
                     onPress={() => props.navigation.navigate({routeName:'createClass'})}
                 />
                 </View>
+
         </View>
     );
 };
@@ -52,6 +58,7 @@ const TeacherProfile = props => {
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
+
         padding : 50,
         alignItems: 'center',
         flexDirection: 'column',
@@ -61,6 +68,7 @@ const styles = StyleSheet.create({
     ImageContainer: {
         width: 100,
         height: 100,
+
         borderRadius: 150,
         borderWidth: 3,
         borderColor: 'black',
@@ -70,6 +78,7 @@ const styles = StyleSheet.create({
     image: {
         width: '100%',
         height: '100%'
+
     },
     buttonContainer:{
         width: 150,
@@ -79,6 +88,7 @@ const styles = StyleSheet.create({
         borderRadius: 10
     }
 })
+
 
 
 export default TeacherProfile;
