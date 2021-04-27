@@ -28,10 +28,18 @@ class Signup extends React.Component {
                 <View style={styles.buttonContainer}>
                     <Button title="Sign Up as Parent" onPress={() => {this.props.navigation.navigate('PSignup')}} color={Colors.secondery}/>
                 </View>
+<<<<<<< Updated upstream
             </View>
             );
           }
 }
+=======
+            </Card>
+        </View>
+    );
+}
+
+>>>>>>> Stashed changes
 
 const styles = StyleSheet.create({
     screen: {
