@@ -19,4 +19,4 @@ it('Test click event', () => {
 test('renders correctly across screens', () => {
     const tree = renderer.create().toJSON();
     expect(tree).toMatchSnapshot();
-});
+}); //shahar
