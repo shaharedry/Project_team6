@@ -3,7 +3,7 @@ import {View ,Alert , Text, StyleSheet, Button, TouchableWithoutFeedback, Keyboa
 import Card from '../components/Card';
 import colors from '../constants/Colors';
 import Input from '../components/Input';
-import ParentSignUp from './Parent/ParentSignUp';
+//import ParentSignUp from './Parent/ParentSignUp';
 
 const FirstScreen = props => {
 

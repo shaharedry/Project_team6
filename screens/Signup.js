@@ -13,15 +13,17 @@ const Signup = props => {
                 <View style={styles.buttonContainer}>
                     <Button title="Sign Up as Parent" onPress={() => {props.navigation.navigate({routeName: 'ParentSignUp'});}} color={Colors.secondery}/>
                 </View>
+            </View>
+            );
+          }
+
+}
+
             </Card>
         </View>
     );
 }
 
-handleSignUp = () => {
-    this.props.signup();
-    this.props.navigation.navigate('Logged')
-}
 
 const styles = StyleSheet.create({
     screen: {

@@ -9,7 +9,7 @@ pipeline {
                 }
             }
             steps {
-                //sh 'npm install'
+                sh 'npm install'
                 echo 'finished build'
             }
         }
@@ -21,7 +21,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'npm test -- -u'
+                sh 'npm test'
                 echo 'Finished backend Tests'
             }
         }
