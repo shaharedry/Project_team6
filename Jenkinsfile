@@ -9,8 +9,9 @@ pipeline {
                 }
             }
             steps {
-                sh 'apt install npm'
-                sh 'apt install jest-expo'
+                //sh 'apt install npm'
+                sh 'sudo apt update'
+                sh  'sudo apt install nodejs npm'
                 echo 'finished build'
             }
         }
