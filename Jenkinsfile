@@ -9,7 +9,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'sudo apt-get install --yes nodejs'
+                sh 'sudo apt-get install --yes build-essential'
                 echo 'finished build'
             }
         }
