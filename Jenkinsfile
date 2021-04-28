@@ -10,9 +10,9 @@ pipeline {
             }
             steps {
                 //sh 'apt install npm'
-                sh 'apt update'
-                sh  'apt install nodejs npm'
-                sh 'apt install npm'
+                sh 'apt-get update'
+                sh  'apt=get install nodejs npm'
+                sh 'apt-get install npm'
                 echo 'finished build'
             }
         }
