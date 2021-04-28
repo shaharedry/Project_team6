@@ -9,7 +9,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'sudo apt-get install --yes build-essential'
+                sh 'sudo apt install npm'
                 echo 'finished build'
             }
         }
