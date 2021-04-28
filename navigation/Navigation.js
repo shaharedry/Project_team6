@@ -13,6 +13,7 @@ import ParentProfile from '../screens/Parent/ParentProfile'
 
 import TeacherLogin from '../screens/Teacher/TeacherLogin'
 import TeacherProfile from '../screens/Teacher/TeacherProfile'
+import TeacherSignIn from '../screens/Teacher/TeacherSignIn'
 
 
 
@@ -26,7 +27,7 @@ import ChildSignUp from '../screens/Child/ChildSignUp' //Invariant Violation
 
 
 //import ParentSignUp from '../screens/Parent/ParentSignUp' //Invariant Violation
-//import ParentSignIn from '../screens/Parent/ParentSignIn' //Invariant Violation
+import ParentSignIn from '../screens/Parent/ParentSignIn' //Invariant Violation
 
 import TeacherSignUp from '../screens/Teacher/TeacherSignUp' //Invariant Violation
 import EnterGrades from  '../screens/Teacher/EnterGrades'
@@ -38,8 +39,9 @@ const AppNavigator = createStackNavigator({
     //ParentSignUp:{ screen:  ParentSignUp ,headerTitle: 'Schovid'},
     ParentLogin:{ screen:  ParentLogin ,headerTitle: 'Schovid'},
     ParentProfile:{ screen:  ParentProfile ,headerTitle: 'Schovid'},
-    //ParentSignIn: {screen:  ParentSignIn ,headerTitle: 'Schovid'},
+    ParentSignIn: {screen:  ParentSignIn ,headerTitle: 'Schovid'},
     
+    TeacherSignIn:{ screen:  TeacherSignIn ,headerTitle: 'Schovid'},
     TeacherSignUp:{ screen:  TeacherSignUp ,headerTitle: 'Schovid'},
     TeacherLogin:{ screen:  TeacherLogin ,headerTitle: 'Schovid'},
     TeacherProfile:{ screen:  TeacherProfile ,headerTitle: 'Schovid'},

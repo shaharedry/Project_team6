@@ -48,6 +48,7 @@ const ParentSignIn = props => {
                 />
                 <View style={styles.buttoncontainer}>
                         <Button title="Sign In" onPress={() => {
+                            console.log("wtf went wrong?");
                             Firebase.auth().signInWithEmailAndPassword(email, password)
                             .then((userCredential) => {
                                 // Signed in

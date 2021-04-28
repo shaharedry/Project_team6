@@ -1,5 +1,6 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import {View, Text, StyleSheet ,Button, Alert , TouchableOpacity , Keyboard} from 'react-native';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import colors from '../../constants/Colors';
 import Input from '../../components/Input';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';;
@@ -12,6 +13,8 @@ const TeacherSignIn = props => {
             try {
                 const response = await Firebase.auth().signInWithEmailAndPassword(EmailInput, PassInput)
                 dispatch(getUser(response.user.uid))
+                //sessionStorage.setItem('name',response.user.fullname)
+                props.navigation.navigate({routeName: 'TeacherLogin'});
             } catch (e) {
                 alert(e)
             }
@@ -33,18 +36,28 @@ const TeacherSignIn = props => {
         }
     }
 
-    const [EmailInput,setEmail]= useState('');
+    const [EmailInput,setEmail]= useState('Elihu222@gmail.com');
 
     const EmailHandler = EmailText => {
         setEmail(EmailText.replace(/^(9,12)/))
     }
     
-    const [PassInput,setPass]= useState('');
+    const [PassInput,setPass]= useState('123123');
 
     const PassHandler = PassText => {
         setPass(PassText)
     }
+    const { getItem, setItem } = useAsyncStorage('@storage_key');
 
+    const readItemFromStorage = async () => {
+      const item = await getItem();
+      setValue(item);
+    };
+  
+    const writeItemToStorage = async newValue => {
+      await setItem(newValue);
+      setValue(newValue);
+    };
 
     return (
         //<TouchableWithoutFeedback  onPress={Keyboard.dismiss}>
@@ -71,9 +84,57 @@ const TeacherSignIn = props => {
                     secureTextEntry={true}
                 />
                 <View style={styles.buttoncontainer}>
-                        <Button title="Sign In" onPress={() => {
-                            login();
+                    <Button title="Sign In" onPress={() => {
+                            console.log('pressed Sign In');
+                            db.collection("Teacher").where("email", "==", EmailInput).get().then(function(querySnapshot) {
+                                querySnapshot.forEach(function(doc) {
+                                // doc.data() is never undefined for query doc snapshots
+                                console.log(doc.id, " => ", doc.data());
+                                var AllData = doc.data();
+                                var AllData = doc.data();
+                                var email = doc.data().email;
+                                var fullname = doc.data().fullname;
+                                var phonenum = doc.data().phonenum;
+                                var id = doc.data().id;
+                                var Role = doc.data().Role;
+                                console.log("full name:"+fullname)
+                                setItem('name',fullname);
+                                //AsyncStorage.setItem("name",fullname)
+                                //sessionStorage.setItem('name',fullname)
+                                const saveUser = async fullname => {
+                                    try {
+                                      await AsyncStorage.setItem('name', fullname);
+                                    } catch (error) {
+                                      // Error retrieving data
+                                      console.log(error.message);
+                                    }
+                                  };
+                                saveUser();
+                                console.log(''+AllData);
+                                props.navigation.navigate({routeName: 'TeacherLogin'});
+                                }
+                            )})              
                         }} color={colors.secondery} />
+                    <Button title="Sign In as Child" onPress={() => { 
+                        db.collection("Parent").where("email", "==", EmailInput).get().then(function(querySnapshot) {
+                                querySnapshot.forEach(function(doc) {
+                                // doc.data() is never undefined for query doc snapshots
+                                console.log(doc.id, " => ", doc.data());
+                                var AllData = doc.data();
+                                var email = doc.data().email;
+                                var fullname = doc.data().fullname;
+                                var phonenum = doc.data().phonenum;
+                                var id = doc.data().id;
+                                var Role = doc.data().Role;
+                                console.log(''+AllData);
+                                AsyncStorage.setItem('name',fullname)
+                                //sessionStorage.setItem('name',fullname)
+                                console.log(''+AllData);
+                                props.navigation.navigate({routeName: 'TeacherLogin'});
+                                }
+                            )})   
+                        props.navigation.navigate({routeName: 'ChildLogin'});
+                    }} color={colors.secondery}/>
                 </View>
             </View>
         //</TouchableWithoutFeedback>

@@ -117,7 +117,7 @@ const TeacherSignUp = props => {
                     keyboardType="visible-password"
                     onChangeText={PassHandler}
                     value={PassInput}
-                    secureTextEntry={false}
+                    secureTextEntry={true}
                 />
                 <Input 
                     style={styles.inputField}
