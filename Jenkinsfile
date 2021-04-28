@@ -22,7 +22,7 @@ pipeline {
             }
             steps {
                 sh 'npm test'
-                echo 'Finished backend Tests'
+                echo 'Ran all test suites.'
             }
         }
         /*
