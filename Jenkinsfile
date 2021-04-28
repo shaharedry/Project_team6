@@ -13,7 +13,7 @@ pipeline {
                 echo 'finished build'
             }
         }
-        stage('Backend Tests') {
+        stage('Test') {
             agent {
                 docker {
                     image 'node:10-alpine'
