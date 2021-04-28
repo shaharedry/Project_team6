@@ -9,7 +9,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'sudo npm install'
+                sh 'sudo apt-get install --yes nodejs'
                 echo 'finished build'
             }
         }
