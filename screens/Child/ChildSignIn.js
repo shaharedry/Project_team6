@@ -3,19 +3,18 @@ import {View, Text, StyleSheet ,Button, Alert , TouchableOpacity , Keyboard} fro
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import colors from '../../constants/Colors';
 import Input from '../../components/Input';
-
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import { createParent } from '../../actions/parent';
+import { FlingGestureHandler, TouchableWithoutFeedback } from 'react-native-gesture-handler';;
 import Firebase ,{db} from '../../firebase/fire';
 
-const TeacherSignIn = props => {
+const ChildSignIn = props => {
 
     const login = () => {
         return async (dispatch, getState) => {
             try {
                 const response = await Firebase.auth().signInWithEmailAndPassword(EmailInput, PassInput)
                 dispatch(getUser(response.user.uid))
-                props.navigation.navigate({routeName: 'TeacherLogin'});
+                //sessionStorage.setItem('name',response.user.fullname)
+                props.navigation.navigate({routeName: 'ChildLogin'});
             } catch (e) {
                 alert(e)
             }
@@ -26,8 +25,7 @@ const TeacherSignIn = props => {
         return async (dispatch, getState) => {
             try {
                 const user = await db
-                    .collection('Parent')
-
+                    .collection('Child')
                     .doc(uid)
                     .get()
                 } 
@@ -64,9 +62,7 @@ const TeacherSignIn = props => {
     return (
         //<TouchableWithoutFeedback  onPress={Keyboard.dismiss}>
             <View style={styles.InputContainer}>
-
-                <Text>Parent Sign In Screen</Text>
-
+                <Text>Child Sign In Screen</Text>
 
                 <Input 
                     style={styles.inputField}
@@ -90,7 +86,7 @@ const TeacherSignIn = props => {
                 <View style={styles.buttoncontainer}>
                     <Button title="Sign In" onPress={() => {
                             console.log('pressed Sign In');
-                            db.collection("Teacher").where("email", "==", EmailInput).get().then(function(querySnapshot) {
+                            db.collection("Child").where("email", "==", EmailInput).get().then(function(querySnapshot) {
                                 querySnapshot.forEach(function(doc) {
                                 localStorage.setItem('user',doc.data().fullname);
                                 },
@@ -99,7 +95,7 @@ const TeacherSignIn = props => {
                         }} color={colors.secondery} />
                     <Button title="Sign In as Child" onPress={() => { 
                         console.log('pressed Sign In as Child');
-                        db.collection("Teacher").where("email", "==", EmailInput).get().then(function(querySnapshot) {
+                        db.collection("Child").where("email", "==", EmailInput).get().then(function(querySnapshot) {
                                 querySnapshot.forEach(function(doc) {
                                 localStorage.setItem('user', doc.data().fullname)
                                 localStorage.setItem('email', doc.data().email)

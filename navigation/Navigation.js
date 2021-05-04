@@ -35,8 +35,9 @@ import SchoolDetails from '../screens/Child/SchoolDetails'
 import Signup from '../screens/Signup';
 
 
-//import ParentSignUp from '../screens/Parent/ParentSignUp' //Invariant Violation
+import ParentSignUp from '../screens/Parent/ParentSignUp' //Invariant Violation
 import ParentSignIn from '../screens/Parent/ParentSignIn' //Invariant Violation
+
 
 
 
