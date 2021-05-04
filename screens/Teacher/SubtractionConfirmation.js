@@ -6,27 +6,26 @@ import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { createGrade } from '../../actions/Grades';
 import Firebase ,{db} from '../../firebase/fire';
 
-const EnterPresence = props => {
+const SubtractionConfirmation = props => {
     const signup = async() =>{ 
         try{
             const response = await Firebase.auth().signInWithEmailAndPassword(Email, Pass)
             if (response.user.uid) {
-                const Presence = {
+                const Class = {
                    
                     fullname: FullnameInput,
-                    
-                    class:ClassInput,
+
+                   number:numberInput,
                     
 
-                    lesson:lessonInput,
+                   students:studentsInput,
 
                    
-                    Presence: PresenceInput
                    
                 }
-                db.collection('Presence')
+                db.collection('Classes')
                     .doc(FullnameInput)
-                    .set(Presence)
+                    .set(Class)
 
                 props.navigation.navigate({routeName: 'TeacherProfile'});
             }
@@ -47,72 +46,59 @@ const EnterPresence = props => {
         setFname(FullnameText.replace(/[^A-Za-z]+[^A-Za-z]/))
     }
 
-    const [ClassInput,setClass]= useState('');
-    const ClassHandler = ClassText => {
-        setClass(ClassText.replace(/^[0-9](1,1)/))
+    const [numberInput,setnumber]= useState('');
+    const numberHandler = numberText => {
+        setnumber(numberText.replace(/^[0-9](1,2)/))
     }
-    const [lessonInput,setlesson]= useState('');
-    const lessonHandler = lessonText => {
-        setlesson(lessonText.replace(/[^A-Za-z]/))
+    const [studentsInput,setstudents]= useState('');
+    const studentsHandler = studentsText => {
+        setstudents(studentsText.replace(/[^A-Za-z]+[^A-Za-z]+[0-9](0,9)/))
     }
-    const [PresenceInput,setPresence]= useState('');
-    const PresenceHandler = PresenceText => {
-        setPresence(PresenceText.replace(/[^A-Za-z]/))
-    }
+    
 
 return(
     <View style={styles.InputContainer}>
-                <Text>Enter Presence</Text>
+                <Text>Subtraction Confirmation</Text>
                 <Input
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
-                    placeholder='Full Name'
+                    placeholder='Teacher Name'
                     keyboardType="ascii-capable"
                     onChangeText={FullnameHandler}
                     value={FullnameInput}
                 />
-                <Input 
+                {/* <Input 
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
-                    placeholder='Class'
+                    placeholder='number of students'
                     keyboardType="Phone"
-                    onChangeText={ClassHandler}
-                    value={ClassInput}
-                />
+                    onChangeText={numberHandler}
+                    value={numberInput}
+                /> */}
                 <Input 
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
-                    placeholder='lesson'
+                    placeholder='Reason Subtraction'
                     keyboardType="ascii-capable"
-                    onChangeText={lessonHandler}
-                    value={lessonInput}
-                />
-                <Input 
-                    style={styles.inputField}
-                    blurOnSubmit
-                    autoCorrect={false}
-                    placeholder='Present / not present'
-                    keyboardType="ascii-capable"
-                    onChangeText={PresenceHandler}
-                    value={PresenceInput}
-                    
+                    onChangeText={studentsHandler}
+                    value={studentsInput}
                 />
                 
+                <Input 
+                    style={styles.inputField}
+                    blurOnSubmit
+                    autoCorrect={false}
+                    placeholder='Student name'
+                    keyboardType="ascii-capable"
+                    onChangeText={studentsHandler}
+                    value={studentsInput}
+                />
+
                 <View style={styles.buttoncontainer}>
                         <Button title="Enter" onPress={() => {
-                            if(PresenceInput!=('Presence' || 'Not Present')){
-                                Alert.alert(
-                                    'Error',
-                                    'Please enter Present or Not Present only!',
-                                    [
-                                      {text: 'OK'}
-                                    ],
-                                    {cancelable: false},
-                                  );
-                            }
                             signup();
                         }} color={colors.secondery} />
                 </View>
@@ -154,4 +140,7 @@ return(
             })
             
             
-            export default EnterPresence
+            export default SubtractionConfirmation;
+
+
+                      

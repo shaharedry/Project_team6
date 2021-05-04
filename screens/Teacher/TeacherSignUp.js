@@ -5,7 +5,6 @@ import Input from '../../components/Input';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 import { createParent } from '../../actions/Parent';
-
 import Firebase ,{db} from '../../firebase/fire';
 
 const TeacherSignUp = props => {
@@ -133,7 +132,7 @@ const TeacherSignUp = props => {
                     keyboardType="visible-password"
                     onChangeText={PassHandler}
                     value={PassInput}
-                    secureTextEntry={false}
+                    secureTextEntry={true}
                 />
                 <Input 
                     style={styles.inputField}

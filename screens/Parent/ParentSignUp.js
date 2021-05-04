@@ -140,7 +140,6 @@ const ParentSignUp = props => {
                     onChangeText={PassHandler}
                     value={PassInput}
                     secureTextEntry={true}
-
                 />
                 <Input 
                     style={styles.inputField}
