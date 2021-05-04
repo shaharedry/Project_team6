@@ -20,6 +20,7 @@ import createClass from '../screens/Teacher/createClass'
 import ViewPresence from '../screens/Teacher/ViewPresence'
 import ViewGrades from '../screens/Teacher/ViewGrades'
 import EnterGrades from  '../screens/Teacher/EnterGrades'
+import SubtractionConfirmation from '../screens/Teacher/SubtractionConfirmation'
 
 import EnterPresence from  '../screens/Teacher/EnterPresence'
 import WatchGrades from '../screens/Child/WatchGrades'
@@ -56,6 +57,7 @@ const AppNavigator = createStackNavigator({
     ViewGrades:{ screen: ViewGrades ,headerTitle: 'Schovid'},
     ViewPresence :{screen:ViewPresence,headerTitle: 'Schovid'},
     createClass :{screen:createClass,headerTitle:'Schovid'},
+    SubtractionConfirmation :{screen:SubtractionConfirmation,headerTitle:'Schovid'},
 
 
     ChildSignUp:{ screen:  ChildSignUp ,headerTitle: 'Schovid'},
