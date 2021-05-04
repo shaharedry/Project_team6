@@ -5,32 +5,27 @@ import Input from '../../components/Input';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { createGrade } from '../../actions/Grades';
 import Firebase ,{db} from '../../firebase/fire';
-import email from 'react-native-email'
 
-
-
-
-const EnterGrades = props => {
+const SubtractionConfirmation = props => {
     const signup = async() =>{ 
         try{
             const response = await Firebase.auth().signInWithEmailAndPassword(Email, Pass)
             if (response.user.uid) {
-                const Grade = {
+                const Class = {
                    
                     fullname: FullnameInput,
 
-                    class:ClassInput,
+                   number:numberInput,
                     
 
-                    lesson:lessonInput,
+                   students:studentsInput,
 
                    
-                    Grade: gradeInput
                    
                 }
-                db.collection('Grades')
+                db.collection('Classes')
                     .doc(FullnameInput)
-                    .set(Grade)
+                    .set(Class)
 
                 props.navigation.navigate({routeName: 'TeacherProfile'});
             }
@@ -51,106 +46,67 @@ const EnterGrades = props => {
         setFname(FullnameText.replace(/[^A-Za-z]+[^A-Za-z]/))
     }
 
-    const [ClassInput,setClass]= useState('');
-    const ClassHandler = ClassText => {
-        setClass(ClassText.replace(/^[0-9](1,1)/))
+    const [numberInput,setnumber]= useState('');
+    const numberHandler = numberText => {
+        setnumber(numberText.replace(/^[0-9](1,2)/))
     }
-    const [lessonInput,setlesson]= useState('');
-    const lessonHandler = lessonText => {
-        setlesson(lessonText.replace(/[^A-Za-z]/))
+    const [studentsInput,setstudents]= useState('');
+    const studentsHandler = studentsText => {
+        setstudents(studentsText.replace(/[^A-Za-z]+[^A-Za-z]+[0-9](0,9)/))
     }
-    const [gradeInput,setgrade]= useState('');
-    const gradeHandler = gradeText => {
-        setgrade(gradeText.replace(/^[0-9](1,2)/))
-    }
-
-    handleEmail = () => {
-        const to = ['shalevgabay60@gmail.com', 'shahared1907@gmail.com'] // string or array of email addresses
-        email(to, {
-            // Optional additional arguments
-            cc: ['shalevgabay60@gmail.com', 'shahared1907@gmail.com'], // string or array of email addresses
-            bcc: 'shalevgabay60@gmail.com', // string or array of email addresses
-            subject: 'Grades Student - Shalev Gabay',
-            body: 'The Grade is 100!!!!!'
-        }).catch(console.error)
-    } 
-
-  
+    
 
 return(
     <View style={styles.InputContainer}>
-
-                <Text>Enter Grades</Text>
+                <Text>Subtraction Confirmation</Text>
                 <Input
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
-                    placeholder='Full Name'
+                    placeholder='Teacher Name'
                     keyboardType="ascii-capable"
                     onChangeText={FullnameHandler}
                     value={FullnameInput}
                 />
-                <Input 
+                {/* <Input 
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
-                    placeholder='Class'
+                    placeholder='number of students'
                     keyboardType="Phone"
-                    onChangeText={ClassHandler}
-                    value={ClassInput}
-                />
+                    onChangeText={numberHandler}
+                    value={numberInput}
+                /> */}
                 <Input 
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
-                    placeholder='lesson'
+                    placeholder='Reason Subtraction'
                     keyboardType="ascii-capable"
-                    onChangeText={lessonHandler}
-                    value={lessonInput}
+                    onChangeText={studentsHandler}
+                    value={studentsInput}
                 />
+                
                 <Input 
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
-                    placeholder='grade'
-                    keyboardType="Phone"
-                    onChangeText={gradeHandler}
-                    value={gradeInput}
-                    
+                    placeholder='Student name'
+                    keyboardType="ascii-capable"
+                    onChangeText={studentsHandler}
+                    value={studentsInput}
                 />
 
-
-                
                 <View style={styles.buttoncontainer}>
                         <Button title="Enter" onPress={() => {
                             signup();
                         }} color={colors.secondery} />
                 </View>
-
-                <View style={styles.buttoncontainer}>
-                        <Button title="Send Email" onPress={() => {
-                            handleEmail();
-                        }} color={colors.secondery} />
-                </View>
-
             </View>
-
-            
 )
             //<TouchableWithoutFeedback  onPress={Keyboard.dismiss}>
 }
-
-
-
-
             const styles = StyleSheet.create({
-                container: {
-                    flex: 1,
-                    backgroundColor: '#fff',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                },
-
                 screen: {
                     marginTop: 5,
                     marginBottom: 10,
@@ -181,9 +137,10 @@ return(
                     borderRadius: 8,
                     borderWidth: 1
                 }
-
-                
             })
             
             
-export default EnterGrades;
+            export default SubtractionConfirmation;
+
+
+                      
