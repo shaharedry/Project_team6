@@ -21,6 +21,7 @@
     "expo-status-bar": "~1.0.3",
     "firebase": "^8.4.2",
     "fs": "*",
+    "git": "^0.1.5",
     "jest-expo": "^41.0.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
