@@ -13,41 +13,30 @@ const TeacherProfile = props => {
                     style={styles.image}
                     />
             </View>
-
-            <View style={styles.buttonContainer}>
-
                 <Button
                     title="Enter Grades"
                     onPress={() => props.navigation.navigate({routeName:'EnterGrades'})}
                 />
-
-                </View>
-                <View style={styles.buttonContainer}>
-
                 <Button
                     title="Enter presence"
                     onPress={() => props.navigation.navigate({routeName:'EnterPresence'})}
                 />
-
-                </View>
-                <View style={styles.buttonContainer}>
                 <Button
                     title="Viewing grades"
                     onPress={() => props.navigation.navigate({routeName:'ViewGrades'})}
                 />
-                </View>
-                <View style={styles.buttonContainer}>
                 <Button
                     title="Viewing presence"
                     onPress={() => props.navigation.navigate({routeName:'ViewPresence'})}
                 />
-                </View>
-                <View style={styles.buttonContainer}>
                 <Button
                     title="create Class"
                     onPress={() => props.navigation.navigate({routeName:'createClass'})}
                 />
-                </View>
+                <Button
+                title="Watch School Details"
+                onPress={() => props.navigation.navigate({routeName:'SchoolDetails'})}
+                />
 
         </View>
     );

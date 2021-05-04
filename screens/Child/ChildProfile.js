@@ -22,6 +22,11 @@ const ChildProfile = props => {
                 title="Watch Presence"
                 onPress={() => props.navigation.navigate({routeName:'WatchPresence'})}
             />
+
+           <Button
+                title="Watch School Details"
+                onPress={() => props.navigation.navigate({routeName:'SchoolDetails'})}
+            /> 
             {/*<Button title='Logout' onPress={this.handleSignout} />*/}
         </View>
     );

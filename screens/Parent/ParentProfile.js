@@ -25,6 +25,10 @@ const ParentProfile = props => {
                 onPress={() => {props.navigation.navigate({routeName:'ChildProfile'})}}
                 style={styles.buttoncontainer}
             />
+            <Button
+                title="Watch School Details"
+                onPress={() => props.navigation.navigate({routeName:'SchoolDetails'})}
+            />
         {/*} <Button title='Logout' onPress={this.handleSignout} /> */}
         </View>  
     /*<ScrollView>
