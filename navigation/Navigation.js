@@ -14,7 +14,9 @@ import ParentSignIn from '../screens/Parent/ParentSignIn'
 
 import TeacherLogin from '../screens/Teacher/TeacherLogin'
 import TeacherProfile from '../screens/Teacher/TeacherProfile'
-import TeacherSignUp from '../screens/Teacher/TeacherSignUp'
+
+import TeacherSignIn from '../screens/Teacher/TeacherSignIn'
+
 
 import createClass from '../screens/Teacher/createClass'
 import ViewPresence from '../screens/Teacher/ViewPresence'
@@ -33,7 +35,7 @@ import Signup from '../screens/Signup';
 
 
 //import ParentSignUp from '../screens/Parent/ParentSignUp' //Invariant Violation
-//import ParentSignIn from '../screens/Parent/ParentSignIn' //Invariant Violation
+import ParentSignIn from '../screens/Parent/ParentSignIn' //Invariant Violation
 
 
 
@@ -47,6 +49,7 @@ const AppNavigator = createStackNavigator({
     ParentSignIn: {screen:  ParentSignIn ,headerTitle: 'Schovid'},
 
     
+    TeacherSignIn:{ screen:  TeacherSignIn ,headerTitle: 'Schovid'},
     TeacherSignUp:{ screen:  TeacherSignUp ,headerTitle: 'Schovid'},
     TeacherLogin:{ screen:  TeacherLogin ,headerTitle: 'Schovid'},
     TeacherProfile:{ screen:  TeacherProfile ,headerTitle: 'Schovid'},

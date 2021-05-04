@@ -1,11 +1,25 @@
 import React from 'react';
 import {View, Text, StyleSheet, Image, Button} from 'react-native';
+import { AsyncStorage } from 'react-native-async-storage';
 import colors from '../../constants/Colors'
 
 const TeacherProfile = props => {
+    const getUser = async () => {
+        let username = '';
+        try {
+          username = await AsyncStorage.getItem('name') || 'none';
+        } catch (error) {
+          // Error retrieving data
+          console.log(error.message);
+        }
+        return username;
+      }
     return (
         <View style={styles.screen}>
             <Text>Teacher Profile Screen</Text>
+            <Text>
+                Hello {getUser.username}
+            </Text>
             <View style={styles.ImageContainer}>
                 <Image
                     source={require('../../assets/images/TeacherIcon.jpg')}
@@ -18,7 +32,10 @@ const TeacherProfile = props => {
 
                 <Button
                     title="Enter Grades"
-                    onPress={() => props.navigation.navigate({routeName:'EnterGrades'})}
+                    onPress={() => {
+                        console.log(""+AsyncStorage.getItem('name'));
+                        props.navigation.navigate({routeName:'EnterGrades'})}
+                    }
                 />
 
                 </View>
