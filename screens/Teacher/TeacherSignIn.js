@@ -3,7 +3,7 @@ import {View, Text, StyleSheet ,Button, Alert , TouchableOpacity , Keyboard} fro
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import colors from '../../constants/Colors';
 import Input from '../../components/Input';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';;
+import { FlingGestureHandler, TouchableWithoutFeedback } from 'react-native-gesture-handler';;
 import Firebase ,{db} from '../../firebase/fire';
 
 const TeacherSignIn = props => {
@@ -47,7 +47,7 @@ const TeacherSignIn = props => {
     const PassHandler = PassText => {
         setPass(PassText)
     }
-    const { getItem, setItem } = useAsyncStorage('@storage_key');
+    //const { getItem, setItem } = useAsyncStorage('@storage_key');
 
     const readItemFromStorage = async () => {
       const item = await getItem();
@@ -97,9 +97,12 @@ const TeacherSignIn = props => {
                                 var phonenum = doc.data().phonenum;
                                 var id = doc.data().id;
                                 var Role = doc.data().Role;
-                                console.log("full name:"+fullname)
-                                setItem('name',fullname);
-                                //AsyncStorage.setItem("name",fullname)
+                                console.log(AllData)
+                                localStorage.setItem('user', JSON.stringify(AllData))
+                                console.log(doc)
+                                
+                                //setItem('name',fullname);
+                                /*//AsyncStorage.setItem("name",fullname)
                                 //sessionStorage.setItem('name',fullname)
                                 const saveUser = async fullname => {
                                     try {
@@ -110,13 +113,15 @@ const TeacherSignIn = props => {
                                     }
                                   };
                                 saveUser();
-                                console.log(''+AllData);
-                                props.navigation.navigate({routeName: 'TeacherLogin'});
-                                }
+                                console.log(''+AllData);*/
+                                ;
+                                },
+                                //props.navigation.navigate({routeName: 'TeacherLogin'})
                             )})              
                         }} color={colors.secondery} />
                     <Button title="Sign In as Child" onPress={() => { 
-                        db.collection("Parent").where("email", "==", EmailInput).get().then(function(querySnapshot) {
+                        console.log('pressed Sign In as Child');
+                        db.collection("Teacher").where("email", "==", EmailInput).get().then(function(querySnapshot) {
                                 querySnapshot.forEach(function(doc) {
                                 // doc.data() is never undefined for query doc snapshots
                                 console.log(doc.id, " => ", doc.data());
@@ -126,11 +131,19 @@ const TeacherSignIn = props => {
                                 var phonenum = doc.data().phonenum;
                                 var id = doc.data().id;
                                 var Role = doc.data().Role;
-                                console.log(''+AllData);
-                                AsyncStorage.setItem('name',fullname)
+                                console.log('this is here'+doc.data());
+                                console.log('this email'+doc.data().email);
+                                console.log('this fullname'+doc.data().fullname);
+                                console.log('this phonenum'+doc.data().phonenum);
+                                console.log('this id'+doc.data().id);
+                                console.log('this Role'+doc.data().Role);
+                                //AsyncStorage.setItem('name',fullname)
+                                localStorage.setItem('user', doc.data().fullname)
+                                localStorage.setItem('email', doc.data().email)
+                                //console.log(doc.data())
                                 //sessionStorage.setItem('name',fullname)
-                                console.log(''+AllData);
-                                props.navigation.navigate({routeName: 'TeacherLogin'});
+                                //console.log(''+AllData);
+                                //props.navigation.navigate({routeName: 'TeacherLogin'});
                                 }
                             )})   
                         props.navigation.navigate({routeName: 'ChildLogin'});
