@@ -9,11 +9,12 @@ pipeline {
                 }
             }
             steps {
-                sh 'npm install'
+                sh 'apt install npm'
+                //sh 'RUN apk add install npm'
                 echo 'finished build'
             }
         }
-        stage('Backend Tests') {
+        stage('Test') {
             agent {
                 docker {
                     image 'node:10-alpine'
@@ -21,7 +22,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'cd backend && npm run test'
+                sh 'npm test -- -u'
                 echo 'Finished backend Tests'
             }
         }

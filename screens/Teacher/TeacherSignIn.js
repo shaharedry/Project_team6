@@ -3,7 +3,9 @@ import {View, Text, StyleSheet ,Button, Alert , TouchableOpacity , Keyboard} fro
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import colors from '../../constants/Colors';
 import Input from '../../components/Input';
-import { FlingGestureHandler, TouchableWithoutFeedback } from 'react-native-gesture-handler';;
+
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { createParent } from '../../actions/parent';
 import Firebase ,{db} from '../../firebase/fire';
 
 const TeacherSignIn = props => {
@@ -24,7 +26,8 @@ const TeacherSignIn = props => {
         return async (dispatch, getState) => {
             try {
                 const user = await db
-                    .collection('Teacher')
+                    .collection('Parent')
+
                     .doc(uid)
                     .get()
                 } 
@@ -61,7 +64,9 @@ const TeacherSignIn = props => {
     return (
         //<TouchableWithoutFeedback  onPress={Keyboard.dismiss}>
             <View style={styles.InputContainer}>
-                <Text>Teacher Sign In Screen</Text>
+
+                <Text>Parent Sign In Screen</Text>
+
 
                 <Input 
                     style={styles.inputField}

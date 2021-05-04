@@ -3,6 +3,8 @@ import {View, Text, StyleSheet ,Button, Alert , TouchableOpacity , Keyboard} fro
 import colors from '../../constants/Colors';
 import Input from '../../components/Input';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+
+import { createParent } from '../../actions/Parent';
 import Firebase ,{db} from '../../firebase/fire';
 
 const TeacherSignUp = props => {
@@ -17,7 +19,9 @@ const TeacherSignUp = props => {
                     phonenum: PhoneInput,
                     id:IDInput,
                     Role: 'Teacher', 
-                    //Grade: GradeInput
+
+                    Grade: GradeInput
+
                    
                 }
                 db.collection('Teacher')
@@ -29,41 +33,52 @@ const TeacherSignUp = props => {
 
         } catch (e){
             console.log(e);
-            alert(e);
+
         }
     }
 
-    const [FullnameInput,setFname]= useState('Harel');
+    const [FullnameInput,setFname]= useState('');
+
 
     const FullnameHandler = FullnameText => {
         setFname(FullnameText.replace(/[^A-Za-z]+[^A-Za-z]/))
     }
 
-    const [EmailInput,setEmail]= useState('Elihu@gmail.com');
+
+    const [EmailInput,setEmail]= useState('');
+
 
     const EmailHandler = EmailText => {
         setEmail(EmailText.replace(/^[0-9](9,12)/))
     }
 
-    const [PhoneInput,setPhone]= useState('0502606484');
+
+    const [PhoneInput,setPhone]= useState('');
+
 
     const PhoneHandler = PhoneText => {
         setPhone(PhoneText.replace(/^[0-9](9,12)/))
     }
     
-    const [PassInput,setPass]= useState('123123');
+
+    const [PassInput,setPass]= useState('');
+
 
     const PassHandler = PassText => {
         setPass(PassText)
     }
 
-    const [IDInput,setID]= useState('205521776');
+
+    const [IDInput,setID]= useState('');
+
 
     const IDHandler = IDText => {
         setID(IDText.replace(/^[0-9](9,9)/))
     }
     
-    const [VerifyPass, setVerifyPass] = useState ('123123');
+
+    const [VerifyPass, setVerifyPass] = useState ('');
+
 
     const VerifyHandler = VerifyPassText =>{
         setVerifyPass(VerifyPassText)

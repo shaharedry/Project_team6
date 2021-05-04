@@ -85,5 +85,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#E7E6E1' 
     }
 })
-
+            
+            
 export default EnterGrades;

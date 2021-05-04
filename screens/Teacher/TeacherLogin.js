@@ -4,9 +4,6 @@ import React, { useCallback, useContext, useEffect, useState } from 'react';
 import * as firebase from 'firebase'
 
 const TeacherLogin = props => {
-    onLoginPress = () => {
-        
-    }
 
     const [user, setUser] = useState()
 
