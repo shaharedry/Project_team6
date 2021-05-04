@@ -5,36 +5,20 @@ import colors from '../../constants/Colors'
 const ChildProfile = props => {
 
     const [user, setUser] = useState()
-    const [userEmail, setUserEmail] = useState()
 
     useEffect(() => {
         const loggedInUser = localStorage.getItem("user");
-        const loggedInUserEmail = localStorage.getItem("email");
         console.log(loggedInUser);
         if (loggedInUser) {
-            //const foundUser = JSON.parse(loggedInUser);
-            //console.log(loggedInUser);
             console.log(loggedInUser);
             setUser(loggedInUser);
-            setUserEmail(loggedInUserEmail)
-            //var restoredSession = JSON.parse(localStorage.getItem('loggedInUser'))
         }
     }, []); 
-
-    function ls_read(name){
-        return JSON.parse(localStorage.getItem(name));
-    };  
-
-    /*function getValue(key) {
-        var session = JSON.parse(localStorage.getItem('loggedInUser'));
-        return session.myValues[key];
-      }*/
 
     return (
         <View style={styles.screen}>
             <Text>Child Profile Screen</Text>
-            <Text>Hello {(user)}, ur email is : {(userEmail)}</Text>
-            
+            <Text>Hello {(user)}</Text>   
             <View style={styles.ImageContainer}>
                 <Image
                     source={require('../../assets/images/ChildIcon.jpg')}

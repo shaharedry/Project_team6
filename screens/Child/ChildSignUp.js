@@ -38,18 +38,6 @@ const ChildSignUp = props => {
     const FullnameHandler = FullnameText => {
         setFname(FullnameText.replace(/[^A-Za-z]+[^A-Za-z]/))
     }
-
-    const [EmailInput,setEmail]= useState('');
-
-    const EmailHandler = EmailText => {
-        setEmail(EmailText.replace(/^[0-9](9,12)/))
-    }
-
-    const [PhoneInput,setPhone]= useState('');
-
-    const PhoneHandler = PhoneText => {
-        setPhone(PhoneText.replace(/^[0-9](9,12)/))
-    }
     
     const [PassInput,setPass]= useState('');
 
@@ -90,24 +78,6 @@ const ChildSignUp = props => {
                     keyboardType="ascii-capable"
                     onChangeText={FullnameHandler}
                     value={FullnameInput}
-                />
-                {/*<Input 
-                    style={styles.inputField}
-                    blurOnSubmit
-                    autoCorrect={false}
-                    placeholder='Email'
-                    keyboardType="email-address"
-                    onChangeText={EmailHandler}
-                    value={EmailInput}
-                />*/}
-                <Input 
-                    style={styles.inputField}
-                    blurOnSubmit
-                    autoCorrect={false}
-                    placeholder='Phone'
-                    keyboardType="phone-pad"
-                    onChangeText={PhoneHandler}
-                    value={PhoneInput}
                 />
                 <Input 
                     style={styles.inputField}

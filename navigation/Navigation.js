@@ -26,17 +26,18 @@ import ChildProfile from '../screens/Child/ChildProfile'
 import ChildSignUp from '../screens/Child/ChildSignUp' //Invariant Violation
 
 
-//import ParentSignUp from '../screens/Parent/ParentSignUp' //Invariant Violation
+import ParentSignUp from '../screens/Parent/ParentSignUp' //Invariant Violation
 import ParentSignIn from '../screens/Parent/ParentSignIn' //Invariant Violation
 
 import TeacherSignUp from '../screens/Teacher/TeacherSignUp' //Invariant Violation
 import EnterGrades from  '../screens/Teacher/EnterGrades'
 
+
 const AppNavigator = createStackNavigator({
     Firstscreen:{ screen: Firstscreen ,headerTitle: 'Schovid'},
     TypeSignin:{ screen: TypeSignin ,headerTitle: 'Schovid',},
     Signup:{screen: Signup ,headerTitle: 'Schovid',},
-    //ParentSignUp:{ screen:  ParentSignUp ,headerTitle: 'Schovid'},
+    ParentSignUp:{ screen:  ParentSignUp ,headerTitle: 'Schovid'},
     ParentLogin:{ screen:  ParentLogin ,headerTitle: 'Schovid'},
     ParentProfile:{ screen:  ParentProfile ,headerTitle: 'Schovid'},
     ParentSignIn: {screen:  ParentSignIn ,headerTitle: 'Schovid'},

@@ -1,13 +1,26 @@
-import React from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import {View, Text, StyleSheet ,Button ,Image} from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import ProfileImage from '../../components/ProfileImage';
 import colors from '../../constants/Colors'
 
 const ParentProfile = props => {
+
+    const [user, setUser] = useState()
+
+    useEffect(() => {
+        const loggedInUser = localStorage.getItem("user");
+        console.log(loggedInUser);
+        if (loggedInUser) {
+            console.log(loggedInUser);
+            setUser(loggedInUser);
+        }
+    }, []);
+
     return (
         <View style={styles.screen}>
             <Text>Parent Profile Screen</Text>
+            <Text>Hello {(user)}</Text> 
             <View style={styles.ImageContainer}>
                 <Image
                     source={require('../../assets/images/ParentIcon.jpg')}

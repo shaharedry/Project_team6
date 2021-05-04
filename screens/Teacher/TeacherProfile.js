@@ -1,25 +1,26 @@
-import React from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import {View, Text, StyleSheet, Image, Button} from 'react-native';
 import { AsyncStorage } from 'react-native-async-storage';
 import colors from '../../constants/Colors'
 
+
 const TeacherProfile = props => {
-    const getUser = async () => {
-        let username = '';
-        try {
-          username = await AsyncStorage.getItem('name') || 'none';
-        } catch (error) {
-          // Error retrieving data
-          console.log(error.message);
+
+    const [user, setUser] = useState()
+
+    useEffect(() => {
+        const loggedInUser = localStorage.getItem("user");
+        console.log(loggedInUser);
+        if (loggedInUser) {
+            console.log(loggedInUser);
+            setUser(loggedInUser);
         }
-        return username;
-      }
+    }, []);
+
     return (
         <View style={styles.screen}>
             <Text>Teacher Profile Screen</Text>
-            <Text>
-                Hello {getUser.username}
-            </Text>
+            <Text>Hello {(user)}</Text> 
             <View style={styles.ImageContainer}>
                 <Image
                     source={require('../../assets/images/TeacherIcon.jpg')}
@@ -30,7 +31,6 @@ const TeacherProfile = props => {
                 <Button
                     title="Enter Grades"
                     onPress={() => {
-                        console.log(""+AsyncStorage.getItem('name'));
                         props.navigation.navigate({routeName:'EnterGrades'})}
                     }
                 />
