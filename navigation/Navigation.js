@@ -40,6 +40,7 @@ import Signup from '../screens/Signup';
 
 
 
+
 const AppNavigator = createStackNavigator({
     FirstScreen:{ screen: FirstScreen ,headerTitle: 'Schovid'},
     TypeSignin:{ screen: TypeSignin ,headerTitle: 'Schovid',},
