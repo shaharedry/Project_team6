@@ -36,7 +36,7 @@ import Signup from '../screens/Signup';
 
 
 //import ParentSignUp from '../screens/Parent/ParentSignUp' //Invariant Violation
-import ParentSignIn from '../screens/Parent/ParentSignIn' //Invariant Violation
+//import ParentSignIn from '../screens/Parent/ParentSignIn' //Invariant Violation
 
 
 
