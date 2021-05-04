@@ -1,7 +1,9 @@
+
 import React, { useEffect, useState } from 'react';
 import {View, Text, StyleSheet , Button, FlatList } from 'react-native';
 import colors from '../../constants/Colors'
 import firebase ,{db} from '../../firebase/fire'
+
 
 const EnterGrades = props => {
 
@@ -84,7 +86,6 @@ const styles = StyleSheet.create({
         height: 40, 
         backgroundColor: '#E7E6E1' 
     }
-})
             
             
 export default EnterGrades;
