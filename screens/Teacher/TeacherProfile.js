@@ -66,6 +66,13 @@ const TeacherProfile = props => {
                 />
                 </View>
 
+                <View style={styles.buttonContainer}>
+                <Button
+                    title="Subtraction Confirmation"
+                    onPress={() => props.navigation.navigate({routeName:'SubtractionConfirmation'})}
+                />
+                </View>
+
         </View>
     );
 };
