@@ -1,11 +1,9 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import {View, Text, StyleSheet ,Button, Alert , TouchableOpacity , Keyboard} from 'react-native';
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import colors from '../../constants/Colors';
 import Input from '../../components/Input';
 
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import { createParent } from '../../actions/parent';
 import Firebase ,{db} from '../../firebase/fire';
 
 const TeacherSignIn = props => {

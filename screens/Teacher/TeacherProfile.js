@@ -1,6 +1,5 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import {View, Text, StyleSheet, Image, Button} from 'react-native';
-import { AsyncStorage } from 'react-native-async-storage';
 import colors from '../../constants/Colors'
 
 
