@@ -43,11 +43,11 @@ const TeacherProfile = props => {
                 />
                 <Button
                     title="Viewing presence"
-                    onPress={() => props.navigation.navigate({routeName:'ViewPresence'})}
+                    //onPress={() => props.navigation.navigate({routeName:'ViewPresence'})}
                 />
                 <Button
                     title="create Class"
-                    onPress={() => props.navigation.navigate({routeName:'createClass'})}
+                    //onPress={() => props.navigation.navigate({routeName:'createClass'})}
                 />
                 <Button
                 title="Watch School Details"
