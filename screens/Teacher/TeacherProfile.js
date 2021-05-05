@@ -12,7 +12,7 @@ const TeacherProfile = props => {
         console.log(loggedInUser);
         if (loggedInUser) {
             console.log(loggedInUser);
-            setUser(loggedInUser);
+            setUser(loggedInUser);  
         }
     }, []);
 
@@ -54,14 +54,22 @@ const TeacherProfile = props => {
                 onPress={() => props.navigation.navigate({routeName:'SchoolDetails'})}
                 />
 
-                <View style={styles.buttonContainer}>
+               
                 <Button
                     title="Subtraction Confirmation"
                     onPress={() => props.navigation.navigate({routeName:'SubtractionConfirmation'})}
                 />
+                <Button
+                    title="Presence Correction"
+                    onPress={() => props.navigation.navigate({routeName:'PresenceCorrection'})}
+                />
+                <Button
+                    title="Score Correction"
+                    onPress={() => props.navigation.navigate({routeName:'ScoreCorrection'})}
+                />
                 </View>
 
-        </View>
+        
     );
 };
 
