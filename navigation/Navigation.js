@@ -17,8 +17,12 @@ import TeacherProfile from '../screens/Teacher/TeacherProfile'
 
 import TeacherSignIn from '../screens/Teacher/TeacherSignIn'
 import TeacherSignUp from '../screens/Teacher/TeacherSignUp'
+
 import PresenceCorrection from '../screens/Teacher/PresenceCorrection'
 import ScoreCorrection from '../screens/Teacher/ScoreCorrection'
+
+
+
 import createClass from '../screens/Teacher/createClass'
 import ViewPresence from '../screens/Teacher/ViewPresence'
 import ViewGrades from '../screens/Teacher/ViewGrades'
@@ -39,6 +43,11 @@ import Signup from '../screens/Signup';
 
 
 
+
+
+
+//import ParentSignUp from '../screens/Parent/ParentSignUp' //Invariant Violation
+//import ParentSignIn from '../screens/Parent/ParentSignIn' //Invariant Violation
 
 
 const AppNavigator = createStackNavigator({
