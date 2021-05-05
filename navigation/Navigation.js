@@ -16,8 +16,9 @@ import TeacherLogin from '../screens/Teacher/TeacherLogin'
 import TeacherProfile from '../screens/Teacher/TeacherProfile'
 
 import TeacherSignIn from '../screens/Teacher/TeacherSignIn'
-
-
+import TeacherSignUp from '../screens/Teacher/TeacherSignUp'
+import PresenceCorrection from '../screens/Teacher/PresenceCorrection'
+import ScoreCorrection from '../screens/Teacher/ScoreCorrection'
 import createClass from '../screens/Teacher/createClass'
 import ViewPresence from '../screens/Teacher/ViewPresence'
 import ViewGrades from '../screens/Teacher/ViewGrades'
@@ -35,8 +36,7 @@ import SchoolDetails from '../screens/Child/SchoolDetails'
 import Signup from '../screens/Signup';
 
 
-import ParentSignUp from '../screens/Parent/ParentSignUp' //Invariant Violation
-import ParentSignIn from '../screens/Parent/ParentSignIn' //Invariant Violation
+
 
 
 
@@ -50,18 +50,19 @@ const AppNavigator = createStackNavigator({
     ParentProfile:{ screen:  ParentProfile ,headerTitle: 'Schovid'},
     ParentSignIn: {screen:  ParentSignIn ,headerTitle: 'Schovid'},
 
-    
+   
     TeacherSignIn:{ screen:  TeacherSignIn ,headerTitle: 'Schovid'},
     TeacherSignUp:{ screen:  TeacherSignUp ,headerTitle: 'Schovid'},
     TeacherLogin:{ screen:  TeacherLogin ,headerTitle: 'Schovid'},
     TeacherProfile:{ screen:  TeacherProfile ,headerTitle: 'Schovid'},
     EnterGrades:{ screen:  EnterGrades ,headerTitle: 'Schovid'},
     EnterPresence:{ screen: EnterPresence ,headerTitle: 'Schovid'},
-
+    ScoreCorrection:{ screen: ScoreCorrection ,headerTitle: 'Schovid'},
     ViewGrades:{ screen: ViewGrades ,headerTitle: 'Schovid'},
     ViewPresence :{screen:ViewPresence,headerTitle: 'Schovid'},
     createClass :{screen:createClass,headerTitle:'Schovid'},
     SubtractionConfirmation :{screen:SubtractionConfirmation,headerTitle:'Schovid'},
+    PresenceCorrection:{ screen:  PresenceCorrection ,headerTitle: 'Schovid'},
 
     ChildSignUp:{ screen:  ChildSignUp ,headerTitle: 'Schovid'},
     ChildLogin:{ screen:  ChildLogin ,headerTitle: 'Schovid'},
