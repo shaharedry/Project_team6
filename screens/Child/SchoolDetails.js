@@ -10,6 +10,10 @@ const SchoolDetails = props => {
                 {/*<Text style={styles.title}>Welcome</Text>*/}
                 <Card style={styles.inputcontainer}>
                     <Text style={styles.title}>School name: Ben-Gurion</Text>
+                    <Text style={styles.title}>School Address: Keryat menahem</Text>
+                    <Text style={styles.title}>School Phone-number: 08-9921112</Text>
+                    <Text style={styles.title}>School Fax-number: 08-9963564</Text>
+                    <Text style={styles.title}>School Email: BenGurion@gmail.com</Text>
                 </Card>
             </View>
     );
