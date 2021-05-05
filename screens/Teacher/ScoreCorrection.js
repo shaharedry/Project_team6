@@ -21,12 +21,12 @@ const ScoreCorrection = props => {
                     lesson:lessonInput,
 
                    
-                    Presence: PresenceInput
+                    grade: gradeInput
                    
                 }
-                db.collection('Presence')
+                db.collection('Grades')
                     .doc(FullnameInput)
-                    .set(Presence)
+                    .set(grade)
 
                 props.navigation.navigate({routeName: 'TeacherProfile'});
             }
@@ -55,9 +55,9 @@ const ScoreCorrection = props => {
     const lessonHandler = lessonText => {
         setlesson(lessonText.replace(/[^A-Za-z]/))
     }
-    const [PresenceInput,setPresence]= useState('');
-    const PresenceHandler = PresenceText => {
-        setPresence(PresenceText.replace(/[^A-Za-z]/))
+    const [gradeInput,setgrade]= useState('');
+    const gradeHandler = gradeText => {
+        setgrade(gradeText.replace(/[^A-Za-z]/))
     }
 
 return(
@@ -94,10 +94,10 @@ return(
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
-                    placeholder='Present / not present'
+                    placeholder=' New Grade'
                     keyboardType="ascii-capable"
-                    onChangeText={PresenceHandler}
-                    value={PresenceInput}
+                    onChangeText={gradeHandler}
+                    value={gradeInput}
                     
                 />
                 
