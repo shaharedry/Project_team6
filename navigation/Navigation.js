@@ -22,6 +22,7 @@ import createClass from '../screens/Teacher/createClass'
 import ViewPresence from '../screens/Teacher/ViewPresence'
 import ViewGrades from '../screens/Teacher/ViewGrades'
 import EnterGrades from  '../screens/Teacher/EnterGrades'
+import SubtractionConfirmation from '../screens/Teacher/SubtractionConfirmation'
 
 import EnterPresence from  '../screens/Teacher/EnterPresence'
 import WatchGrades from '../screens/Child/WatchGrades'
@@ -30,7 +31,7 @@ import WatchPresence from '../screens/Child/WatchPresence'
 import ChildLogin from '../screens/Child/ChildLogin'
 import ChildProfile from '../screens/Child/ChildProfile'
 import ChildSignUp from '../screens/Child/ChildSignUp'
-
+import SchoolDetails from '../screens/Child/SchoolDetails'
 import Signup from '../screens/Signup';
 
 
@@ -56,12 +57,13 @@ const AppNavigator = createStackNavigator({
     ViewGrades:{ screen: ViewGrades ,headerTitle: 'Schovid'},
     ViewPresence :{screen:ViewPresence,headerTitle: 'Schovid'},
     createClass :{screen:createClass,headerTitle:'Schovid'},
-
+    SubtractionConfirmation :{screen:SubtractionConfirmation,headerTitle:'Schovid'},
 
     ChildSignUp:{ screen:  ChildSignUp ,headerTitle: 'Schovid'},
     ChildLogin:{ screen:  ChildLogin ,headerTitle: 'Schovid'},
     ChildProfile:{ screen:  ChildProfile ,headerTitle: 'Schovid'},
     WatchGrades:{ screen:  WatchGrades ,headerTitle: 'Schovid'},
+    SchoolDetails:{screen: SchoolDetails,headerTitle:'Schovid'},
 
     WatchPresence:{ screen:  WatchPresence ,headerTitle: 'Schovid'},
 
