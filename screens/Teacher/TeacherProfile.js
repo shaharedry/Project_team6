@@ -12,7 +12,7 @@ const TeacherProfile = props => {
         console.log(loggedInUser);
         if (loggedInUser) {
             console.log(loggedInUser);
-            setUser(loggedInUser);
+            setUser(loggedInUser);  
         }
     }, []);
 
@@ -30,7 +30,7 @@ const TeacherProfile = props => {
                 <Button
                     title="Enter Grades"
                     onPress={() => {
-                        props.navigation.navigate({routeName:'EnterGrades'})}
+                        props.navigation.navigate({routeName:'EnterGrades2'})}
                     }
                 />
                 <Button
@@ -54,14 +54,22 @@ const TeacherProfile = props => {
                 onPress={() => props.navigation.navigate({routeName:'SchoolDetails'})}
                 />
 
-                <View style={styles.buttonContainer}>
+               
                 <Button
                     title="Subtraction Confirmation"
                     onPress={() => props.navigation.navigate({routeName:'SubtractionConfirmation'})}
                 />
+                <Button
+                    title="Presence Correction"
+                    onPress={() => props.navigation.navigate({routeName:'PresenceCorrection'})}
+                />
+                <Button
+                    title="Score Correction"
+                    onPress={() => props.navigation.navigate({routeName:'ScoreCorrection'})}
+                />
                 </View>
 
-        </View>
+        
     );
 };
 
@@ -70,7 +78,6 @@ const TeacherProfile = props => {
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-
         padding : 50,
         alignItems: 'center',
         flexDirection: 'column',
@@ -80,7 +87,6 @@ const styles = StyleSheet.create({
     ImageContainer: {
         width: 100,
         height: 100,
-
         borderRadius: 150,
         borderWidth: 3,
         borderColor: 'black',
@@ -90,14 +96,14 @@ const styles = StyleSheet.create({
     image: {
         width: '100%',
         height: '100%'
-
     },
     buttonContainer:{
         width: 150,
         height: 50,
         justifyContent: 'center',
         paddingBottom: 100 ,
-        borderRadius: 10
+        borderRadius: 10,
+        color: 'red'
     }
 })
 
