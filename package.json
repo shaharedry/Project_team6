@@ -22,6 +22,8 @@
     "firebase": "^8.4.2",
     "fs": "*",
     "jest-expo": "^41.0.0",
+    "localstorage": "^1.0.1",
+    "localstorage-polyfill": "^1.0.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",

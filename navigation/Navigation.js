@@ -16,7 +16,7 @@ import TeacherLogin from '../screens/Teacher/TeacherLogin'
 import TeacherProfile from '../screens/Teacher/TeacherProfile'
 
 import TeacherSignIn from '../screens/Teacher/TeacherSignIn'
-
+import TeacherSignUp from '../screens/Teacher/TeacherSignUp'
 
 import createClass from '../screens/Teacher/createClass'
 import ViewPresence from '../screens/Teacher/ViewPresence'
@@ -32,10 +32,6 @@ import ChildProfile from '../screens/Child/ChildProfile'
 import ChildSignUp from '../screens/Child/ChildSignUp'
 
 import Signup from '../screens/Signup';
-
-
-import ParentSignUp from '../screens/Parent/ParentSignUp' //Invariant Violation
-import ParentSignIn from '../screens/Parent/ParentSignIn' //Invariant Violation
 
 
 
