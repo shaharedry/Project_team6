@@ -71,6 +71,7 @@ const ChildSignUp = props => {
             <View style={styles.InputContainer}>
                 <Text>Register your child</Text>
                 <Input
+                    testID={'fullname'}
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
@@ -80,6 +81,7 @@ const ChildSignUp = props => {
                     value={FullnameInput}
                 />
                 <Input 
+                    testID={'password'}
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
@@ -100,6 +102,7 @@ const ChildSignUp = props => {
                     secureTextEntry={true}
                 />
                 <Input
+                    testID={'id'}
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
