@@ -1,6 +1,5 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import {View, Text, StyleSheet, Image, Button} from 'react-native';
-import { AsyncStorage } from 'react-native-async-storage';
 import colors from '../../constants/Colors'
 
 
@@ -13,7 +12,7 @@ const TeacherProfile = props => {
         console.log(loggedInUser);
         if (loggedInUser) {
             console.log(loggedInUser);
-            setUser(loggedInUser);
+            setUser(loggedInUser);  
         }
     }, []);
 
@@ -44,25 +43,33 @@ const TeacherProfile = props => {
                 />
                 <Button
                     title="Viewing presence"
-                    onPress={() => props.navigation.navigate({routeName:'ViewPresence'})}
+                    //onPress={() => props.navigation.navigate({routeName:'ViewPresence'})}
                 />
                 <Button
                     title="create Class"
-                    onPress={() => props.navigation.navigate({routeName:'createClass'})}
+                    //onPress={() => props.navigation.navigate({routeName:'createClass'})}
                 />
                 <Button
                 title="Watch School Details"
                 onPress={() => props.navigation.navigate({routeName:'SchoolDetails'})}
                 />
 
-                <View style={styles.buttonContainer}>
+               
                 <Button
                     title="Subtraction Confirmation"
                     onPress={() => props.navigation.navigate({routeName:'SubtractionConfirmation'})}
                 />
+                <Button
+                    title="Presence Correction"
+                    onPress={() => props.navigation.navigate({routeName:'PresenceCorrection'})}
+                />
+                <Button
+                    title="Score Correction"
+                    onPress={() => props.navigation.navigate({routeName:'ScoreCorrection'})}
+                />
                 </View>
 
-        </View>
+        
     );
 };
 
