@@ -67,25 +67,25 @@ const ParentSignUp = props => {
         setEmail(EmailText.replace(/^[0-9](9,12)/))
     }
 
-    const [PhoneInput,setPhone]= useState('0502606484');
+    const [PhoneInput,setPhone]= useState('');
 
     const PhoneHandler = PhoneText => {
         setPhone(PhoneText.replace(/^[0-9](9,12)/))
     }
     
-    const [PassInput,setPass]= useState('123123');
+    const [PassInput,setPass]= useState('');
 
     const PassHandler = PassText => {
         setPass(PassText)
     }
 
-    const [IDInput,setID]= useState('205521776');
+    const [IDInput,setID]= useState('');
 
     const IDHandler = IDText => {
         setID(IDText.replace(/^[0-9](9,9)/))
     }
     
-    const [VerifyPass, setVerifyPass] = useState ('123123');
+    const [VerifyPass, setVerifyPass] = useState ('');
 
     const VerifyHandler = VerifyPassText =>{
         setVerifyPass(VerifyPassText)
@@ -105,6 +105,7 @@ const ParentSignUp = props => {
             <View style={styles.InputContainer}>
                 <Text>Parent Sign Up Screen</Text>
                 <Input
+                    testID={'fullname'}
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
@@ -114,6 +115,7 @@ const ParentSignUp = props => {
                     value={FullnameInput}
                 />
                 <Input 
+                    testID={'email'}
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
@@ -123,6 +125,7 @@ const ParentSignUp = props => {
                     value={EmailInput}
                 />
                 <Input 
+                    testID={'phone'}
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
@@ -132,6 +135,7 @@ const ParentSignUp = props => {
                     value={PhoneInput}
                 />
                 <Input 
+                    testID={'password'}
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
@@ -152,6 +156,7 @@ const ParentSignUp = props => {
                     secureTextEntry={true}
                 />
                 <Input
+                    testID={'id'}
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}

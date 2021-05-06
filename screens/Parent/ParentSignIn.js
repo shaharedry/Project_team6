@@ -13,7 +13,7 @@ import Navigation from '../../navigation/Navigation';
 
 const ParentSignIn = props => {
 
-    const [email,setEmail]= useState('HarelElihu@gmail.com');
+    const [email,setEmail]= useState('harelelihu@gmail.com');
 
     const EmailHandler = EmailText => {
         setEmail(EmailText.replace(/^[0-9](9,12)/))
@@ -34,6 +34,7 @@ const ParentSignIn = props => {
                 <Text>Parent Sign In Screen</Text>
 
                 <Input 
+                    testID={'email'}
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
@@ -43,6 +44,7 @@ const ParentSignIn = props => {
                     value={email}
                 />
                 <Input 
+                    testID={'password'}
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
@@ -65,6 +67,7 @@ const ParentSignIn = props => {
                                       console.log(user.uid);
                                     }
                                 }
+                                props.navigation.navigate({routeName:'ParentProfile'})
                                 Firebase.auth().getUser(uid).then((userRecord) => {
                                     // See the UserRecord reference doc for the contents of userRecord.
 

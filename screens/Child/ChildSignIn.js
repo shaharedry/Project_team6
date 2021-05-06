@@ -36,13 +36,13 @@ const ChildSignIn = props => {
         }
     }
 
-    const [EmailInput,setEmail]= useState('Elihu222@gmail.com');
+    const [EmailInput,setEmail]= useState('');
 
     const EmailHandler = EmailText => {
         setEmail(EmailText.replace(/^(9,12)/))
     }
     
-    const [PassInput,setPass]= useState('123123');
+    const [PassInput,setPass]= useState('');
 
     const PassHandler = PassText => {
         setPass(PassText)
@@ -65,6 +65,7 @@ const ChildSignIn = props => {
                 <Text>Child Sign In Screen</Text>
 
                 <Input 
+                    testID={'email'}
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
@@ -74,6 +75,7 @@ const ChildSignIn = props => {
                     value={EmailInput}
                 />
                 <Input 
+                    testID={'password'}
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
