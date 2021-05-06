@@ -18,6 +18,7 @@ import TeacherProfile from '../screens/Teacher/TeacherProfile'
 import TeacherSignIn from '../screens/Teacher/TeacherSignIn'
 import TeacherSignUp from '../screens/Teacher/TeacherSignUp'
 
+
 import PresenceCorrection from '../screens/Teacher/PresenceCorrection'
 import ScoreCorrection from '../screens/Teacher/ScoreCorrection'
 
@@ -38,8 +39,6 @@ import ChildProfile from '../screens/Child/ChildProfile'
 import ChildSignUp from '../screens/Child/ChildSignUp'
 import SchoolDetails from '../screens/Child/SchoolDetails'
 import Signup from '../screens/Signup';
-
-
 
 
 

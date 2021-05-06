@@ -1,54 +1,54 @@
-
-import React, { useEffect, useState } from 'react';
-import {View, Text, StyleSheet , Button, FlatList } from 'react-native';
+import React, { useEffect, useState } from 'react'; 
+import { render } from 'react-dom';
+import {View, Text, StyleSheet , Button, FlatList, Alert ,setState} from 'react-native';
 import colors from '../../constants/Colors'
 import firebase ,{db} from '../../firebase/fire'
 
+class EnterGrades extends React.Component {
+    state= {
+        students: null
+    }
 
-const EnterGrades = props => {
-
-    let NumOfUsers = []
-
-    const [sizeof,setsizeof]=useState(0);
-
-    useEffect(() => {
-        //const Ref = firebase.reference.child("Teacher").orderByChild("fullname");
-        const ref = db.collection("Teacher").where("email", "!=", 'NULL')
-        db.collection("Teacher").where("email", "!=", 'NULL').get().then(function(querySnapshot) {
-            querySnapshot.forEach(function(doc) {
-            //ref.on('child_added', snapshot => {
-                // NumOfUsers.push({
-                //     fullname: doc.data().fullname,
-                //     //name: doc.data().grade
-                //     })
-                let DATA = [];
-                if(doc != 'NULL' ){
-                    let tmp = [];
-                    KEY = Object.keys(doc.data());
-                    console.log("KEYS is :"+KEY);
-                    KEY.forEach( (key_id) => {
-                    let a = doc.data()[key_id];
-                    a.key = key_id;
+    componentDidMount(){
+        console.log('mounted')
+        db.collection('Teacher').get().then( snapshot =>{
+            const students = []
+            snapshot.forEach( doc =>{
+                KEY = Object.keys(doc.data());
+                console.log("KEYS is :"+KEY);
+                KEY.forEach( (key_id) => {
                     if(key_id=='fullname'){
-                        tmp.push(a);
-                        setsizeof(NumOfUsers.length);
+                        const data = doc.data()
+                        console.log(data)
+                        students.push(data)
                     }
+                    else{
 
+                    }
+                })
+            })
+            this.setState({ students: students})
         })
-                console.log(doc.data());
-                console.log("Length of array is: "+NumOfUsers.length);
-            }
-        })
+        .catch( error => Alert.alert('Error',error))
+    }
 
-    })
-    })
-
-    return (
-        <View style={styles.InputContainer}>
-            <Text>Enter Grades</Text>
-            <Text>Size of array is : {sizeof}</Text>  
-        </View>
-    )
+    render(){
+        return (
+            <View style={styles.InputContainer}>
+                <Text>Enter Grades2</Text>
+                <FlatList 
+                data = {this.state.students}
+                renderItem ={({item}) =>
+                <Text>
+                    {`Student name: ${item.fullname}\n`}
+                    {`Email is: ${item.email}`}
+                </Text>
+                }
+            />
+    
+            </View>
+        )
+    }
 };
 
 const styles = StyleSheet.create({
@@ -86,6 +86,7 @@ const styles = StyleSheet.create({
         height: 40, 
         backgroundColor: '#E7E6E1' 
     }
+
 })        
             
 export default EnterGrades;
