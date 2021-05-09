@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     ImageContainer: {
-        width: '85%',
+        width: '85%', 
         height: '50%',
         borderRadius: 5,
         borderWidth: 3,
