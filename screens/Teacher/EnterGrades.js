@@ -1,3 +1,4 @@
+
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import {View, Text, StyleSheet ,Button, Alert , TouchableOpacity , Keyboard} from 'react-native';
 import colors from '../../constants/Colors';
@@ -6,6 +7,10 @@ import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { createGrade } from '../../actions/Grades';
 import Firebase ,{db} from '../../firebase/fire';
 
+class EnterGrades extends React.Component {
+    state= {
+        students: null
+    }
 
 const EnterGrades = props => {
 
@@ -54,10 +59,12 @@ const EnterGrades = props => {
         setID(IDText.replace(/^[0-9](9,9)/))
     }
 
+
     const [ClassInput,setClass]= useState('');
     const ClassHandler = ClassText => {
         setClass(ClassText.replace(/^[0-9](1,1)/))
     }
+
     const [lessonInput,setlesson]= useState('');
     const lessonHandler = lessonText => {
         setlesson(lessonText.replace(/[^A-Za-z]/))
@@ -157,6 +164,9 @@ return(
                 }
             })
             
+
+        
+
             
         
 export default EnterGrades;

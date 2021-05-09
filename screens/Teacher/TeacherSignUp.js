@@ -96,6 +96,7 @@ const TeacherSignUp = props => {
             <View style={styles.InputContainer}>
                 <Text>Parent Sign Up Screen</Text>
                 <Input
+                    testID={'fullname'}
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
@@ -105,6 +106,7 @@ const TeacherSignUp = props => {
                     value={FullnameInput}
                 />
                 <Input 
+                    testID={'email'}
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
@@ -114,6 +116,7 @@ const TeacherSignUp = props => {
                     value={EmailInput}
                 />
                 <Input 
+                    testID={'phone'}
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
@@ -123,6 +126,7 @@ const TeacherSignUp = props => {
                     value={PhoneInput}
                 />
                 <Input 
+                    testID={'password'}
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
@@ -143,6 +147,7 @@ const TeacherSignUp = props => {
                     secureTextEntry={true}
                 />
                 <Input
+                    testID={'id'}
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}

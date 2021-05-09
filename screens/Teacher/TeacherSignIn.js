@@ -3,7 +3,7 @@ import {View, Text, StyleSheet ,Button, Alert , TouchableOpacity , Keyboard} fro
 
 import colors from '../../constants/Colors';
 import Input from '../../components/Input';
-
+//import 'localstorage-polyfill';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import Firebase ,{db} from '../../firebase/fire';
 
@@ -37,13 +37,13 @@ const TeacherSignIn = props => {
         }
     }
 
-    const [EmailInput,setEmail]= useState('Elihu222@gmail.com');
+    const [EmailInput,setEmail]= useState('');
 
     const EmailHandler = EmailText => {
         setEmail(EmailText.replace(/^(9,12)/))
     }
     
-    const [PassInput,setPass]= useState('123123');
+    const [PassInput,setPass]= useState('');
 
     const PassHandler = PassText => {
         setPass(PassText)
@@ -67,7 +67,8 @@ const TeacherSignIn = props => {
                 <Text>Parent Sign In Screen</Text>
 
 
-                <Input 
+                <Input
+                    testID={'email'} 
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
@@ -77,6 +78,7 @@ const TeacherSignIn = props => {
                     value={EmailInput}
                 />
                 <Input 
+                    testID={'password'}
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
