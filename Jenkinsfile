@@ -9,8 +9,8 @@ pipeline {
                 }
             }
             steps {
-                sh 'apt install npm'
-                //sh 'RUN apk add install npm'
+                sh 'npm install'
+             
                 echo 'finished build'
             }
         }
