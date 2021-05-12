@@ -30,7 +30,7 @@ const TeacherProfile = props => {
                 <Button
                     title="Enter Grades"
                     onPress={() => {
-                        props.navigation.navigate({routeName:'EnterGrades2'})}
+                        props.navigation.navigate({routeName:'EnterGrades'})}
                     }
                 />
                 <Button
