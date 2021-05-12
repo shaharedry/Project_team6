@@ -11,6 +11,7 @@ import ParentLogin from '../screens/Parent/ParentLogin'
 import ParentProfile from '../screens/Parent/ParentProfile'
 import ParentSignUp from '../screens/Parent/ParentSignUp'
 import ParentSignIn from '../screens/Parent/ParentSignIn'
+import GreenTav from '../screens/Parent/GreenTav'
 
 import TeacherLogin from '../screens/Teacher/TeacherLogin'
 import TeacherProfile from '../screens/Teacher/TeacherProfile'
@@ -65,7 +66,11 @@ const AppNavigator = createStackNavigator({
     TeacherProfile:{ screen:  TeacherProfile ,headerTitle: 'Schovid'},
     EnterGrades:{ screen:  EnterGrades ,headerTitle: 'Schovid'},
     EnterPresence:{ screen: EnterPresence ,headerTitle: 'Schovid'},
+
+    GreenTav:{ screen: GreenTav ,headerTitle: 'Schovid'},
+
     ScoreCorrection:{ screen: ScoreCorrection ,headerTitle: 'Schovid'},
+                                          
     ViewGrades:{ screen: ViewGrades ,headerTitle: 'Schovid'},
     ViewPresence :{screen:ViewPresence,headerTitle: 'Schovid'},
     createClass :{screen:createClass,headerTitle:'Schovid'},

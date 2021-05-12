@@ -145,44 +145,110 @@ class EnterGrades extends React.Component {
             </View>
         )
     }
-};
 
-const styles = StyleSheet.create({
-    screen: {
-        marginTop: 5,
-        marginBottom: 10,
-        width: '100%',
-        //height: windowHeight /15,
-        borderColor: '#acc',
-        borderRadius: 3,
-        borderWidth: 1,
-        flexDirection: 'row',
-        alignItems: 'center',
-        backgroundColor: '#fff'
-    },
-    InputContainer: {
-        padding: 10,
-        flex: 1,
-        fontSize: 16,
-        color: '#333',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    inputField: {
-        padding: 10,
-        marginTop: 5,
-        marginBottom: 10,
-        //width: windowWidth /1.5,
-        //height: windowHeight /15,
-        fontSize: 16,
-        borderRadius: 8,
-        borderWidth: 1
-    },
-    row: {
-        height: 40, 
-        backgroundColor: '#E7E6E1' 
+    const [ClassInput,setClass]= useState('');
+    const ClassHandler = ClassText => {
+        setClass(ClassText.replace(/^[0-9](1,1)/))
+    }
+    const [lessonInput,setlesson]= useState('');
+    const lessonHandler = lessonText => {
+        setlesson(lessonText.replace(/[^A-Za-z]/))
+    }
+    const [gradeInput,setgrade]= useState('');
+    const gradeHandler = gradeText => {
+        setgrade(gradeText.replace(/^[0-9](2,1)/))
     }
 
-})        
+return(
+    <View style={styles.InputContainer}>
+                <Text>Enter Grade</Text>
+                <Input
+                    style={styles.inputField}
+                    blurOnSubmit
+                    autoCorrect={false}
+                    placeholder='Full Name'
+                    keyboardType="ascii-capable"
+                    onChangeText={FullnameHandler}
+                    value={FullnameInput}
+                />
+                <Input
+                    style={styles.inputField}
+                    blurOnSubmit
+                    autoCorrect={false}
+                    placeholder='ID'
+                    keyboardType="ascii-capable"
+                    onChangeText={IDHandler}
+                    value={IDInput}
+                />
+                <Input 
+                    style={styles.inputField}
+                    blurOnSubmit
+                    autoCorrect={false}
+                    placeholder='Class'
+                    keyboardType="Phone"
+                    onChangeText={ClassHandler}
+                    value={ClassInput}
+                />
+                <Input 
+                    style={styles.inputField}
+                    blurOnSubmit
+                    autoCorrect={false}
+                    placeholder='lesson'
+                    keyboardType="ascii-capable"
+                    onChangeText={lessonHandler}
+                    value={lessonInput}
+                />
+                <Input 
+                    style={styles.inputField}
+                    blurOnSubmit
+                    autoCorrect={false}
+                    placeholder='Grade'
+                    keyboardType="ascii-Phone"
+                    onChangeText={gradeHandler}
+                    value={gradeInput}
+                    
+                />
+                
+                <View style={styles.buttoncontainer}>
+                        <Button title="Enter" onPress={() => {
+                            
+                            signup();
+                        }} color={colors.secondery} />
+                </View>
+            </View>
+)}
             
+            const styles = StyleSheet.create({
+                screen: {
+                    marginTop: 5,
+                    marginBottom: 10,
+                    width: '100%',
+                    //height: windowHeight /15,
+                    borderColor: '#acc',
+                    borderRadius: 3,
+                    borderWidth: 1,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    backgroundColor: '#fff'
+                },
+                InputContainer: {
+                    padding: 10,
+                    flex: 1,
+                    fontSize: 16,
+                    color: '#333',
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                },
+                inputField: {
+                    padding: 10,
+                    marginTop: 5,
+                    marginBottom: 10,
+                    fontSize: 16,
+                    borderRadius: 8,
+                    borderWidth: 1
+                }
+            })
+            
+            
+        
 export default EnterGrades;
