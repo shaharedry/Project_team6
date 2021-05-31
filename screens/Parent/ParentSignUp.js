@@ -33,21 +33,29 @@ const ParentSignUp = props => {
                     fullname: FullnameInput,
                     phonenum: PhoneInput,
                     id:IDInput,
-
                     Role: 'Parent', 
-                    Children: child
+                    Children: null
                    
                 }
                 db.collection('Parent')
-                    .doc(response.user.uid)
+                    .doc(FullnameInput)
                     .set(user)
-
                 props.navigation.navigate({routeName: 'ParentLogin'});
             }
 
         } catch (e){
-            console.log(e);
-            alert(e);
+            if(e.code == 'auth/invalid-email'){
+                Alert.alert("Bad Email!", e.message)
+                console.log(e);
+            }
+            if(e.code == 'auth/email-already-in-use'){
+                Alert.alert("This Email is already Registered!", "The email address is already in use by another account.")
+                console.log(e);
+            }
+            else{
+                Alert.alert(e.code,e.message)
+                console.log(e);
+            }
         }
     }
 
@@ -164,7 +172,7 @@ const ParentSignUp = props => {
                     keyboardType="number-pad"
                     onChangeText={IDHandler}
                     value={IDInput}
-                />
+                /> 
                 <View style={styles.buttoncontainer}>
                         <Button title="Sign Up" onPress={() => {
                             if(PassInput!=''){

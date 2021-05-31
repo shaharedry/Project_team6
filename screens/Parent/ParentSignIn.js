@@ -1,6 +1,7 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import {View, Text, StyleSheet ,Button, Alert , TouchableOpacity , Keyboard} from 'react-native';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { NavigationActions, StackActions } from 'react-navigation'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import colors from '../../constants/Colors';
@@ -8,13 +9,13 @@ import Input from '../../components/Input';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { createParent } from '../../actions/Parent';
 import Firebase ,{db} from '../../firebase/fire';
-//import 'localstorage-polyfill';
+
 import Navigation from '../../navigation/Navigation';
 
 
 const ParentSignIn = props => {
 
-    const [email,setEmail]= useState('harelelihu@gmail.com');
+    const [email,setEmail]= useState('HarelElihu@gmail.com');
 
     const EmailHandler = EmailText => {
         setEmail(EmailText.replace(/^[0-9](9,12)/))
@@ -28,6 +29,27 @@ const ParentSignIn = props => {
 
     const [verify,setverify]=useState(false);
 
+    const AddItem = async (saveas,save) =>{
+        try{
+            console.log("from async storage: "+ save)
+            await AsyncStorage.setItem(saveas,save)
+        } catch (error){
+            console.warn(error)
+        }
+    }
+
+    resetStack = () => {
+        props.navigation.dispatch(StackActions.reset({
+            index: 0,
+            actions: [
+              NavigationActions.navigate({
+                routeName: 'TeacherProfile',
+                //params: { someParams: 'parameters goes here...' },
+              }),
+            ],
+          }
+        ))
+    }
 
     return (
         //<TouchableWithoutFeedback  onPress={Keyboard.dismiss}>
@@ -56,18 +78,43 @@ const ParentSignIn = props => {
                     secureTextEntry={true}
                 />
                 <View style={styles.buttoncontainer}>
-                        <Button title="Sign In" onPress={() => {
-                            console.log("wtf went wrong?");
+                    <Button title="Sign In" onPress={() => {
+                            console.log('pressed Sign In');
+                            db.collection("Parent").where("email", "==", email).get().then(function(querySnapshot) {
+                                querySnapshot.forEach(function(doc) {
+                                    console.log("name from db collection: "+doc.data().fullname)
+                                    AddItem('ParentFullname',doc.data().fullname);
+                                    AddItem('ParentEmail',doc.data().email)
+                                    AddItem('ParentId', doc.data().id)
+                                    AddItem('ParentPhone', doc.data().phonenum)
+                                    props.navigation.navigate({routeName: 'ParentProfile'})
+                                    //resetStack(); //unfreeze in final
+                                },
+                            )})  
+                            Alert.alert('Error!','Please check info again!\nEmail is case sensitive')
+                            console.log('Error!\nPlease check info again!\nEmail is case sensitive')          
+                        }} color={colors.secondery} />
+                </View>
+                
+                        {/* <Button title="Sign In" onPress={() => {
+                            console.log("SignInWithEmailAndPassword started");
                             Firebase.auth().signInWithEmailAndPassword(email, password)
                             .then((userCredential) => {
                                 // Signed in
-                                var user = userCredential.user;
-                                console.log("wtf went wrong?"+user);
+                                var user = userCredential;
                                 (user) => {
                                     if (user){
                                       console.log(user.uid);
-                                    }
+                                    } 
                                 }
+                                db.collection("Parent").where("email", "==", email).get().then(function(querySnapshot) {
+                                    querySnapshot.forEach(function(doc) {
+                                        // .setItem('ParentEmail',doc.data().email);
+                                        // .setItem('ParentFullname',doc.data().fullname);
+                                        // .setItem('ParentId',doc.data().id);
+                                        // .setItem('ParentPhone',doc.data().phone);
+                                    },
+                                )})              
                                 props.navigation.navigate({routeName:'ParentProfile'})
                                 Firebase.auth().getUser(uid).then((userRecord) => {
                                     // See the UserRecord reference doc for the contents of userRecord.
@@ -75,15 +122,13 @@ const ParentSignIn = props => {
                                     console.log(`Successfully fetched user data: ${userRecord.toJSON()}`);
 
                                 })
-                                props.navigation.navigate({routeName: 'ParentLogin'});
-                                // ...
                                 })
                             .catch((error) => {
                                 var errorCode = error.code;
                                 var errorMessage = error.message;
                                 });
-                        }} color={colors.secondery} />
-                </View>
+                        }} color={colors.secondery} /> */}
+                {/* </View> */}
             </View>
         //</TouchableWithoutFeedback>
     );

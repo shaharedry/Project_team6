@@ -3,19 +3,28 @@ import {View, Text, StyleSheet ,Button ,Image} from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import ProfileImage from '../../components/ProfileImage';
 import colors from '../../constants/Colors'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ParentProfile = props => {
 
     const [user, setUser] = useState()
 
     useEffect(() => {
-        const loggedInUser = localStorage.getItem("user");
-        console.log(loggedInUser);
-        if (loggedInUser) {
-            console.log(loggedInUser);
-            setUser(loggedInUser);
+        _retrieveData();
+    }, []); 
+
+    _retrieveData= async () => {
+        try{
+            AsyncStorage.getItem('ParentFullname')
+                .then(value => {
+                    if(value!= null) {
+                        setUser(value)
+                    }
+                })
+        } catch (error){
+            console.warn(error)
         }
-    }, []);
+    } 
 
     return (
         <View style={styles.screen}>
