@@ -12,16 +12,9 @@ const SubtractionConfirmation = props => {
             const response = await Firebase.auth().signInWithEmailAndPassword(Email, Pass)
             if (response.user.uid) {
                 const Class = {
-                   
                     fullname: FullnameInput,
-
-                   number:numberInput,
-                    
-
-                   students:studentsInput,
-
-                   
-                   
+                    number:numberInput,
+                    students:studentsInput,
                 }
                 db.collection('Classes')
                     .doc(FullnameInput)
@@ -141,6 +134,3 @@ return(
             
             
             export default SubtractionConfirmation;
-
-
-                      
