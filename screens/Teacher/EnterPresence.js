@@ -12,17 +12,10 @@ const EnterPresence = props => {
             const response = await Firebase.auth().signInWithEmailAndPassword(Email, Pass)
             if (response.user.uid) {
                 const Presence = {
-                   
                     fullname: FullnameInput,
-                    
                     class:ClassInput,
-                    
-
-                    lesson:lessonInput,
-
-                   
-                    Presence: PresenceInput
-                   
+                    lesson:lessonInput,    
+                    Presence: PresenceInput   
                 }
                 db.collection('Presence')
                     .doc(FullnameInput)

@@ -6,7 +6,61 @@ import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { createGrade } from '../../actions/Grades';
 import Firebase ,{db} from '../../firebase/fire';
 
-const SubtractionConfirmation = props => {
+const MakeClass = props => {
+    const [user, setUser] = useState()
+
+    useEffect(() => {
+        _retrieveData();
+        console.log('mounted')
+        db.collection('Teacher').get().then( snapshot =>{
+            const students = []
+            snapshot.forEach( doc =>{
+                KEY = Object.keys(doc.data());
+                console.log("KEYS is :"+KEY);
+                KEY.forEach( (key_id) => {
+                    if(key_id=='fullname'){
+                        const data = doc.data()
+                        console.log(data)
+                        students.push(data)
+                        console.log('name is:'+doc.data().fullname)
+                        //names.push(doc.data().fullname)
+                    }
+                    else{
+
+                    }
+                })
+            })
+            this.setState({ students: students})
+            this.setState({isLoaded:true})
+        })
+        .catch( error => Alert.alert('Error',error.message))
+    }, []); 
+
+    state= {
+        students: null,
+        isLoaded: false,
+        checked: false
+    }
+   
+    // getStudentsOnQeueu = async () => {
+    //     let students = await this.studentsRef.orderByChild("fullname")
+    //     return students
+    //   }
+    
+
+    _retrieveData= async () => {
+        try{
+            AsyncStorage.getItem('TeacherFullname')
+                .then(value => {
+                    if(value!= null) {
+                        setUser(value)
+                    }
+                })
+        } catch (error){
+            console.warn(error)
+        }
+    } 
+
     const signup = async() =>{ 
         try{
             const response = await Firebase.auth().signInWithEmailAndPassword(Email, Pass)
@@ -14,7 +68,7 @@ const SubtractionConfirmation = props => {
                 const Class = {
                     fullname: FullnameInput,
                     number:numberInput,
-                    students:studentsInput,
+                    students:studentsInput,    
                 }
                 db.collection('Classes')
                     .doc(FullnameInput)
@@ -51,17 +105,17 @@ const SubtractionConfirmation = props => {
 
 return(
     <View style={styles.InputContainer}>
-                <Text>Subtraction Confirmation</Text>
+                <Text>Hello ({user}), Make a new class</Text>
                 <Input
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
-                    placeholder='Teacher Name'
+                    placeholder='Full Name'
                     keyboardType="ascii-capable"
                     onChangeText={FullnameHandler}
                     value={FullnameInput}
                 />
-                {/* <Input 
+                <Input 
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
@@ -69,27 +123,17 @@ return(
                     keyboardType="Phone"
                     onChangeText={numberHandler}
                     value={numberInput}
-                /> */}
+                />
                 <Input 
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
-                    placeholder='Reason Subtraction'
+                    placeholder='Student names'
                     keyboardType="ascii-capable"
                     onChangeText={studentsHandler}
                     value={studentsInput}
                 />
                 
-                <Input 
-                    style={styles.inputField}
-                    blurOnSubmit
-                    autoCorrect={false}
-                    placeholder='Student name'
-                    keyboardType="ascii-capable"
-                    onChangeText={studentsHandler}
-                    value={studentsInput}
-                />
-
                 <View style={styles.buttoncontainer}>
                         <Button title="Enter" onPress={() => {
                             signup();
@@ -99,38 +143,38 @@ return(
 )
             //<TouchableWithoutFeedback  onPress={Keyboard.dismiss}>
 }
-            const styles = StyleSheet.create({
-                screen: {
-                    marginTop: 5,
-                    marginBottom: 10,
-                    width: '100%',
-                    //height: windowHeight /15,
-                    borderColor: '#acc',
-                    borderRadius: 3,
-                    borderWidth: 1,
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    backgroundColor: '#fff'
-                },
-                InputContainer: {
-                    padding: 10,
-                    flex: 1,
-                    fontSize: 16,
-                    color: '#333',
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                },
-                inputField: {
-                    padding: 10,
-                    marginTop: 5,
-                    marginBottom: 10,
-                    //width: windowWidth /1.5,
-                    //height: windowHeight /15,
-                    fontSize: 16,
-                    borderRadius: 8,
-                    borderWidth: 1
-                }
-            })
+    const styles = StyleSheet.create({
+        screen: {
+        marginTop: 5,
+        marginBottom: 10,
+        width: '100%',
+        //height: windowHeight /15,
+        borderColor: '#acc',
+        borderRadius: 3,
+        borderWidth: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: '#fff'
+            },
+        InputContainer: {
+        padding: 10,
+        flex: 1,
+        fontSize: 16,
+        color: '#333',
+        justifyContent: 'center',
+        alignItems: 'center'
+            },
+        inputField: {
+        padding: 10,
+        marginTop: 5,
+        marginBottom: 10,
+        //width: windowWidth /1.5,
+        //height: windowHeight /15,
+        fontSize: 16,
+        borderRadius: 8,
+        borderWidth: 1
+    }
+})
             
             
-            export default SubtractionConfirmation;
+export default MakeClass;

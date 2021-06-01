@@ -53,13 +53,13 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     ImageContainer: {
-        width: '85%',
+        width: '85%', 
         height: '50%',
         borderRadius: 5,
         borderWidth: 3,
         borderColor: 'black',
         overflow: 'hidden',
-        margnVertical: 5
+        marginVertical: 5
     },
     image: {
         width: '100%',
