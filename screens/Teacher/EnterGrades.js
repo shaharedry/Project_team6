@@ -8,10 +8,13 @@ import { Checkbox, List } from 'react-native-paper';
 import { ListItem } from 'react-native-elements'
 
 class EnterGrades extends React.Component {
-    state= {
-        students: null,
-        isLoaded: false,
-        checked: false
+    constructor(){
+        super()
+        this.state= {
+            students: null,
+            isLoaded: false,
+            check:true
+        }
     }
    
     // getStudentsOnQeueu = async () => {
@@ -24,7 +27,7 @@ class EnterGrades extends React.Component {
             const students = []
             snapshot.forEach( doc =>{
                 KEY = Object.keys(doc.data());
-                console.log("KEYS is :"+KEY);
+                console.log("KEYS are :"+KEY);
                 KEY.forEach( (key_id) => {
                     if(key_id=='fullname'){
                         const data = doc.data()
@@ -49,14 +52,24 @@ class EnterGrades extends React.Component {
         if(this.state.isLoaded!=false)
         return this.state.students.map((item,key)=> {
             return(
-                <TouchableOpacity style={{flexDirection: "row",alignItems: "center" }} key={key} onPress={()=> {this.value=!this.value}}>
-                    <CheckBox value={false}/>
+
+                <TouchableOpacity style={{ flexDirection: "row", alignItems: "center" , }} key={key} onPress={()=> 
+                {this.onChecked(item.fullname)}}>
+                    <CheckBox value={this.state.students.checked} onChange={()=> {this.checkBox_Test}}/>
                     <Text style={{fontWeight:"bold"}}>{item.fullname}</Text>
                 </TouchableOpacity>
+                /* <CheckBox
+                    uncheckedColor={'#b3b4b5'}
+                    checkedColor={"#911830"}
+                    title = {item.fullname}
+                    checkedIcon="stop"
+                    checked={item.checked}
+                    onPress={()=>this.onChecked(item.fullname)}
+                /> */
                 // <View>
                 //     <CheckBox
                 //         value={this.state.checked}
-                //         onValueChange={() => this.setState({ checked: !this.state.checked })}
+                //         onClick={() => this.value = !this.value}
                 //         />
                 //     <Text>{item.fullname}</Text>
                 // </View>
@@ -102,9 +115,28 @@ class EnterGrades extends React.Component {
     //         if(checks[i] == true ){
     //             selected.push(keys[i])
     //         }
+    //         if(isInList== false)
+    //             checked.push(data[index]);
     //     }
-    //     console.log(selected)
+    //     else{
+    //         console.log('checked length was 0')
+    //         console.log('data is' + data[index])
+    //         checked.push(data[index]);
+    //     }
+    //     this.setState({ checked: checked})
     // }
+
+    getSelectedStudents(){
+        var keys = this.state.students.map((t) => t.key)
+        const checks = this.state.students.map((t) => t.checked)
+        let selected = [] 
+        for (let i=0;i<checks.length; i++){
+            if(checks[i] == true ){
+                selected.push(keys[i])
+            }
+        }
+        console.log(selected)
+    }
 
     render(){
         return (
