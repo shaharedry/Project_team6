@@ -3,9 +3,19 @@ import {View, Text, StyleSheet ,Button, Alert , TouchableOpacity , Keyboard} fro
 import colors from '../../constants/Colors';
 import Input from '../../components/Input';
 
+import { NavigationActions, StackActions } from 'react-navigation'
 import Firebase ,{db} from '../../firebase/fire';
 
 const TeacherSignUp = props => {
+    const AddItem = async (saveas,save) =>{
+        try{
+            console.log("saving to async storage: "+ save)
+            await AsyncStorage.setItem(saveas,save)
+        } catch (error){
+            console.warn(error)
+        }
+    }
+
     const signup = async() =>{ 
         try{
             const response = await Firebase.auth().createUserWithEmailAndPassword(EmailInput, PassInput)
@@ -17,20 +27,31 @@ const TeacherSignUp = props => {
                     phonenum: PhoneInput,
                     id:IDInput,
                     Role: 'Teacher', 
-
-                    Grade: GradeInput
-
-                   
+                    TeacherOfClass: null   
                 }
                 db.collection('Teacher')
-                    .doc(response.user.uid)
+                    .doc(FullnameInput)
                     .set(user)
-
+                // AddItem('TeacherFullname',doc.data().fullname);
+                // AddItem('TeacherEmail',doc.data().email)
+                // AddItem('TeacherId', doc.data().id)
+                // AddItem('TeacherPhone', doc.data().phonenum)
                 props.navigation.navigate({routeName: 'TeacherProfile'});
             }
 
         } catch (e){
-            console.log(e);
+            if(e.code == 'auth/invalid-email'){
+                Alert.alert("Bad Email!", e.message)
+                console.log(e);
+            }
+            if(e.code == 'auth/email-already-in-use'){
+                Alert.alert("This Email is already Registered!", "The email address is already in use by another account.")
+                console.log(e);
+            }
+            else{
+                Alert.alert(e.code,e.message)
+                console.log(e);
+            }
 
         }
     }

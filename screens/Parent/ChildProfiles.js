@@ -6,32 +6,47 @@ import firebase ,{db} from '../../firebase/fire'
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 import { Checkbox, List } from 'react-native-paper';
 import { ListItem } from 'react-native-elements'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-class EnterGrades extends React.Component {
+class ChildProfiles extends React.Component {
     state= {
         students: null,
         isLoaded: false,
         checked: false
     }
-   
-    // getStudentsOnQeueu = async () => {
-    //     let students = await this.studentsRef.orderByChild("fullname")
-    //     return students
-    //   }
+    
     componentDidMount(){
         console.log('mounted')
-        db.collection('Teacher').get().then( snapshot =>{
+        db.collection('Child').get().then( snapshot =>{
             const students = []
             snapshot.forEach( doc =>{
                 KEY = Object.keys(doc.data());
                 console.log("KEYS is :"+KEY);
                 KEY.forEach( (key_id) => {
-                    if(key_id=='fullname'){
+                    if(key_id=='ChildOf'){
                         const data = doc.data()
                         console.log(data)
-                        students.push(data)
-                        console.log('name is:'+doc.data().fullname)
-                        //names.push(doc.data().fullname)
+                        const value = AsyncStorage.getItem('ParentFullname')
+                        console.log("ChildOf:" + doc.data().ChildOf)
+                        console.log("value is : "+value)
+                        if(doc.data().ChildOf == value){
+                            students.push(data)
+                            console.log('name is:'+doc.data().fullname)
+                       }
+                        // try{
+                        //     AsyncStorage.getItem('ParentFullname')
+                        //         .then(value => {
+                        //             if(value!= null) {
+                        //                 console.log("value is: "+value)
+                        //                 if(doc.data().ChildOf == value){
+                        //                     students.push(data)
+                        //                     console.log('name is:'+doc.data().fullname)
+                        //                 }
+                        //             }
+                        //         })
+                        // } catch (error){
+                        //     console.warn(error)
+                        // }
                     }
                     else{
 
@@ -40,7 +55,6 @@ class EnterGrades extends React.Component {
             })
             this.setState({ students: students})
             this.setState({isLoaded:true})
-            //getStudentsOnQeueu();
         })
         .catch( error => Alert.alert('Error',error.message))
     }
@@ -53,13 +67,6 @@ class EnterGrades extends React.Component {
                     <CheckBox value={false}/>
                     <Text style={{fontWeight:"bold"}}>{item.fullname}</Text>
                 </TouchableOpacity>
-                // <View>
-                //     <CheckBox
-                //         value={this.state.checked}
-                //         onValueChange={() => this.setState({ checked: !this.state.checked })}
-                //         />
-                //     <Text>{item.fullname}</Text>
-                // </View>
             )
         })
     }
@@ -94,6 +101,21 @@ class EnterGrades extends React.Component {
         
     }
 
+    _retrieveData= async () => {
+        try{
+            AsyncStorage.getItem('ParentFullname')
+                .then(value => {
+                    if(value!= null) {
+                        console.log("value is: "+value)
+                        this.setState({user : value})
+                        console.log("user state should be: "+this.user)
+                    }
+                })
+        } catch (error){
+            console.warn(error)
+        }
+    } 
+
     // getSelectedStudents(){
     //     var keys = this.state.students.map((t) => t.key)
     //     const checks = this.state.students.map((t) => t.checked)
@@ -107,49 +129,8 @@ class EnterGrades extends React.Component {
     // }
 
     render(){
+        if(isLoaded)
         return (
-            // <View style={styles.InputContainer}>
-            //     <Text>Enter Grades</Text>
-            //     <FlatList 
-            //     data = {this.state.students}
-            //     renderItem ={({item}) =>
-            //         // <RadioButton
-            //         //     value ={item.fullname}
-            //         //     onPress={() => this.checked=value}
-            //         // />
-            //     <Text>
-            //         {`Student name: ${item.fullname}\n`}
-            //         {`Email is: ${item.email}`}
-            //     </Text>
-            //     }
-            //     />
-            //     <RadioForm
-            //         radio_props={this.dataList}
-                    
-            //         onPress={(value) => {this.setState({value:value})}}
-            //     />
-            // {this.renderStudentList()}
-            // {/* <Button
-            //         title="Update Students "
-            //         onPress={() => {
-            //         {this.getSelectedStudents}}
-            //         }
-            //     /> */}
-            // </View>
-
-            // <View>
-            //     {this.state.students.map((item,index) =>(
-            //         <ListItem key={index}>
-            //             <Checkbox
-            //                 style={{marginRight: 30}}
-            //                 checked={this.state.deletionArray.includes(index)}
-            //                 />
-            //                 <body>
-            //                     <Text>{item.fullname}</Text>
-            //                 </body>
-            //         </ListItem>
-            //     ))}
-            // </View>
         <View style={styles.container}>
             <FlatList style={styles.list}
                 contentContainerStyle={styles.listContainer}
@@ -356,6 +337,4 @@ class EnterGrades extends React.Component {
                   
             })
             
-            
-        
-export default EnterGrades;
+export default ChildProfiles;
