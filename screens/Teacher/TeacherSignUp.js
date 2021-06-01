@@ -32,10 +32,10 @@ const TeacherSignUp = props => {
                 db.collection('Teacher')
                     .doc(FullnameInput)
                     .set(user)
-                // AddItem('TeacherFullname',doc.data().fullname);
-                // AddItem('TeacherEmail',doc.data().email)
-                // AddItem('TeacherId', doc.data().id)
-                // AddItem('TeacherPhone', doc.data().phonenum)
+                AddItem('TeacherFullname',doc.data().fullname);
+                AddItem('TeacherEmail',doc.data().email)
+                AddItem('TeacherId', doc.data().id)
+                AddItem('TeacherPhone', doc.data().phonenum)
                 props.navigation.navigate({routeName: 'TeacherProfile'});
             }
 

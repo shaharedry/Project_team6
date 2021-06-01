@@ -134,6 +134,3 @@ return(
             
             
             export default SubtractionConfirmation;
-
-
-                      
