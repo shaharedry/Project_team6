@@ -154,7 +154,6 @@ const TeacherSignIn = props => {
                                     }
                                 },
                             )})
-              
                         }} color={colors.secondery} />
                 </View>
                 {/* <View style={styles.buttoncontainer}>
