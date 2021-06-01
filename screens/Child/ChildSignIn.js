@@ -5,18 +5,20 @@ import colors from '../../constants/Colors';
 import Input from '../../components/Input';
 import { FlingGestureHandler, TouchableWithoutFeedback } from 'react-native-gesture-handler';;
 import Firebase ,{db} from '../../firebase/fire';
+import { NavigationActions, StackActions } from 'react-navigation'
 
 const ChildSignIn = props => {
 
     const login = () => {
         return async (dispatch, getState) => {
             try {
-                const response = await Firebase.auth().signInWithEmailAndPassword(EmailInput, PassInput)
+                const response = await Firebase.auth().signInWithEmailAndPassword(IDInput+"@gmail.com", PassInput)
                 dispatch(getUser(response.user.uid))
                 //sessionStorage.setItem('name',response.user.fullname)
                 props.navigation.navigate({routeName: 'ChildLogin'});
             } catch (e) {
                 alert(e)
+                Alert.alert(e.error,e.message)
             }
         }
     }
@@ -36,10 +38,10 @@ const ChildSignIn = props => {
         }
     }
 
-    const [EmailInput,setEmail]= useState('');
+    const [IDInput,setID]= useState('');
 
-    const EmailHandler = EmailText => {
-        setEmail(EmailText.replace(/^(9,12)/))
+    const IDHandler = IDText => {
+        setID(IDText.replace(/^[0-9](9,9)/))
     }
     
     const [PassInput,setPass]= useState('');
@@ -59,20 +61,41 @@ const ChildSignIn = props => {
       setValue(newValue);
     };
 
+    resetStack = () => {
+        props.navigation.dispatch(StackActions.reset({
+            index: 0,
+            actions: [
+              NavigationActions.navigate({
+                routeName: 'ChildProfile',
+                //params: { someParams: 'parameters goes here...' },
+              }),
+            ],
+          }
+        ))
+    }
+
+    const AddItem = async (saveas,save) =>{
+        try{
+            console.log(saveas +" "+ save)
+            await AsyncStorage.setItem(saveas,save)
+        } catch (error){
+            console.warn(error)
+        }
+    }
+
     return (
         //<TouchableWithoutFeedback  onPress={Keyboard.dismiss}>
             <View style={styles.InputContainer}>
                 <Text>Child Sign In Screen</Text>
-
                 <Input 
-                    testID={'email'}
+                    testID={'Id'}
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
-                    placeholder='Email'
-                    keyboardType="email-address"
-                    onChangeText={EmailHandler}
-                    value={EmailInput}
+                    placeholder='Id'
+                    keyboardType="visible-password"
+                    onChangeText={IDHandler}
+                    value={IDInput}
                 />
                 <Input 
                     testID={'password'}
@@ -86,25 +109,22 @@ const ChildSignIn = props => {
                     secureTextEntry={true}
                 />
                 <View style={styles.buttoncontainer}>
-                    <Button title="Sign In" onPress={() => {
+                <Button title="Sign In" onPress={() => {
                             console.log('pressed Sign In');
-                            db.collection("Child").where("email", "==", EmailInput).get().then(function(querySnapshot) {
+                            db.collection("Child").where("id", "==", IDInput).get().then(function(querySnapshot) {
                                 querySnapshot.forEach(function(doc) {
-                                localStorage.setItem('user',doc.data().fullname);
+                                    console.log("name from db collection: "+doc.data().fullname)
+                                    AddItem('ChildFullname',doc.data().fullname);
+                                    //AddItem('ChildEmail',doc.data().email)
+                                    AddItem('ChildId', doc.data().id)
+                                    AddItem('ChildPhone', doc.data().phonenum)
+                                    props.navigation.navigate({routeName: 'ChildProfile'})
+                                    //resetStack(); //unfreeze in final
                                 },
-                                props.navigation.navigate({routeName: 'TeacherLogin'})
-                            )})              
+                            )})  
+                            Alert.alert('Error!','Please check info again!\nEmail is case sensitive')
+                            console.log('Error!\nPlease check info again!\nEmail is case sensitive')          
                         }} color={colors.secondery} />
-                    <Button title="Sign In as Child" onPress={() => { 
-                        console.log('pressed Sign In as Child');
-                        db.collection("Child").where("email", "==", EmailInput).get().then(function(querySnapshot) {
-                                querySnapshot.forEach(function(doc) {
-                                localStorage.setItem('user', doc.data().fullname)
-                                localStorage.setItem('email', doc.data().email)
-                                }
-                            )})   
-                        props.navigation.navigate({routeName: 'ChildLogin'});
-                    }} color={colors.secondery}/>
                 </View>
             </View>
         //</TouchableWithoutFeedback>
@@ -145,4 +165,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default TeacherSignIn;
+export default ChildSignIn;

@@ -6,7 +6,61 @@ import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { createGrade } from '../../actions/Grades';
 import Firebase ,{db} from '../../firebase/fire';
 
-const createClass = props => {
+const MakeClass = props => {
+    const [user, setUser] = useState()
+
+    useEffect(() => {
+        _retrieveData();
+        console.log('mounted')
+        db.collection('Teacher').get().then( snapshot =>{
+            const students = []
+            snapshot.forEach( doc =>{
+                KEY = Object.keys(doc.data());
+                console.log("KEYS is :"+KEY);
+                KEY.forEach( (key_id) => {
+                    if(key_id=='fullname'){
+                        const data = doc.data()
+                        console.log(data)
+                        students.push(data)
+                        console.log('name is:'+doc.data().fullname)
+                        //names.push(doc.data().fullname)
+                    }
+                    else{
+
+                    }
+                })
+            })
+            this.setState({ students: students})
+            this.setState({isLoaded:true})
+        })
+        .catch( error => Alert.alert('Error',error.message))
+    }, []); 
+
+    state= {
+        students: null,
+        isLoaded: false,
+        checked: false
+    }
+   
+    // getStudentsOnQeueu = async () => {
+    //     let students = await this.studentsRef.orderByChild("fullname")
+    //     return students
+    //   }
+    
+
+    _retrieveData= async () => {
+        try{
+            AsyncStorage.getItem('TeacherFullname')
+                .then(value => {
+                    if(value!= null) {
+                        setUser(value)
+                    }
+                })
+        } catch (error){
+            console.warn(error)
+        }
+    } 
+
     const signup = async() =>{ 
         try{
             const response = await Firebase.auth().signInWithEmailAndPassword(Email, Pass)
@@ -51,7 +105,7 @@ const createClass = props => {
 
 return(
     <View style={styles.InputContainer}>
-                <Text>Enter Class</Text>
+                <Text>Hello ({user}), Make a new class</Text>
                 <Input
                     style={styles.inputField}
                     blurOnSubmit
@@ -89,41 +143,38 @@ return(
 )
             //<TouchableWithoutFeedback  onPress={Keyboard.dismiss}>
 }
-            const styles = StyleSheet.create({
-                screen: {
-                    marginTop: 5,
-                    marginBottom: 10,
-                    width: '100%',
-                    //height: windowHeight /15,
-                    borderColor: '#acc',
-                    borderRadius: 3,
-                    borderWidth: 1,
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    backgroundColor: '#fff'
-                },
-                InputContainer: {
-                    padding: 10,
-                    flex: 1,
-                    fontSize: 16,
-                    color: '#333',
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                },
-                inputField: {
-                    padding: 10,
-                    marginTop: 5,
-                    marginBottom: 10,
-                    //width: windowWidth /1.5,
-                    //height: windowHeight /15,
-                    fontSize: 16,
-                    borderRadius: 8,
-                    borderWidth: 1
-                }
-            })
+    const styles = StyleSheet.create({
+        screen: {
+        marginTop: 5,
+        marginBottom: 10,
+        width: '100%',
+        //height: windowHeight /15,
+        borderColor: '#acc',
+        borderRadius: 3,
+        borderWidth: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: '#fff'
+            },
+        InputContainer: {
+        padding: 10,
+        flex: 1,
+        fontSize: 16,
+        color: '#333',
+        justifyContent: 'center',
+        alignItems: 'center'
+            },
+        inputField: {
+        padding: 10,
+        marginTop: 5,
+        marginBottom: 10,
+        //width: windowWidth /1.5,
+        //height: windowHeight /15,
+        fontSize: 16,
+        borderRadius: 8,
+        borderWidth: 1
+    }
+})
             
             
-            export default createClass;
-
-
-                      
+export default MakeClass;

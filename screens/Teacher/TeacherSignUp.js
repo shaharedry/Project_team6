@@ -9,7 +9,7 @@ import Firebase ,{db} from '../../firebase/fire';
 const TeacherSignUp = props => {
     const AddItem = async (saveas,save) =>{
         try{
-            console.log("from async storage: "+ save)
+            console.log("saving to async storage: "+ save)
             await AsyncStorage.setItem(saveas,save)
         } catch (error){
             console.warn(error)

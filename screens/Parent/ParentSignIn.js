@@ -15,7 +15,8 @@ import Navigation from '../../navigation/Navigation';
 
 const ParentSignIn = props => {
 
-    const [email,setEmail]= useState('HarelElihu@gmail.com');
+    const [email,setEmail]= useState('Harel@gmail.com');
+
 
     const EmailHandler = EmailText => {
         setEmail(EmailText.replace(/^[0-9](9,12)/))
@@ -31,7 +32,7 @@ const ParentSignIn = props => {
 
     const AddItem = async (saveas,save) =>{
         try{
-            console.log("from async storage: "+ save)
+            console.log("saving to async storage: "+ save)
             await AsyncStorage.setItem(saveas,save)
         } catch (error){
             console.warn(error)
@@ -82,6 +83,7 @@ const ParentSignIn = props => {
                             console.log('pressed Sign In');
                             db.collection("Parent").where("email", "==", email).get().then(function(querySnapshot) {
                                 querySnapshot.forEach(function(doc) {
+                                    if(querySnapshot!= null){
                                     console.log("name from db collection: "+doc.data().fullname)
                                     AddItem('ParentFullname',doc.data().fullname);
                                     AddItem('ParentEmail',doc.data().email)
@@ -89,10 +91,14 @@ const ParentSignIn = props => {
                                     AddItem('ParentPhone', doc.data().phonenum)
                                     props.navigation.navigate({routeName: 'ParentProfile'})
                                     //resetStack(); //unfreeze in final
+                                    }
+                                    else{
+                                        Alert.alert('Error!','Please check info again!\nEmail is case sensitive')
+                                        console.log('Error!\nPlease check info again!\nEmail is case sensitive')
+                                    }
                                 },
                             )})  
-                            Alert.alert('Error!','Please check info again!\nEmail is case sensitive')
-                            console.log('Error!\nPlease check info again!\nEmail is case sensitive')          
+          
                         }} color={colors.secondery} />
                 </View>
                 

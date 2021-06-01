@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
         borderWidth: 3,
         borderColor: 'black',
         overflow: 'hidden',
-        margnVertical: 5
+        marginVertical: 5
     },
     image: {
         width: '100%',

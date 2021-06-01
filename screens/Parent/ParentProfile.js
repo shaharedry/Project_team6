@@ -43,8 +43,8 @@ const ParentProfile = props => {
                 style={styles.buttoncontainer}
             />
             <Button
-                title="Child profile"
-                onPress={() => {props.navigation.navigate({routeName:'ChildProfile'})}}
+                title="Child profiles"
+                onPress={() => {props.navigation.navigate({routeName:'ChildProfiles'})}}
                 style={styles.buttoncontainer}
             />
             <Button

@@ -68,7 +68,7 @@ const TeacherProfile = props => {
             <View style={styles.buttoncontainer}>
                 <Button
                     title="create Class"
-                    //onPress={() => props.navigation.navigate({routeName:'createClass'})}
+                    onPress={() => props.navigation.navigate({routeName:'createClass'})}
                 />
             </View>
             <View style={styles.buttoncontainer}>
