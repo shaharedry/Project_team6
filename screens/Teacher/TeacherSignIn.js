@@ -45,7 +45,7 @@ const TeacherSignIn = props => {
         }
     }
 
-    const [EmailInput,setEmail]= useState('Elihu222@gmail.com');
+    const [EmailInput,setEmail]= useState('HarelElihu@gmail.com');
 
     const EmailHandler = EmailText => {
         setEmail(EmailText.replace(/^(9,12)/))
@@ -85,7 +85,7 @@ const TeacherSignIn = props => {
 
     const AddItem = async (saveas,save) =>{
         try{
-            console.log("from async storage: "+ save)
+            console.log("saving to async storage: "+ save)
             await AsyncStorage.setItem(saveas,save)
         } catch (error){
             console.warn(error)
@@ -139,28 +139,21 @@ const TeacherSignIn = props => {
                             console.log('pressed Sign In');
                             db.collection("Teacher").where("email", "==", EmailInput).get().then(function(querySnapshot) {
                                 querySnapshot.forEach(function(doc) {
-                                    console.log("verified is: "+Verified)
-                                    //VerifiedHandler
-                                    setVerified(true);
-                                    console.log("verified should be true: "+Verified)
-                                    console.log("name from db collection: "+doc.data().fullname)
-                                    AddItem('TeacherFullname',doc.data().fullname);
-                                    AddItem('TeacherEmail',doc.data().email)
-                                    AddItem('TeacherId', doc.data().id)
-                                    AddItem('TeacherPhone', doc.data().phonenum)
-                                    //props.navigation.navigate({routeName: 'TeacherProfile'})
-                                    //resetStack();
+                                    if(querySnapshot!= null){
+                                        console.log("name from db collection: "+doc.data().fullname)
+                                        AddItem('TeacherFullname',doc.data().fullname);
+                                        AddItem('TeacherEmail',doc.data().email)
+                                        AddItem('TeacherId', doc.data().id)
+                                        AddItem('TeacherPhone', doc.data().phonenum)
+                                        props.navigation.navigate({routeName: 'TeacherProfile'})
+                                        //resetStack();
+                                    }
+                                    else{
+                                        Alert.alert('Error!','Please check info again!\nEmail is case sensitive')
+                                        console.log('Error!\nPlease check info again!\nEmail is case sensitive')
+                                    }
                                 },
                             )})
-                            console.log("verified is after change: "+Verified)
-                            if(Verified == true){
-                                //resetStack(); //unfreeze in final
-                                props.navigation.navigate({routeName: 'TeacherProfile'})
-                            }
-                            else{
-                                Alert.alert('Error!','Please check info again!\nEmail is case sensitive')
-                                console.log('Error!\nPlease check info again!\nEmail is case sensitive')
-                            }        
                         }} color={colors.secondery} />
                 </View>
                 {/* <View style={styles.buttoncontainer}>

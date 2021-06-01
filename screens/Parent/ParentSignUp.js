@@ -40,6 +40,10 @@ const ParentSignUp = props => {
                 db.collection('Parent')
                     .doc(FullnameInput)
                     .set(user)
+                AddItem('ParentFullname',doc.data().fullname);
+                AddItem('ParentEmail',doc.data().email)
+                AddItem('ParentId', doc.data().id)
+                AddItem('ParentPhone', doc.data().phonenum)
                 props.navigation.navigate({routeName: 'ParentLogin'});
             }
 

@@ -1,19 +1,28 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import {View, Text, StyleSheet ,Image, Button} from 'react-native';
 import colors from '../../constants/Colors'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ChildProfile = props => {
 
     const [user, setUser] = useState()
 
     useEffect(() => {
-        const loggedInUser = localStorage.getItem("user");
-        console.log(loggedInUser);
-        if (loggedInUser) {
-            console.log(loggedInUser);
-            setUser(loggedInUser);
-        }
+        _retrieveData();
     }, []); 
+
+    _retrieveData= async () => {
+        try{
+            AsyncStorage.getItem('ChildFullname')
+                .then(value => {
+                    if(value!= null) {
+                        setUser(value)
+                    }
+                })
+        } catch (error){
+            console.warn(error)
+        }
+    }  
 
     return (
         <View style={styles.screen}>
@@ -52,8 +61,8 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     ImageContainer: {
-        width: 300,
-        height: 300,
+        width: 100,
+        height: 100,
         borderRadius: 150,
         borderWidth: 3,
         borderColor: 'black',
