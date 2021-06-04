@@ -1,6 +1,7 @@
 import { createStackNavigator } from 'react-navigation-stack'
 import { createAppContainer } from 'react-navigation';
 
+
 import colors from '../constants/Colors'
 
 
@@ -40,9 +41,20 @@ import ChildProfile from '../screens/Child/ChildProfile'
 import ChildSignUp from '../screens/Child/ChildSignUp'
 import ChildSignIn from '../screens/Child/ChildSignIn'
 import SchoolDetails from '../screens/Child/SchoolDetails'
+import TeacherDetails from '../screens/Child/TeacherDetails'
 import Signup from '../screens/Signup';
 import ChildProfiles from '../screens/Parent/ChildProfiles2';
+import WatchClass from '../screens/Child/WatchClass';
 import MakeClass from '../screens/Teacher/MakeClass'
+import MakeAClass from '../screens/Teacher/MakeAClass'
+import EditClass from '../screens/Teacher/EditClass'
+import ClassDetails from '../screens/Teacher/ClassDetails'
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+import PersonalDetails from '../screens/Teacher/PersonalDetails'
+
+import MakeSchedule from '../screens/Teacher/MakeSchedule'
+import PPersonalDetails from '../screens/Parent/PPersonalDetails'
+import CPersonalDetails from '../screens/Child/CPersonalDetails'
 
 
 
@@ -65,6 +77,8 @@ const AppNavigator = createStackNavigator({
     ParentSignIn: {screen:  ParentSignIn ,headerTitle: 'Schovid'},
     ChildProfiles: {screen: ChildProfiles, headerTitle: 'Schovid'},
     GreenTav:{ screen: GreenTav ,headerTitle: 'Schovid'},
+    TeacherDetails:{ screen: TeacherDetails ,headerTitle: 'Schovid'},
+    PPersonalDetails : { screen:  PPersonalDetails ,headerTitle: 'Schovid'},
 
     //Teacher Pages
     TeacherSignIn:{ screen:  TeacherSignIn ,headerTitle: 'Schovid'},
@@ -74,6 +88,11 @@ const AppNavigator = createStackNavigator({
     EnterGrades:{ screen:  EnterGrades ,headerTitle: 'Schovid'},
     EnterPresence:{ screen: EnterPresence ,headerTitle: 'Schovid'},
     MakeClass: { screen: MakeClass, headerTitle: 'Schovid'},
+    MakeAClass: { screen: MakeAClass, headerTitle: 'Schovid'},
+    EditClass: { screen: EditClass,headerTitle:'Schovid'},
+    ClassDetails: { screen: ClassDetails,headerTitle:'Schovid'},
+    PersonalDetails: {screen : PersonalDetails,headerTitle:'Schovid'},
+    MakeSchedule : {screen : MakeSchedule,headerTitle:'Schovid'},
 
 
 
@@ -93,6 +112,8 @@ const AppNavigator = createStackNavigator({
     WatchGrades:{ screen:  WatchGrades ,headerTitle: 'Schovid'},
     SchoolDetails:{screen: SchoolDetails,headerTitle:'Schovid'},
     WatchPresence:{ screen:  WatchPresence ,headerTitle: 'Schovid'},
+    WatchClass: { screen:  WatchClass ,headerTitle: 'Schovid'},
+    CPersonalDetails : { screen:  CPersonalDetails ,headerTitle: 'Schovid'},
 
     Signup:{ screen:  Signup ,headerTitle: 'Schovid'}
 

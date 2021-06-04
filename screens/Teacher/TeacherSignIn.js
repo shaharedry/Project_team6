@@ -45,13 +45,13 @@ const TeacherSignIn = props => {
         }
     }
 
-    const [EmailInput,setEmail]= useState('HarelElihu@gmail.com');
+    const [EmailInput,setEmail]= useState('');
 
     const EmailHandler = EmailText => {
         setEmail(EmailText.replace(/^(9,12)/))
     }
     
-    const [PassInput,setPass]= useState('123123');
+    const [PassInput,setPass]= useState('');
 
     const [Verified, setVerified]= useState(false);
 
@@ -92,19 +92,6 @@ const TeacherSignIn = props => {
         }
     }
 
-    resetStack = () => {
-        props.navigation.dispatch(StackActions.reset({
-            index: 0,
-            actions: [
-              NavigationActions.navigate({
-                routeName: 'TeacherProfile',
-                //params: { someParams: 'parameters goes here...' },
-              }),
-            ],
-          }
-        ))
-    }
-
     return (
         //<TouchableWithoutFeedback  onPress={Keyboard.dismiss}>
             <View style={styles.InputContainer}>
@@ -137,23 +124,25 @@ const TeacherSignIn = props => {
                 <View style={styles.buttoncontainer}>
                     <Button title="Sign In" onPress={() => {
                             console.log('pressed Sign In');
-                            db.collection("Teacher").where("email", "==", EmailInput).get().then(function(querySnapshot) {
-                                querySnapshot.forEach(function(doc) {
-                                    if(querySnapshot!= null){
-                                        console.log("name from db collection: "+doc.data().fullname)
-                                        AddItem('TeacherFullname',doc.data().fullname);
-                                        AddItem('TeacherEmail',doc.data().email)
-                                        AddItem('TeacherId', doc.data().id)
-                                        AddItem('TeacherPhone', doc.data().phonenum)
-                                        props.navigation.navigate({routeName: 'TeacherProfile'})
-                                        //resetStack();
-                                    }
-                                    else{
-                                        Alert.alert('Error!','Please check info again!\nEmail is case sensitive')
-                                        console.log('Error!\nPlease check info again!\nEmail is case sensitive')
-                                    }
-                                },
-                            )})
+                            Firebase.auth().signInWithEmailAndPassword(EmailInput, PassInput)
+                            .then((userCredential) => {
+                                db.collection("Teacher").where("email", "==", EmailInput).get().then(function(querySnapshot) {
+                                    querySnapshot.forEach(function(doc) {
+                                            console.log("name from db collection: "+doc.data().fullname)
+                                            AddItem('TeacherFullname',doc.data().fullname);
+                                            AddItem('TeacherEmail',doc.data().email)
+                                            AddItem('TeacherId', doc.data().id)
+                                            AddItem('TeacherPhone', doc.data().phonenum)
+                                            props.navigation.navigate({routeName: 'TeacherProfile'})
+                                            //resetStack(); //unfreeze in final
+                                        }
+                                )}
+                                )
+                            })
+                            .catch((error) => {
+                                Alert.alert('Error!','Please check info again!\nEmail is case sensitive')
+                                console.log('Error!\nPlease check info again!\nEmail is case sensitive')
+                              });
                         }} color={colors.secondery} />
                 </View>
                 {/* <View style={styles.buttoncontainer}>

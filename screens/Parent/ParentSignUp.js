@@ -3,6 +3,7 @@ import {View, Text, StyleSheet ,Button, Alert , TouchableOpacity , Keyboard} fro
 import colors from '../../constants/Colors';
 import Input from '../../components/Input';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { createParent } from '../../actions/Parent';
 import Firebase ,{db} from '../../firebase/fire';
@@ -22,6 +23,15 @@ const ParentSignUp = props => {
         setenteredInput(inputText.replace(/^[A-Za-z]/));
     }; */
 
+    const AddItem = async (saveas,save) =>{
+        try{
+            console.log("saving to async storage: "+ save)
+            await AsyncStorage.setItem(saveas,save)
+        } catch (error){
+            console.warn(error)
+        }
+    }
+
     const signup = async() =>{
 
         try{
@@ -40,10 +50,10 @@ const ParentSignUp = props => {
                 db.collection('Parent')
                     .doc(FullnameInput)
                     .set(user)
-                AddItem('ParentFullname',doc.data().fullname);
-                AddItem('ParentEmail',doc.data().email)
-                AddItem('ParentId', doc.data().id)
-                AddItem('ParentPhone', doc.data().phonenum)
+                AddItem('ParentFullname',user.fullname);
+                AddItem('ParentEmail',user.email)
+                AddItem('ParentId',user.id)
+                AddItem('ParentPhone', user.phonenum)
                 props.navigation.navigate({routeName: 'ParentLogin'});
             }
 
@@ -62,6 +72,7 @@ const ParentSignUp = props => {
             }
         }
     }
+
 
 
     const [FullnameInput,setFname]= useState('');

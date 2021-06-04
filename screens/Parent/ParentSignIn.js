@@ -1,6 +1,5 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import {View, Text, StyleSheet ,Button, Alert , TouchableOpacity , Keyboard} from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationActions, StackActions } from 'react-navigation'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -9,20 +8,22 @@ import Input from '../../components/Input';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { createParent } from '../../actions/Parent';
 import Firebase ,{db} from '../../firebase/fire';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Navigation from '../../navigation/Navigation';
+import darkColors from 'react-native-elements/dist/config/colorsDark';
 
 
 const ParentSignIn = props => {
 
-    const [email,setEmail]= useState('Harel@gmail.com');
+    const [email,setEmail]= useState('');
 
 
     const EmailHandler = EmailText => {
         setEmail(EmailText.replace(/^[0-9](9,12)/))
     }
     
-    const [password,setPass]= useState('123123');
+    const [password,setPass]= useState('');
 
     const PassHandler = PassText => {
         setPass(PassText)
@@ -81,23 +82,25 @@ const ParentSignIn = props => {
                 <View style={styles.buttoncontainer}>
                     <Button title="Sign In" onPress={() => {
                             console.log('pressed Sign In');
-                            db.collection("Parent").where("email", "==", email).get().then(function(querySnapshot) {
-                                querySnapshot.forEach(function(doc) {
-                                    if(querySnapshot!= null){
-                                    console.log("name from db collection: "+doc.data().fullname)
-                                    AddItem('ParentFullname',doc.data().fullname);
-                                    AddItem('ParentEmail',doc.data().email)
-                                    AddItem('ParentId', doc.data().id)
-                                    AddItem('ParentPhone', doc.data().phonenum)
-                                    props.navigation.navigate({routeName: 'ParentProfile'})
-                                    //resetStack(); //unfreeze in final
-                                    }
-                                    else{
-                                        Alert.alert('Error!','Please check info again!\nEmail is case sensitive')
-                                        console.log('Error!\nPlease check info again!\nEmail is case sensitive')
-                                    }
-                                },
-                            )})  
+                            Firebase.auth().signInWithEmailAndPassword(email, password)
+                            .then((userCredential) => {
+                                db.collection("Parent").where("email", "==", email).get().then(function(querySnapshot) {
+                                    querySnapshot.forEach(function(doc) {
+                                            console.log("name from db collection: "+doc.data().fullname)
+                                            AddItem('ParentFullname',doc.data().fullname);
+                                            AddItem('ParentEmail',doc.data().email)
+                                            AddItem('ParentId', doc.data().id)
+                                            AddItem('ParentPhone', doc.data().phonenum)
+                                            props.navigation.navigate({routeName: 'ParentProfile'})
+                                        }
+                                )}
+                                )
+                            })
+                            .catch((error) => {
+                                Alert.alert('Error!','Please check info again!\nEmail is case sensitive')
+                                console.log('Error!\nPlease check info again!\nEmail is case sensitive')
+                              });
+                             
           
                         }} color={colors.secondery} />
                 </View>

@@ -7,13 +7,14 @@ import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-
 import { Checkbox, List } from 'react-native-paper';
 import { ListItem } from 'react-native-elements'
 
-class EnterGrades extends React.Component {
+class MakeAClass extends React.Component {
     constructor(){
         super()
         this.state= {
             students: null,
             isLoaded: false,
-            check:true
+            check:true,
+            user:null
         }
     }
    
@@ -22,32 +23,95 @@ class EnterGrades extends React.Component {
     //     return students
     //   }
     componentDidMount(){
+        // console.log('mounted')
+        // db.collection('Teacher').get().then( snapshot =>{
+        //     const students = []
+        //     snapshot.forEach( doc =>{
+        //         KEY = Object.keys(doc.data());
+        //         console.log("KEYS are :"+KEY);
+        //         KEY.forEach( (key_id) => {
+        //             if(key_id=='fullname'){
+        //                 const data = doc.data()
+        //                 console.log(data)
+        //                 students.push(data)
+        //                 console.log('name is:'+doc.data().fullname)
+        //             }
+        //             else{
+
+        //             }
+        //         })
+        //     })
+        //     this.setState({ students: students})
+        //     this.setState({isLoaded:true})
+        //     //getStudentsOnQeueu();
+        // }
+        _retrieveData();
         console.log('mounted')
-        db.collection('Teacher').get().then( snapshot =>{
+        db.collection('Child').get().then( snapshot =>{
             const students = []
             snapshot.forEach( doc =>{
-                KEY = Object.keys(doc.data());
-                console.log("KEYS are :"+KEY);
+                const KEY = Object.keys(doc.data());
+                console.log("KEYS is :"+KEY);
                 KEY.forEach( (key_id) => {
-                    if(key_id=='fullname'){
-                        const data = doc.data()
-                        console.log(data)
-                        students.push(data)
-                        console.log('name is:'+doc.data().fullname)
-                        //names.push(doc.data().fullname)
+                    if(key_id=='class'){
+                        if(doc.data().class == null ){
+                            const data = doc.data()
+                            console.log(data)
+                            students.push(data)
+                            console.log('name is:'+doc.data().fullname)
+                            //names.push(doc.data().fullname)
+                        }
                     }
                     else{
 
                     }
                 })
             })
-            this.setState({ students: students})
-            this.setState({isLoaded:true})
-            //getStudentsOnQeueu();
-        })
+            this.setState({ students : students})
+            this.setState({isLoaded: true})
+            //this.students=students;
+            //isLoaded=true;
+
+        }
+        )
         .catch( error => Alert.alert('Error',error.message))
     }
+
+    _retrieveData= async () => {
+        try{
+            AsyncStorage.getItem('TeacherFullname')
+                .then(value => {
+                    if(value!= null) {
+                        setUser(value)
+                    }
+                })
+        } catch (error){
+            console.warn(error)
+        }
+    } 
     
+    signup = async() =>{ 
+        try{
+            const response = await Firebase.auth().signInWithEmailAndPassword('Elihu222@gmail.com', '123123')
+            if (response.user.uid) {
+                const Class = {
+                    fullname: FullnameInput,
+                    number:numberInput,
+                    students:studentsInput,    
+                }
+                db.collection('Classes')
+                    .doc(FullnameInput)
+                    .set(Class)
+
+                props.navigation.navigate({routeName: 'TeacherProfile'});
+            }
+
+        } catch (e){
+            console.log(e);
+            alert(e);
+        }
+    }
+
     renderStudentList(){
         if(this.state.isLoaded!=false)
         return this.state.students.map((item,key)=> {
@@ -91,7 +155,6 @@ class EnterGrades extends React.Component {
         if(checked.length > 0){
             console.log('checked length wasnt 0')
             for(let i=0;i<checked.length;i++){
-                //console.log('checked list is:'+checked[i])
                 if(checked[i]==data[index])
                     isInList = true;
             }
@@ -103,8 +166,7 @@ class EnterGrades extends React.Component {
             console.log('data is' + data[index])
             checked.push(data[index]);
         }
-        this.setState({ checked: checked})
-        
+        this.setState({ checked: checked})  
     }
 
     // getSelectedStudents(){
@@ -182,107 +244,53 @@ class EnterGrades extends React.Component {
             //         </ListItem>
             //     ))}
             // </View>
+
+
+            //works from here on!!
         <View style={styles.container}>
             <FlatList style={styles.list}
                 contentContainerStyle={styles.listContainer}
                 data={this.state.students}
                 horizontal={false}
-                numColumns={2}
+                numColumns={3}
                 keyExtractor= {(item) => {
                 return item.fullname;
             }}
             renderItem={({item}) => {
-                return (
-                <TouchableOpacity style={styles.card} onPress={() => {this.clickEventListener(item)}}>
-                    <View style={styles.cardFooter}>
-                        <View style={{alignItems:"center", justifyContent:"center"}}>
-                            <Text style={styles.name}>{item.fullname}</Text>
-                            <Text style={styles.position}>{item.email}</Text>
-                            <TouchableOpacity style={styles.UpdateButton} onPress={()=> this.clickEventListener(item)}>
-                                <Text style={styles.UpdateButtonText}>Enter Grades</Text>  
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-              </TouchableOpacity>
-            )
+                if(item.class==null){
+                    return (
+                        <TouchableOpacity style={styles.card} onPress={() => {this.clickEventListener(item)}}>
+                            <View style={styles.cardFooter}>
+                                <View style={{alignItems:"center", justifyContent:"center"}}>
+                                    <Text style={styles.name}>{item.fullname}</Text>
+                                    <Text style={styles.position}>No Assigned Class!</Text>
+                                    <TouchableOpacity style={styles.UpdateButton} onPress={()=> this.clickEventListener(item)}>
+                                        <Text style={styles.UpdateButtonText}>Assign Class</Text>  
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                      </TouchableOpacity>
+                    )
+                }
+                else{
+                    return (
+                        <TouchableOpacity style={styles.card} onPress={() => {this.clickEventListener(item)}}>
+                            <View style={styles.cardFooter}>
+                                <View style={{alignItems:"center", justifyContent:"center"}}>
+                                    <Text style={styles.name}>{item.fullname}</Text>
+                                    <Text style={styles.position}>{item.class}</Text>
+                                </View>
+                            </View>
+                      </TouchableOpacity>
+                    )
+                }
+
           }}/>
       </View>
     );
       
         
     }
-
-//     const [ClassInput,setClass]= useState('');
-//     const ClassHandler = ClassText => {
-//         setClass(ClassText.replace(/^[0-9](1,1)/))
-//     }
-//     const [lessonInput,setlesson]= useState('');
-//     const lessonHandler = lessonText => {
-//         setlesson(lessonText.replace(/[^A-Za-z]/))
-//     }
-//     const [gradeInput,setgrade]= useState('');
-//     const gradeHandler = gradeText => {
-//         setgrade(gradeText.replace(/^[0-9](2,1)/))
-//     }
-
-// return(
-//     <View style={styles.InputContainer}>
-//                 <Text>Enter Grade</Text>
-//                 <Input
-//                     style={styles.inputField}
-//                     blurOnSubmit
-//                     autoCorrect={false}
-//                     placeholder='Full Name'
-//                     keyboardType="ascii-capable"
-//                     onChangeText={FullnameHandler}
-//                     value={FullnameInput}
-//                 />
-//                 <Input
-//                     style={styles.inputField}
-//                     blurOnSubmit
-//                     autoCorrect={false}
-//                     placeholder='ID'
-//                     keyboardType="ascii-capable"
-//                     onChangeText={IDHandler}
-//                     value={IDInput}
-//                 />
-//                 <Input 
-//                     style={styles.inputField}
-//                     blurOnSubmit
-//                     autoCorrect={false}
-//                     placeholder='Class'
-//                     keyboardType="Phone"
-//                     onChangeText={ClassHandler}
-//                     value={ClassInput}
-//                 />
-//                 <Input 
-//                     style={styles.inputField}
-//                     blurOnSubmit
-//                     autoCorrect={false}
-//                     placeholder='lesson'
-//                     keyboardType="ascii-capable"
-//                     onChangeText={lessonHandler}
-//                     value={lessonInput}
-//                 />
-//                 <Input 
-//                     style={styles.inputField}
-//                     blurOnSubmit
-//                     autoCorrect={false}
-//                     placeholder='Grade'
-//                     keyboardType="ascii-Phone"
-//                     onChangeText={gradeHandler}
-//                     value={gradeInput}
-                    
-//                 />
-                
-//                 <View style={styles.buttoncontainer}>
-//                         <Button title="Enter" onPress={() => {
-                            
-//                             signup();
-//                         }} color={colors.secondery} />
-//                 </View>
-//             </View>
-//)
 }
             
             const styles = StyleSheet.create({
@@ -388,6 +396,5 @@ class EnterGrades extends React.Component {
                   
             })
             
-            
-        
-export default EnterGrades;
+  
+export default MakeAClass;

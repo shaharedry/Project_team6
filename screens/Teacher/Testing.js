@@ -7,7 +7,7 @@ import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-
 import { Checkbox, List } from 'react-native-paper';
 import { ListItem } from 'react-native-elements'
 
-class EnterGrades extends React.Component {
+class Testing extends React.Component {
     constructor(){
         super()
         this.state= {
@@ -16,34 +16,25 @@ class EnterGrades extends React.Component {
             check:true
         }
     }
-   
-    // getStudentsOnQeueu = async () => {
-    //     let students = await this.studentsRef.orderByChild("fullname")
-    //     return students
-    //   }
+
     componentDidMount(){
         console.log('mounted')
-        db.collection('Teacher').get().then( snapshot =>{
+        db.collection('Class').get().then( snapshot =>{
             const students = []
             snapshot.forEach( doc =>{
                 KEY = Object.keys(doc.data());
                 console.log("KEYS are :"+KEY);
                 KEY.forEach( (key_id) => {
-                    if(key_id=='fullname'){
+                    if(key_id=='ClassName'){
                         const data = doc.data()
                         console.log(data)
                         students.push(data)
                         console.log('name is:'+doc.data().fullname)
-                        //names.push(doc.data().fullname)
-                    }
-                    else{
-
                     }
                 })
             })
             this.setState({ students: students})
             this.setState({isLoaded:true})
-            //getStudentsOnQeueu();
         })
         .catch( error => Alert.alert('Error',error.message))
     }
@@ -54,37 +45,24 @@ class EnterGrades extends React.Component {
             return(
 
                 <TouchableOpacity style={{ flexDirection: "row", alignItems: "center" , }} key={key} onPress={()=> 
-                {this.onChecked(item.fullname)}}>
+                //{this.onChecked(item.ClassName)}
+                Alert.alert("Button Clicked!","Button Clicked!!")
+                }>
                     <CheckBox value={this.state.students.checked} onChange={()=> {this.checkBox_Test}}/>
-                    <Text style={{fontWeight:"bold"}}>{item.fullname}</Text>
+                    <Text style={{fontWeight:"bold"}}>{item.ClassName}</Text>
                 </TouchableOpacity>
-                /* <CheckBox
-                    uncheckedColor={'#b3b4b5'}
-                    checkedColor={"#911830"}
-                    title = {item.fullname}
-                    checkedIcon="stop"
-                    checked={item.checked}
-                    onPress={()=>this.onChecked(item.fullname)}
-                /> */
-                // <View>
-                //     <CheckBox
-                //         value={this.state.checked}
-                //         onClick={() => this.value = !this.value}
-                //         />
-                //     <Text>{item.fullname}</Text>
-                // </View>
             )
         })
     }
 
     clickEventListener(item) {
-        Alert.alert(item.fullname, item.email)
+        Alert.alert(item.ClassName, item.studentsList)
     }
 
-    onChecked(id){
+    onChecked(ClassName){
         const data = this.state.students
-        const index = data.findIndex(x => x.id === id);
-        console.log('id is '+ id)
+        const index = data.findIndex(x => x.ClassName === ClassName);
+        console.log('ClassName is '+ id)
         console.log('index is '+index)
         const isInList = false;
         const checked = []
@@ -140,48 +118,6 @@ class EnterGrades extends React.Component {
 
     render(){
         return (
-            // <View style={styles.InputContainer}>
-            //     <Text>Enter Grades</Text>
-            //     <FlatList 
-            //     data = {this.state.students}
-            //     renderItem ={({item}) =>
-            //         // <RadioButton
-            //         //     value ={item.fullname}
-            //         //     onPress={() => this.checked=value}
-            //         // />
-            //     <Text>
-            //         {`Student name: ${item.fullname}\n`}
-            //         {`Email is: ${item.email}`}
-            //     </Text>
-            //     }
-            //     />
-            //     <RadioForm
-            //         radio_props={this.dataList}
-                    
-            //         onPress={(value) => {this.setState({value:value})}}
-            //     />
-            // {this.renderStudentList()}
-            // {/* <Button
-            //         title="Update Students "
-            //         onPress={() => {
-            //         {this.getSelectedStudents}}
-            //         }
-            //     /> */}
-            // </View>
-
-            // <View>
-            //     {this.state.students.map((item,index) =>(
-            //         <ListItem key={index}>
-            //             <Checkbox
-            //                 style={{marginRight: 30}}
-            //                 checked={this.state.deletionArray.includes(index)}
-            //                 />
-            //                 <body>
-            //                     <Text>{item.fullname}</Text>
-            //                 </body>
-            //         </ListItem>
-            //     ))}
-            // </View>
         <View style={styles.container}>
             <FlatList style={styles.list}
                 contentContainerStyle={styles.listContainer}
@@ -196,10 +132,10 @@ class EnterGrades extends React.Component {
                 <TouchableOpacity style={styles.card} onPress={() => {this.clickEventListener(item)}}>
                     <View style={styles.cardFooter}>
                         <View style={{alignItems:"center", justifyContent:"center"}}>
-                            <Text style={styles.name}>{item.fullname}</Text>
-                            <Text style={styles.position}>{item.email}</Text>
+                            <Text style={styles.name}>{item.ClassName}</Text>
+                            <Text style={styles.position}>{item.ClassTeacher}</Text>
                             <TouchableOpacity style={styles.UpdateButton} onPress={()=> this.clickEventListener(item)}>
-                                <Text style={styles.UpdateButtonText}>Enter Grades</Text>  
+                                <Text style={styles.UpdateButtonText}>Edit Class</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -390,4 +326,4 @@ class EnterGrades extends React.Component {
             
             
         
-export default EnterGrades;
+export default Testing;
