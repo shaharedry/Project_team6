@@ -12,7 +12,17 @@ const ChildSignUp = props => {
     const [id, setId] = useState()
     const [fullname, setFullname] = useState()
     const [phone, setParentPhone] = useState()
+    const ChildAr= [];
     
+    const AddItem = async (saveas,save) =>{
+        try{
+            console.log("saving to async storage: "+ save)
+            await AsyncStorage.setItem(saveas,save)
+        } catch (error){
+            console.warn(error)
+        }
+    }
+
     useEffect(() => {
         _retrieveData();
     }, []); 
@@ -64,16 +74,24 @@ const ChildSignUp = props => {
                     id: IDInput,
                     Role: 'Child',      
                     ChildOf: fullname,
+                    class: null,
                     checked: false
                 }
                 db.collection('Child')
                     .doc(FullnameInput)
                     .set(user)
-                AddItem('ChildFullname',doc.data().fullname);
-                //AddItem('ChildEmail',doc.data().email)
-                AddItem('ChildId', doc.data().id)
-                AddItem('ChildPhone', doc.data().phonenum)
-                props.navigation.navigate({routeName: 'ChildProfile'});
+                AddItem('ChildFullname',user.fullname);
+                AddItem('ChildId', user.id)
+                AddItem('ChildPhone', user.phonenum)
+                
+                db.collection('Parent').doc(fullname).update({Children:ChildAr});
+                Alert.alert(
+                    "Created Succesfully",
+                    "Your Child User has been created succesfully!",
+                    [
+                      { text: "OK", onPress: () => props.navigation.navigate({routeName: 'ParentProfile'}) }
+                    ]
+                  );
             }
 
         } catch (e){
@@ -154,7 +172,7 @@ const ChildSignUp = props => {
                     blurOnSubmit
                     autoCorrect={false}
                     placeholder='Phone Number'
-                    keyboardType="visible-password"
+                    keyboardType="phone-pad"
                     onChangeText={PhoneHandler}
                     value={PhoneInput}
                     secureTextEntry={false}
@@ -164,7 +182,7 @@ const ChildSignUp = props => {
                     blurOnSubmit
                     autoCorrect={false}
                     placeholder='Password'
-                    keyboardType="visible-password"
+                    keyboardType="phone-pad"
                     onChangeText={PassHandler}
                     value={PassInput}
                     secureTextEntry={true}
@@ -174,7 +192,7 @@ const ChildSignUp = props => {
                     blurOnSubmit
                     autoCorrect={false}
                     placeholder='Verify Password'
-                    keyboardType="visible-password"
+                    keyboardType="phone-pad"
                     onChangeText={VerifyHandler}
                     value={VerifyPass}
                     secureTextEntry={true}

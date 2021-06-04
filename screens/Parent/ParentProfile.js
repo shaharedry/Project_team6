@@ -4,27 +4,20 @@ import { ScrollView } from 'react-native-gesture-handler';
 import ProfileImage from '../../components/ProfileImage';
 import colors from '../../constants/Colors'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { NavigationActions, StackActions } from 'react-navigation'
 
 const ParentProfile = props => {
 
     const [user, setUser] = useState()
 
     useEffect(() => {
-        _retrieveData();
-    }, []); 
-
-    _retrieveData= async () => {
-        try{
-            AsyncStorage.getItem('ParentFullname')
+        AsyncStorage.getItem('ParentFullname')
                 .then(value => {
                     if(value!= null) {
                         setUser(value)
                     }
                 })
-        } catch (error){
-            console.warn(error)
-        }
-    } 
+    }, []); 
 
     return (
         <View style={styles.screen}>
@@ -44,7 +37,7 @@ const ParentProfile = props => {
             />
             <Button
                 title="Child profiles"
-                onPress={() => {props.navigation.navigate({routeName:'ChildProfiles'})}}
+                onPress={() => {props.navigation.navigate({routeName:'ChildProfile'})}}
                 style={styles.buttoncontainer}
             />
             <Button
@@ -55,6 +48,18 @@ const ParentProfile = props => {
                 title="Health Declaration"
                 onPress={() => props.navigation.navigate({routeName:'GreenTav'})}
             />
+            <Button
+                title="Personal Details"
+                onPress={() => props.navigation.navigate({routeName:'PPersonalDetails'})}
+            />  
+                    <Button
+                        title="Logout"
+                        onPress={() =>props.navigation.dispatch(StackActions.reset({
+                            index: 0,
+                            actions: [
+                              NavigationActions.navigate({
+                                routeName: 'FirstScreen',}),],}))}
+                    />
             
         {/*} <Button title='Logout' onPress={this.handleSignout} /> */}
         </View>  

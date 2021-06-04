@@ -111,19 +111,44 @@ const ChildSignIn = props => {
                 <View style={styles.buttoncontainer}>
                 <Button title="Sign In" onPress={() => {
                             console.log('pressed Sign In');
-                            db.collection("Child").where("id", "==", IDInput).get().then(function(querySnapshot) {
-                                querySnapshot.forEach(function(doc) {
-                                    console.log("name from db collection: "+doc.data().fullname)
-                                    AddItem('ChildFullname',doc.data().fullname);
-                                    //AddItem('ChildEmail',doc.data().email)
-                                    AddItem('ChildId', doc.data().id)
-                                    AddItem('ChildPhone', doc.data().phonenum)
-                                    props.navigation.navigate({routeName: 'ChildProfile'})
-                                    //resetStack(); //unfreeze in final
-                                },
-                            )})  
-                            Alert.alert('Error!','Please check info again!\nEmail is case sensitive')
-                            console.log('Error!\nPlease check info again!\nEmail is case sensitive')          
+                            Firebase.auth().signInWithEmailAndPassword(IDInput+"@gmail.com", PassInput)
+                            .then((userCredential) => {
+                                console.log("1")
+                                db.collection("Child").where("id", "==", IDInput).get().then(function(querySnapshot) {
+                                    console.log("2")
+                                    querySnapshot.forEach(function(doc) {
+                                        console.log("name from db collection: "+doc.data().fullname)
+                                        AddItem('ChildFullname',doc.data().fullname);
+                                        //AddItem('ChildEmail',doc.data().email)
+                                        AddItem('ChildId', doc.data().id)
+                                        AddItem('ChildPhone', doc.data().phonenum)
+                                        props.navigation.navigate({routeName: 'ChildProfile'})
+                                        //resetStack(); //unfreeze in final
+                                    }
+                                )}
+                                )
+                            })
+                            .catch((error) => {
+                                Alert.alert('Error!','Please check info again!\nEmail is case sensitive')
+                                console.log('Error!\nPlease check info again!\nEmail is case sensitive')
+                              });
+                            // db.collection("Child").where("id", "==", IDInput).get().then(function(querySnapshot) {
+                            //     querySnapshot.forEach(function(doc) {
+                            //             if(querySnapshot!= null){
+                                        // console.log("name from db collection: "+doc.data().fullname)
+                                        // AddItem('ChildFullname',doc.data().fullname);
+                                        // //AddItem('ChildEmail',doc.data().email)
+                                        // AddItem('ChildId', doc.data().id)
+                                        // AddItem('ChildPhone', doc.data().phonenum)
+                                        // props.navigation.navigate({routeName: 'ChildProfile'})
+                                        // //resetStack(); //unfreeze in final
+                            //         }
+                            //         else{
+                            //             Alert.alert('Error!','Please check info again!\nEmail is case sensitive')
+                            //             console.log('Error!\nPlease check info again!\nEmail is case sensitive')
+                            //         }
+                            //     },
+                            // )})         
                         }} color={colors.secondery} />
                 </View>
             </View>

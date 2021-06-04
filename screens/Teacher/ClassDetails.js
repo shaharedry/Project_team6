@@ -10,12 +10,11 @@ import Navigation from '../../navigation/Navigation'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-class MakeAClass extends React.Component {
+class ClassDetails extends React.Component {
     constructor(){
         super()
         this.state= {
             students: null,
-            teachers:[],
             isLoaded: false,
             check:true,
             user:null,
@@ -29,14 +28,7 @@ class MakeAClass extends React.Component {
         }
     }
     componentDidMount(){
-        AsyncStorage.getItem('TeacherFullname')
-                .then(value => {
-                    console.log("value is: "+value)
-                    if(value!= null) {
-                        this.setState({user:value})
-                        console.log(this.state.user)
-                    }
-                })
+        _retrieveData();
         let Temp = this.state.GradeYear
         let FormatData = []
         for(let i=0;i<Temp.length;i++){
@@ -44,8 +36,7 @@ class MakeAClass extends React.Component {
                 id:i,
                 key:Temp[i],
                 checked:false
-            }
-            )
+            })
         }
         db.collection('Child').get().then( snapshot =>{
             const students = []
@@ -54,11 +45,11 @@ class MakeAClass extends React.Component {
                 //console.log("KEYS is :"+KEY);
                 KEY.forEach( (key_id) => {
                     if(key_id=='class'){
-                        if(doc.data().class == null ){
+                        if(doc.data().class == item.ClassName ){
                             const data = doc.data()
-                            //console.log(data)
+
                             students.push(data)
-                            //console.log('name is:'+doc.data().fullname)
+
                         }
                     }
                     if(students==null){
@@ -70,10 +61,25 @@ class MakeAClass extends React.Component {
             this.setState({ students : students})
             this.setState({isLoaded: true})
             this.setState({data: FormatData})
-        })
+        }
+        )
         .catch( error => Alert.alert('Error',error.message))
     }
 
+    _retrieveData(){
+        try{
+            AsyncStorage.getItem('TeacherFullname')
+                .then(value => {
+                    console.log("value is: "+value)
+                    if(value!= null) {
+                        this.setState({user:value})
+                        console.log(this.state.user)
+                    }
+                })
+        } catch (error){
+            console.warn(error)
+        }
+    } 
 
     getteachername(){
         AsyncStorage.getItem('TeacherFullname')
@@ -100,14 +106,11 @@ class MakeAClass extends React.Component {
                 }
             }
             const Teacher = this.state.user;
-            //console.log("Teacher name : "+Teacher)
-            //console.log("User is: " + this.state.user)
-            //console.log("Students to update: "+selected)
             const response = await firebase.auth().signInWithEmailAndPassword('HarelElihu@gmail.com', '123123')
             if (response.user.uid) {
                 const Class = {
                     ClassName:nameofclass,
-                    ClassTeacher: "Hadas Hassidim",
+                    ClassTeacher: "Harel Elihu",
                     number: this.state.NumOfStudents,
                     studentsList: selected
                 }
@@ -153,6 +156,10 @@ class MakeAClass extends React.Component {
         }
         if(this.state.NumOfGrades == 1){
             if(this.state.NumOfStudents>0){
+                //RegisterClass();
+                //Alert.alert("Selected Students:",""+selected)
+                //alert("Should Register Class Now!")
+                //this.CheckClassName()
                 this.RegisterClass()
             }
         }
@@ -169,19 +176,7 @@ class MakeAClass extends React.Component {
                 {this.onChecked(item.fullname)}}>
                     <CheckBox value={item.checked} onChange={()=> {this.checkBox_Test}}/>
                     <Text style={{fontWeight:"bold"}}>{item.fullname}</Text>
-                </TouchableOpacity>
-            )
-        })
-    }
-
-    renderTeacherList(){
-        if(this.state.isLoaded!=false)
-        return this.state.teachers.map((item,key)=> {
-            return(
-                <TouchableOpacity style={{ flexDirection: "row", alignItems: "center" , }} key={key} onPress={()=> 
-                {this.onChecked(item.fullname)}}>
-                    <CheckBox value={item.checked} onChange={()=> {this.checkBox_Test}}/>
-                    <Text style={{fontWeight:"bold"}}>{item.fullname}</Text>
+                    {/* {(console.log('Key:'+ key))} */}
                 </TouchableOpacity>
             )
         })
@@ -195,6 +190,7 @@ class MakeAClass extends React.Component {
                 {this.onCheckedGrade(item.id)}}>
                     <CheckBox value={item.checked} onChange={()=> {this.checkBox_Test}}/>
                     <Text style={{fontWeight:"bold"}}>{item.key}</Text>
+                    {/* {(console.log('Key:'+ key))} */}
                 </TouchableOpacity>  
             )
         })
@@ -226,14 +222,16 @@ class MakeAClass extends React.Component {
     render(){
         return (
             <View style={styles.container}>
-                <Text>Choose Students</Text>
+                <Text>Choose to remove from current Class</Text>
                 {this.renderStudentList()}
-                <Text>choose Class Grade</Text>
+                <Text>Add more students to current class</Text>
                 {this.renderClassList()}
-                <Button  
+                <Button 
+                    //title="Show/Hide List of Students" 
                     title="Register Class"
                     onPress={()=>{
                         this.getSelectedStudents();
+                        //console.log("Verify num of students: "+this.state.NumOfStudents)
                     }
                     }/>
             </View>
@@ -345,4 +343,4 @@ class MakeAClass extends React.Component {
             })
             
   
-export default MakeAClass;
+export default ClassDetails;

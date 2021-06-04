@@ -2,27 +2,32 @@ import React, { useCallback, useContext, useEffect, useState } from 'react';
 import {View, Text, StyleSheet ,Image, Button} from 'react-native';
 import colors from '../../constants/Colors'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { NavigationActions, StackActions } from 'react-navigation'
 
 const ChildProfile = props => {
 
     const [user, setUser] = useState()
 
     useEffect(() => {
-        _retrieveData();
-    }, []); 
-
-    _retrieveData= async () => {
-        try{
-            AsyncStorage.getItem('ChildFullname')
+        AsyncStorage.getItem('ChildFullname')
                 .then(value => {
                     if(value!= null) {
                         setUser(value)
                     }
                 })
-        } catch (error){
-            console.warn(error)
-        }
-    }  
+    }, []); 
+
+    resetStack = () => {
+        props.navigation.dispatch(StackActions.reset({
+            index: 0,
+            actions: [
+              NavigationActions.navigate({
+                routeName: 'FirstScreen',
+              }),
+            ],
+          }
+        ))
+    }
 
     return (
         <View style={styles.screen}>
@@ -44,11 +49,31 @@ const ChildProfile = props => {
                 title="Watch Presence"
                 onPress={() => props.navigation.navigate({routeName:'WatchPresence'})}
             />
-
+            <Button
+                title="Watch Class Details"
+                onPress={() => props.navigation.navigate({routeName:'WatchClass'})}
+            /> 
            <Button
                 title="Watch School Details"
                 onPress={() => props.navigation.navigate({routeName:'SchoolDetails'})}
             /> 
+            <Button
+                title="Teacher Details"
+                onPress={() => props.navigation.navigate({routeName:'TeacherDetails'})}
+            />
+            <Button
+                title="Personal Details"
+                onPress={() => props.navigation.navigate({routeName:'CPersonalDetails'})}
+            />  
+                    <Button
+                        title="Logout"
+                        onPress={() =>props.navigation.dispatch(StackActions.reset({
+                            index: 0,
+                            actions: [
+                              NavigationActions.navigate({
+                                routeName: 'FirstScreen',}),],}))}
+                    />
+            
             {/*<Button title='Logout' onPress={this.handleSignout} />*/}
         </View>
     );

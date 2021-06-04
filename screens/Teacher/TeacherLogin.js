@@ -7,13 +7,13 @@ const TeacherLogin = props => {
 
     const [user, setUser] = useState()
 
-    useEffect(() => {
-        const loggedInUser = localStorage.getItem("user");
-        if (loggedInUser) {
-            const foundUser = (loggedInUser);
-            setUser(foundUser);
-        }
-    }, []);
+    // useEffect(() => {
+    //     const loggedInUser = .getItem("user");
+    //     if (loggedInUser) {
+    //         const foundUser = (loggedInUser);
+    //         setUser(foundUser);
+    //     }
+    // }, []);
 
     return (
         <View style={styles.screen}>

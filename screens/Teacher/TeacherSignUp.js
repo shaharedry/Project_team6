@@ -2,6 +2,7 @@ import React, { useCallback, useContext, useEffect, useState } from 'react';
 import {View, Text, StyleSheet ,Button, Alert , TouchableOpacity , Keyboard} from 'react-native';
 import colors from '../../constants/Colors';
 import Input from '../../components/Input';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { NavigationActions, StackActions } from 'react-navigation'
 import Firebase ,{db} from '../../firebase/fire';
@@ -32,10 +33,10 @@ const TeacherSignUp = props => {
                 db.collection('Teacher')
                     .doc(FullnameInput)
                     .set(user)
-                AddItem('TeacherFullname',doc.data().fullname);
-                AddItem('TeacherEmail',doc.data().email)
-                AddItem('TeacherId', doc.data().id)
-                AddItem('TeacherPhone', doc.data().phonenum)
+                AddItem('TeacherFullname',FullnameInput);
+                AddItem('TeacherEmail',EmailInput)
+                AddItem('TeacherId', IDInput)
+                AddItem('TeacherPhone', PhoneInput)
                 props.navigation.navigate({routeName: 'TeacherProfile'});
             }
 
