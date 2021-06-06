@@ -10,49 +10,113 @@ import Navigation from '../../navigation/Navigation'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-class WatchScheduale extends React.Component {
+class WatchMessages extends React.Component {
     constructor(){
         super()
         this.state={
-            class:null,
-            days:[],
-            LesDay:[],
-
-
+            StudentsName:null,
+            TeacherEmail:null,
+            MSubject:null,
+            MDesc:null,
+            MsgTo:[],
+            TeacherName:null,
+            TeacherPhone:null,
+            ClassName:[],
             isLoaded:false,
+            EntireMsg:[]
         }
     }
 
 
 
     componentDidMount(){
+        let ChildName = null    
+        try{
+            AsyncStorage.getItem('ChildFullname')
+                .then(value => {
+                    if(value!= null) {
+                        ChildName=value;
+                    }
+                })
+            } catch (error){
+                console.warn(error)
+        }
         db.collection('Class').get().then( snapshot =>{
-            let students = []
-            let studentsName=[]
-            let className=null;
             let teacherName=null;
             snapshot.forEach( doc =>{
                 const KEY = Object.keys(doc.data());
-                console.log("KEYS is :"+KEY);
                 KEY.forEach( (key_id) => {
                     if(key_id=='studentsList'){
                         for(let i=0;i<doc.data().number;i++){
                             const data = doc.data().studentsList[i];
-                            studentsName.push({
-                                name:data,
-                                id:i    
-                            })
-                            className=doc.data().ClassName;
-                            teacherName=doc.data().ClassTeacher;
+                            const tname = doc.data().ClassTeacher;
+                            if(ChildName == data ){
+                                teacherName=tname
+                            }
                         }
-                        this.setState({StudentsName:studentsName})
-                        this.setState({ClassName:className})
                         this.setState({TeacherName:teacherName})
-                        this.setState({isLoaded:true})
                     }
                 })
             })
-        }
+        }),
+        db.collection('Class').get().then( snapshot =>{
+            let classname=[];
+            snapshot.forEach( doc =>{
+                const KEY = Object.keys(doc.data());
+                KEY.forEach( (key_id) => {
+                    if(key_id=='ClassName'){
+                        if(doc.data().ClassTeacher == this.state.TeacherName){
+                            classname.push({
+                                name:doc.data().ClassName
+                            })
+                        }
+                        this.setState({ClassName:classname})
+                    }
+                })
+            })
+        },
+        db.collection('Messages').get().then( snapshot =>{
+            let msub;
+            let mdesc;
+            let msgto=[];
+            let entiremsg=[];
+            snapshot.forEach( doc =>{
+                const KEY = Object.keys(doc.data());
+                KEY.forEach( (key_id) => {
+                    if(key_id=='classname'){
+                        let j=1;                      
+                        for(let i=0;i<this.state.ClassName.length;i++){
+                            console.log("should be "+this.state.ClassName[i].name)
+                            if(doc.data().classname == this.state.ClassName[i].name){
+                                console.log("Class is: "+this.state.ClassName[i].name)
+                                msub=doc.data().Subject
+                                mdesc=doc.data().description
+                                for(let i=0;i<doc.data().MsgTo.length;i++){
+                                    msgto.push(doc.data().MsgTo[i])
+                                }
+                                entiremsg.push({
+                                    id:j,
+                                    msgsub:msub,
+                                    msgdesc:mdesc,
+                                    msgisto:msgto
+                                })
+                                j=j+1;
+                            }
+                        }
+                        console.log("Teacher: "+this.state.TeacherName)
+                        console.log("Class: "+this.state.ClassName)
+                        this.setState({EntireMsg:entiremsg})
+                        this.setState({MSubject:msub})
+                        console.log("msub: "+msub)
+                        this.setState({MDesc:mdesc})
+                        console.log("mdesc: "+mdesc)
+                        this.setState({MsgTo:msgto})
+                        console.log("msgto: "+msgto)
+                    }
+                })
+            })
+        }),
+        this.setState({isLoaded:true})
         )
     }
 
@@ -60,21 +124,8 @@ class WatchScheduale extends React.Component {
         if(this.state.isLoaded==true)
         return (
             <View>
-                <Text>Class Name: {(this.state.ClassName)}</Text> 
-                <Text>Teacher Name: {(this.state.TeacherName)}</Text> 
-                <Text>Students in the Class:</Text> 
-
-                {this.state.StudentsName.map((item, index) => (
-                  <TouchableOpacity
-                     key = {item.id}
-                     style = {styles.container}
-                     onPress = {() => this.alertItemName(item)}>
-                     <Text style = {styles.text}>
-                        {item.name}
-                     </Text>
-                  </TouchableOpacity>
-               ))
-            }
+                <Text>Message Subject: {(this.state.MSubject)}</Text> 
+                <Text>Message Description: {(this.state.MDesc)}</Text>
             </View>
         ); 
         else{
@@ -189,4 +240,4 @@ class WatchScheduale extends React.Component {
             })
             
   
-export default WatchScheduale;
+export default WatchMessages;

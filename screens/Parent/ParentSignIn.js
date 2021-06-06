@@ -40,19 +40,6 @@ const ParentSignIn = props => {
         }
     }
 
-    resetStack = () => {
-        props.navigation.dispatch(StackActions.reset({
-            index: 0,
-            actions: [
-              NavigationActions.navigate({
-                routeName: 'TeacherProfile',
-                //params: { someParams: 'parameters goes here...' },
-              }),
-            ],
-          }
-        ))
-    }
-
     return (
         //<TouchableWithoutFeedback  onPress={Keyboard.dismiss}>
             <View style={styles.InputContainer}>

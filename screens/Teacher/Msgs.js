@@ -10,71 +10,75 @@ import Navigation from '../../navigation/Navigation'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-class WatchScheduale extends React.Component {
+class Msgs extends React.Component {
     constructor(){
         super()
         this.state={
-            class:null,
-            days:[],
-            LesDay:[],
-
-
+            StudentsName:null,
+            TeacherEmail:null,
+            MSubject:null,
+            MDesc:null,
+            MsgFrom:null,
+            TeacherName:null,
+            TeacherPhone:null,
+            ClassName:[],
             isLoaded:false,
+            EntireMsg:[],
+            From:null
         }
     }
 
 
 
     componentDidMount(){
-        db.collection('Class').get().then( snapshot =>{
-            let students = []
-            let studentsName=[]
-            let className=null;
-            let teacherName=null;
-            snapshot.forEach( doc =>{
-                const KEY = Object.keys(doc.data());
-                console.log("KEYS is :"+KEY);
-                KEY.forEach( (key_id) => {
-                    if(key_id=='studentsList'){
-                        for(let i=0;i<doc.data().number;i++){
-                            const data = doc.data().studentsList[i];
-                            studentsName.push({
-                                name:data,
-                                id:i    
-                            })
-                            className=doc.data().ClassName;
-                            teacherName=doc.data().ClassTeacher;
-                        }
-                        this.setState({StudentsName:studentsName})
-                        this.setState({ClassName:className})
-                        this.setState({TeacherName:teacherName})
-                        this.setState({isLoaded:true})
+        let teacher = null    
+        try{
+            AsyncStorage.getItem('TeacherFullname')
+                .then(value => {
+                    if(value!= null) {
+                        teacher=value;
                     }
                 })
-            })
+            } catch (error){
+                console.warn(error)
         }
-        )
+        db.collection('MessagesFromChilds').get().then( snapshot =>{
+            let msub;
+            let mdesc;
+            let msgto=[];
+            let entiremsg=[];
+            let frm;
+            snapshot.forEach( doc =>{
+                const KEY = Object.keys(doc.data());
+                KEY.forEach( (key_id) => {
+                    if(key_id=='From'){
+                        console.log("length "+doc.data().MsgTo.length)
+                            for(let i=0;i<doc.data().MsgTo.length;i++){
+                                let msgto = doc.data().MsgTo
+                                if(msgto==teacher){
+                                    frm=doc.data().From
+                                    msub=doc.data().Subject
+                                    mdesc=doc.data().description
+                                }
+                            }
+                        }
+                        this.setState({MSubject:msub})
+                        this.setState({MDesc:mdesc})
+                        this.setState({MsgFrom:frm})
+                    }
+                )
+            })
+        }),
+        this.setState({isLoaded:true})
     }
 
     render(){
         if(this.state.isLoaded==true)
         return (
-            <View>
-                <Text>Class Name: {(this.state.ClassName)}</Text> 
-                <Text>Teacher Name: {(this.state.TeacherName)}</Text> 
-                <Text>Students in the Class:</Text> 
-
-                {this.state.StudentsName.map((item, index) => (
-                  <TouchableOpacity
-                     key = {item.id}
-                     style = {styles.container}
-                     onPress = {() => this.alertItemName(item)}>
-                     <Text style = {styles.text}>
-                        {item.name}
-                     </Text>
-                  </TouchableOpacity>
-               ))
-            }
+            <View> 
+                <Text>Message From: {(this.state.MsgFrom)}</Text> 
+                <Text>Message Subject: {(this.state.MSubject)}</Text> 
+                <Text>Message Description: {(this.state.MDesc)}</Text>
             </View>
         ); 
         else{
@@ -189,4 +193,4 @@ class WatchScheduale extends React.Component {
             })
             
   
-export default WatchScheduale;
+export default Msgs;

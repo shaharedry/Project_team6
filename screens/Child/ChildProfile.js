@@ -17,18 +17,6 @@ const ChildProfile = props => {
                 })
     }, []); 
 
-    resetStack = () => {
-        props.navigation.dispatch(StackActions.reset({
-            index: 0,
-            actions: [
-              NavigationActions.navigate({
-                routeName: 'FirstScreen',
-              }),
-            ],
-          }
-        ))
-    }
-
     return (
         <View style={styles.screen}>
             <Text>Child Profile Screen</Text>
@@ -44,7 +32,14 @@ const ChildProfile = props => {
                 title="Watch Grades"
                 onPress={() => props.navigation.navigate({routeName:'WatchGrades'})}
             />
-                
+            <Button
+                title="Message Teacher"
+                onPress={() => props.navigation.navigate({routeName:'MsgToTeacher'})}
+            />
+            <Button
+                title="Watch Messages"
+                onPress={() => props.navigation.navigate({routeName:'WatchMessages'})}
+            />
             <Button
                 title="Watch Presence"
                 onPress={() => props.navigation.navigate({routeName:'WatchPresence'})}

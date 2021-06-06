@@ -55,10 +55,13 @@ import PersonalDetails from '../screens/Teacher/PersonalDetails'
 import MakeSchedule from '../screens/Teacher/MakeSchedule'
 import PPersonalDetails from '../screens/Parent/PPersonalDetails'
 import CPersonalDetails from '../screens/Child/CPersonalDetails'
+import MsgToTeacher from '../screens/Child/MsgToTeacher'
+import WatchMessages from '../screens/Child/WatchMessages'
 
-
-
-
+import CreateTask from '../screens/Teacher/CreateTask'
+import Msgs from '../screens/Teacher/Msgs'
+import SendMessage from '../screens/Teacher/SendMessage'
+import WatchScheduale from '../screens/Child/WatchScheduale'
 
 //import ParentSignUp from '../screens/Parent/ParentSignUp' //Invariant Violation
 //import ParentSignIn from '../screens/Parent/ParentSignIn' //Invariant Violation
@@ -93,6 +96,9 @@ const AppNavigator = createStackNavigator({
     ClassDetails: { screen: ClassDetails,headerTitle:'Schovid'},
     PersonalDetails: {screen : PersonalDetails,headerTitle:'Schovid'},
     MakeSchedule : {screen : MakeSchedule,headerTitle:'Schovid'},
+    CreateTask: {screen: CreateTask,headerTitle:'Schovid'},
+    SendMessage: { screen:SendMessage,headerTitle:'Schovid'},
+    Msgs: {  screen:Msgs,headerTitle:'Schovid'},
 
 
 
@@ -114,6 +120,9 @@ const AppNavigator = createStackNavigator({
     WatchPresence:{ screen:  WatchPresence ,headerTitle: 'Schovid'},
     WatchClass: { screen:  WatchClass ,headerTitle: 'Schovid'},
     CPersonalDetails : { screen:  CPersonalDetails ,headerTitle: 'Schovid'},
+    MsgToTeacher: {screen: MsgToTeacher,headerTitle:'Schovid'},
+    WatchMessages: {screen: WatchMessages,headerTitle:'Schovid'},
+    WatchScheduale: {screen: WatchScheduale,headerTitle:'Schovid'},
 
     Signup:{ screen:  Signup ,headerTitle: 'Schovid'}
 
