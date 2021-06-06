@@ -69,11 +69,18 @@ const ChildSignUp = props => {
                 db.collection('Child')
                     .doc(FullnameInput)
                     .set(user)
-                AddItem('ChildFullname',doc.data().fullname);
-                //AddItem('ChildEmail',doc.data().email)
-                AddItem('ChildId', doc.data().id)
-                AddItem('ChildPhone', doc.data().phonenum)
-                props.navigation.navigate({routeName: 'ChildProfile'});
+                AddItem('ChildFullname',user.fullname);
+                AddItem('ChildId', user.id)
+                AddItem('ChildPhone', user.phonenum)
+                
+                db.collection('Parent').doc(fullname).update({Children:ChildAr});
+                Alert.alert(
+                    "Created Succesfully",
+                    "Your Child User has been created succesfully!",
+                    [
+                      { text: "OK", onPress: () => this.props.navigation.navigate({routeName: 'ParentProfile'}) }
+                    ]
+                  );
             }
 
         } catch (e){

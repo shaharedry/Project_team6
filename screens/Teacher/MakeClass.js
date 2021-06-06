@@ -25,7 +25,20 @@ const MakeClass = props => {
                         console.log('name is:'+doc.data().fullname)
                         //names.push(doc.data().fullname)
                     }
+<<<<<<< Updated upstream
                     else{
+=======
+                    if(students==null){
+                        this.props.navigation.navigate({routeName: 'TeacherProfile'});
+                        Alert.alert("Error!","All students are assigned to classes!")
+                        Alert.alert(
+                            "Error!",
+                            "All students are already assigned to classes!",
+                            [
+                            { text: "OK", onPress: () => this.props.navigation.navigate({routeName: 'TeacherProfile'}) }
+                            ]
+                        );
+>>>>>>> Stashed changes
 
                     }
                 })
@@ -63,7 +76,26 @@ const MakeClass = props => {
 
     const signup = async() =>{ 
         try{
+<<<<<<< Updated upstream
             const response = await Firebase.auth().signInWithEmailAndPassword(Email, Pass)
+=======
+            const nameofclass=this.CheckClassName();
+            console.log("nameofclass: "+nameofclass)
+            var keys = this.state.students.map((t) => t.fullname)
+            const checks = this.state.students.map((t) => t.checked)
+            let selected = [] 
+            for (let i=0;i<checks.length; i++){
+                if(checks[i] == true ){
+                    selected.push(keys[i])
+                }
+            }
+            const Teacher = this.state.user;
+            console.log(Teacher)
+            //console.log("Teacher name : "+Teacher)
+            //console.log("User is: " + this.state.user)
+            //console.log("Students to update: "+selected)
+            const response = await firebase.auth().signInWithEmailAndPassword('HarelElihu@gmail.com', '123123')
+>>>>>>> Stashed changes
             if (response.user.uid) {
                 const Class = {
                     fullname: FullnameInput,

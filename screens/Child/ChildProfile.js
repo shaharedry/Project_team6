@@ -49,6 +49,37 @@ const ChildProfile = props => {
                 title="Watch School Details"
                 onPress={() => props.navigation.navigate({routeName:'SchoolDetails'})}
             /> 
+            <Button
+                title="Teacher Details"
+                onPress={() => props.navigation.navigate({routeName:'TeacherDetails'})}
+            />
+            <Button
+                title="Personal Details"
+                onPress={() => props.navigation.navigate({routeName:'CPersonalDetails'})}
+            /> 
+            <Button
+                title="Watch Messages"
+                onPress={() => props.navigation.navigate({routeName:'WatchMessages'})}
+            /> 
+            <Button
+                title="Watch Tasks"
+                onPress={() => props.navigation.navigate({routeName:'WatchTasks'})}
+            /> 
+            <Button
+                title="Msg To Teacher"
+                onPress={() => props.navigation.navigate({routeName:'MsgToTeacher'})}
+            /> 
+             
+
+                    <Button
+                        title="Logout"
+                        onPress={() =>props.navigation.dispatch(StackActions.reset({
+                            index: 0,
+                            actions: [
+                              NavigationActions.navigate({
+                                routeName: 'FirstScreen',}),],}))}
+                    />
+            
             {/*<Button title='Logout' onPress={this.handleSignout} />*/}
         </View>
     );

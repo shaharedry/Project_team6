@@ -53,22 +53,6 @@ class ChildProfiles extends React.Component {
         })
         .catch( error => Alert.alert('Error',error.message))
     }
-    
-    renderStudentList(){
-        if(this.state.isLoaded!=false)
-        return this.state.students.map((item,key)=> {
-            return(
-                <TouchableOpacity style={{flexDirection: "row",alignItems: "center" }} key={key} onPress={()=> {this.value=!this.value}}>
-                    <CheckBox value={false}/>
-                    <Text style={{fontWeight:"bold"}}>{item.fullname}</Text>
-                </TouchableOpacity>
-            )
-        })
-    }
-
-    clickEventListener(item) {
-        Alert.alert(item.fullname, item.email)
-    }
 
     onChecked(id){
         const data = this.state.students
@@ -110,32 +94,6 @@ class ChildProfiles extends React.Component {
 
     clickEventListener(item) {
         Alert.alert(item.fullname, item.email)
-    }
-
-    onChecked(id){
-        const data = this.state.students
-        const index = data.findIndex(x => x.id === id);
-        console.log('id is '+ id)
-        console.log('index is '+index)
-        const isInList = false;
-        const checked = []
-        if(checked.length > 0){
-            console.log('checked length wasnt 0')
-            for(let i=0;i<checked.length;i++){
-                //console.log('checked list is:'+checked[i])
-                if(checked[i]==data[index])
-                    isInList = true;
-            }
-            if(isInList== false)
-                checked.push(data[index]);
-        }
-        else{
-            console.log('checked length was 0')
-            console.log('data is' + data[index])
-            checked.push(data[index]);
-        }
-        this.setState({ checked: checked})
-        
     }
 
     _retrieveData= async () => {

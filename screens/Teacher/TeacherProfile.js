@@ -39,6 +39,120 @@ const TeacherProfile = props => {
                     style={styles.image}
                     />
             </View>
+            <View>
+                {/* <View style={styles.buttoncontainer}>
+                    <Button
+                        title="Enter Grades"
+                        onPress={() => {
+                            props.navigation.navigate({routeName:'EnterGrades'})}
+                        }
+                    />
+                </View> */}
+                <View style={styles.buttoncontainer}>
+                    <Button
+                        title="Watch Messages"
+                        onPress={() => {
+                            props.navigation.navigate({routeName:'Msgs'})}
+                        }
+                    />
+                </View>
+                <View style={styles.buttoncontainer}>
+                    <Button
+                        title="Create Task"
+                        onPress={() => {
+                            props.navigation.navigate({routeName:'CreateTask'})}
+                        }
+                    />
+                </View>
+                {/* <View style={styles.buttoncontainer}>
+                    <Button
+                        title="Enter Presence"
+                        onPress={() => props.navigation.navigate({routeName:'EnterPresence'})}
+                    />
+                </View> */}
+                {/* <View style={styles.buttoncontainer}>
+                    <Button
+                        title="View grades"
+                        onPress={() => props.navigation.navigate({routeName:'ViewGrades'})}
+                    />
+                </View>
+                <View style={styles.buttoncontainer}>
+                    <Button
+                        title="View presence"
+                        //onPress={() => props.navigation.navigate({routeName:'ViewPresence'})}
+                    />
+                </View> */}
+                {/* <View style={styles.buttoncontainer}>
+                    <Button
+                        title="create Class"
+                        onPress={() => props.navigation.navigate({routeName:'createClass'})}
+                    />
+                </View> */}
+                <View style={styles.buttoncontainer}>
+                    <Button
+                        title="create Class - Harel and Shahar"
+                        onPress={() => props.navigation.navigate({routeName:'MakeClass'})}
+                    />
+                </View>
+                <View style={styles.buttoncontainer}>
+                    <Button
+                        title="Edit Class"
+                        onPress={() => props.navigation.navigate({routeName:'EditClass'})}
+                    />
+                </View>
+                <View style={styles.buttoncontainer}>
+                    <Button
+                    title="Watch School Details"
+                    onPress={() => props.navigation.navigate({routeName:'SchoolDetails'})}
+                    />
+                </View>
+                <View style={styles.buttoncontainer}>
+                    <Button
+                    title="Watch Personal Details"
+                    onPress={() => props.navigation.navigate({routeName:'PersonalDetails'})}
+                    />
+                </View>
+                <View style={styles.buttoncontainer}>
+                    <Button
+                        title="Subtraction Confirmation"
+                        onPress={() => props.navigation.navigate({routeName:'SubtractionConfirmation'})}
+                    />
+                </View>
+                <View style={styles.buttoncontainer}>
+                    <Button
+                        title="Presence Correction"
+                        onPress={() => props.navigation.navigate({routeName:'PresenceCorrection'})}
+                    />
+                </View>
+                <View style={styles.buttoncontainer}>
+                    <Button
+                        title="Score Correction"
+                        onPress={() => props.navigation.navigate({routeName:'ScoreCorrection'})}
+                    />
+                </View>
+                <View style={styles.buttoncontainer}>
+                    <Button
+                        title="Make Class Schedule"
+                        onPress={() => props.navigation.navigate({routeName:'MakeSchedule'})}
+                    />
+                </View>
+                <View style={styles.buttoncontainer}>
+                    <Button
+                        title="Send Message"
+                        onPress={() => props.navigation.navigate({routeName:'SendMessage'})}
+                    />
+                </View>
+                <View style={styles.buttoncontainer}>
+                    <Button
+                        title="Logout"
+                        onPress={() =>props.navigation.dispatch(StackActions.reset({
+                            index: 0,
+                            actions: [
+                              NavigationActions.navigate({
+                                routeName: 'FirstScreen',}),],}))}
+                    />
+                </View>
+            </View>
             <View style={styles.buttoncontainer}>
                 <Button
                     title="Enter Grades"
