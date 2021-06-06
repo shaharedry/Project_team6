@@ -35,7 +35,7 @@ const TeacherProfile = props => {
                     />
             </View> */}
             <View>
-                <View style={styles.buttoncontainer}>
+                {/*<View style={styles.buttoncontainer}>
                     <Button
                         title="Enter Grades"
                         onPress={() => {
@@ -60,13 +60,31 @@ const TeacherProfile = props => {
                         title="View presence"
                         //onPress={() => props.navigation.navigate({routeName:'ViewPresence'})}
                     />
-                </View>
+                </View> */}
                 {/* <View style={styles.buttoncontainer}>
                     <Button
                         title="create Class"
                         onPress={() => props.navigation.navigate({routeName:'createClass'})}
                     />
                 </View> */}
+                <View style={styles.buttoncontainer}>
+                    <Button
+                        title="Send Message"
+                        onPress={() => props.navigation.navigate({routeName:'SendMessage'})}
+                    />
+                </View>
+                <View style={styles.buttoncontainer}>
+                    <Button
+                        title="View Messages"
+                        onPress={() => props.navigation.navigate({routeName:'Msgs'})}
+                    />
+                </View>
+                <View style={styles.buttoncontainer}>
+                    <Button
+                        title="Create Tasks"
+                        onPress={() => props.navigation.navigate({routeName:'CreateTask'})}
+                    />
+                </View>
                 <View style={styles.buttoncontainer}>
                     <Button
                         title="create Class - Harel and Shahar"
