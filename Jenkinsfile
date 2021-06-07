@@ -4,13 +4,14 @@ pipeline {
         stage('Build') {
             agent {
                 docker {
-                    image 'node:6-alpine' 
+                    image 'node:10-alpine' 
                     args '-p 3000:3000'
                 }
             }
             steps {
-                sh 'apt install npm'
-                //sh 'RUN apk add install npm'
+                sh 'npm install'
+                //RUN apk update && apk upgrade &&
+                //apk add --no-cache git
                 echo 'finished build'
             }
         }

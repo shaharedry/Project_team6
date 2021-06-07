@@ -2,12 +2,21 @@ import React, { useCallback, useContext, useEffect, useState } from 'react';
 import {View, Text, StyleSheet ,Button, Alert , TouchableOpacity , Keyboard} from 'react-native';
 import colors from '../../constants/Colors';
 import Input from '../../components/Input';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { createParent } from '../../actions/Parent';
+import { NavigationActions, StackActions } from 'react-navigation'
 import Firebase ,{db} from '../../firebase/fire';
 
 const TeacherSignUp = props => {
+    const AddItem = async (saveas,save) =>{
+        try{
+            console.log("saving to async storage: "+ save)
+            await AsyncStorage.setItem(saveas,save)
+        } catch (error){
+            console.warn(error)
+        }
+    }
+
     const signup = async() =>{ 
         try{
             const response = await Firebase.auth().createUserWithEmailAndPassword(EmailInput, PassInput)
@@ -19,20 +28,31 @@ const TeacherSignUp = props => {
                     phonenum: PhoneInput,
                     id:IDInput,
                     Role: 'Teacher', 
-
-                    Grade: GradeInput
-
-                   
+                    TeacherOfClass: null   
                 }
                 db.collection('Teacher')
-                    .doc(response.user.uid)
+                    .doc(FullnameInput)
                     .set(user)
-
+                AddItem('TeacherFullname',FullnameInput);
+                AddItem('TeacherEmail',EmailInput)
+                AddItem('TeacherId', IDInput)
+                AddItem('TeacherPhone', PhoneInput)
                 props.navigation.navigate({routeName: 'TeacherProfile'});
             }
 
         } catch (e){
-            console.log(e);
+            if(e.code == 'auth/invalid-email'){
+                Alert.alert("Bad Email!", e.message)
+                console.log(e);
+            }
+            if(e.code == 'auth/email-already-in-use'){
+                Alert.alert("This Email is already Registered!", "The email address is already in use by another account.")
+                console.log(e);
+            }
+            else{
+                Alert.alert(e.code,e.message)
+                console.log(e);
+            }
 
         }
     }
@@ -98,6 +118,7 @@ const TeacherSignUp = props => {
             <View style={styles.InputContainer}>
                 <Text>Parent Sign Up Screen</Text>
                 <Input
+                    testID={'fullname'}
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
@@ -107,6 +128,7 @@ const TeacherSignUp = props => {
                     value={FullnameInput}
                 />
                 <Input 
+                    testID={'email'}
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
@@ -116,6 +138,7 @@ const TeacherSignUp = props => {
                     value={EmailInput}
                 />
                 <Input 
+                    testID={'phone'}
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
@@ -125,6 +148,7 @@ const TeacherSignUp = props => {
                     value={PhoneInput}
                 />
                 <Input 
+                    testID={'password'}
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
@@ -132,7 +156,7 @@ const TeacherSignUp = props => {
                     keyboardType="visible-password"
                     onChangeText={PassHandler}
                     value={PassInput}
-                    secureTextEntry={false}
+                    secureTextEntry={true}
                 />
                 <Input 
                     style={styles.inputField}
@@ -145,6 +169,7 @@ const TeacherSignUp = props => {
                     secureTextEntry={true}
                 />
                 <Input
+                    testID={'id'}
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}

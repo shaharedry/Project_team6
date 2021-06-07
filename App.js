@@ -4,6 +4,11 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import Navigation from './navigation/Navigation';
 
+import { LogBox } from 'react-native'; /// unfreeze for running on phones
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+LogBox.ignoreLogs(['Require cycle']); /// unfreeze for running on phones
+
 /*const FetchFonts =()=>{
   return Font.loadAsync({
     'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
@@ -13,16 +18,17 @@ import Navigation from './navigation/Navigation';
 
 
 export default function App() {
-  /*const [FontLoaded,setFontLoaded] = useState(false);
+  const [FontLoaded,setFontLoaded] = useState(false);
 
-  if(!FontLoaded){
-    return (
-    <AppLoading
-      startAsync={FetchFonts}
-      onFinish={() => setFontLoaded(true)}
-      />
-      );
-    } */
+  // if(!FontLoaded){
+  //   return (
+  //   <AppLoading
+  //     startAsync={FetchFonts}
+  //     onFinish={() => setFontLoaded(true)}
+  //     />
+  //     );
+  //   } 
+  AsyncStorage.clear();
   return <Navigation/>;
 }
 

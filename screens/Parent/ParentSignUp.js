@@ -3,6 +3,7 @@ import {View, Text, StyleSheet ,Button, Alert , TouchableOpacity , Keyboard} fro
 import colors from '../../constants/Colors';
 import Input from '../../components/Input';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { createParent } from '../../actions/Parent';
 import Firebase ,{db} from '../../firebase/fire';
@@ -22,6 +23,15 @@ const ParentSignUp = props => {
         setenteredInput(inputText.replace(/^[A-Za-z]/));
     }; */
 
+    const AddItem = async (saveas,save) =>{
+        try{
+            console.log("saving to async storage: "+ save)
+            await AsyncStorage.setItem(saveas,save)
+        } catch (error){
+            console.warn(error)
+        }
+    }
+
     const signup = async() =>{
 
         try{
@@ -33,23 +43,36 @@ const ParentSignUp = props => {
                     fullname: FullnameInput,
                     phonenum: PhoneInput,
                     id:IDInput,
-
                     Role: 'Parent', 
-                    Children: child
+                    Children: null
                    
                 }
                 db.collection('Parent')
-                    .doc(response.user.uid)
+                    .doc(FullnameInput)
                     .set(user)
-
+                AddItem('ParentFullname',user.fullname);
+                AddItem('ParentEmail',user.email)
+                AddItem('ParentId',user.id)
+                AddItem('ParentPhone', user.phonenum)
                 props.navigation.navigate({routeName: 'ParentLogin'});
             }
 
         } catch (e){
-            console.log(e);
-            alert(e);
+            if(e.code == 'auth/invalid-email'){
+                Alert.alert("Bad Email!", e.message)
+                console.log(e);
+            }
+            if(e.code == 'auth/email-already-in-use'){
+                Alert.alert("This Email is already Registered!", "The email address is already in use by another account.")
+                console.log(e);
+            }
+            else{
+                Alert.alert(e.code,e.message)
+                console.log(e);
+            }
         }
     }
+
 
 
     const [FullnameInput,setFname]= useState('');
@@ -67,25 +90,25 @@ const ParentSignUp = props => {
         setEmail(EmailText.replace(/^[0-9](9,12)/))
     }
 
-    const [PhoneInput,setPhone]= useState('0502606484');
+    const [PhoneInput,setPhone]= useState('');
 
     const PhoneHandler = PhoneText => {
         setPhone(PhoneText.replace(/^[0-9](9,12)/))
     }
     
-    const [PassInput,setPass]= useState('123123');
+    const [PassInput,setPass]= useState('');
 
     const PassHandler = PassText => {
         setPass(PassText)
     }
 
-    const [IDInput,setID]= useState('205521776');
+    const [IDInput,setID]= useState('');
 
     const IDHandler = IDText => {
         setID(IDText.replace(/^[0-9](9,9)/))
     }
     
-    const [VerifyPass, setVerifyPass] = useState ('123123');
+    const [VerifyPass, setVerifyPass] = useState ('');
 
     const VerifyHandler = VerifyPassText =>{
         setVerifyPass(VerifyPassText)
@@ -105,6 +128,7 @@ const ParentSignUp = props => {
             <View style={styles.InputContainer}>
                 <Text>Parent Sign Up Screen</Text>
                 <Input
+                    testID={'fullname'}
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
@@ -114,6 +138,7 @@ const ParentSignUp = props => {
                     value={FullnameInput}
                 />
                 <Input 
+                    testID={'email'}
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
@@ -123,6 +148,7 @@ const ParentSignUp = props => {
                     value={EmailInput}
                 />
                 <Input 
+                    testID={'phone'}
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
@@ -132,6 +158,7 @@ const ParentSignUp = props => {
                     value={PhoneInput}
                 />
                 <Input 
+                    testID={'password'}
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
@@ -140,7 +167,6 @@ const ParentSignUp = props => {
                     onChangeText={PassHandler}
                     value={PassInput}
                     secureTextEntry={true}
-
                 />
                 <Input 
                     style={styles.inputField}
@@ -153,6 +179,7 @@ const ParentSignUp = props => {
                     secureTextEntry={true}
                 />
                 <Input
+                    testID={'id'}
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
@@ -160,7 +187,7 @@ const ParentSignUp = props => {
                     keyboardType="number-pad"
                     onChangeText={IDHandler}
                     value={IDInput}
-                />
+                /> 
                 <View style={styles.buttoncontainer}>
                         <Button title="Sign Up" onPress={() => {
                             if(PassInput!=''){

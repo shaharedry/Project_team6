@@ -6,16 +6,16 @@ import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { createGrade } from '../../actions/Grades';
 import Firebase ,{db} from '../../firebase/fire';
 
-const EnterPresence = props => {
+const PresenceCorrection = props => {
     const signup = async() =>{ 
         try{
             const response = await Firebase.auth().signInWithEmailAndPassword(Email, Pass)
             if (response.user.uid) {
                 const Presence = {
-                    fullname: FullnameInput,
+                    fullname: FullnameInput,  
                     class:ClassInput,
-                    lesson:lessonInput,    
-                    Presence: PresenceInput   
+                    lesson:lessonInput,                  
+                    Presence: PresenceInput
                 }
                 db.collection('Presence')
                     .doc(FullnameInput)
@@ -55,7 +55,7 @@ const EnterPresence = props => {
 
 return(
     <View style={styles.InputContainer}>
-                <Text>Enter Presence</Text>
+                <Text>Presence Correction</Text>
                 <Input
                     style={styles.inputField}
                     blurOnSubmit
@@ -147,4 +147,4 @@ return(
             })
             
             
-            export default EnterPresence
+export default PresenceCorrection

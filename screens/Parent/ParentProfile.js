@@ -1,13 +1,28 @@
-import React from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import {View, Text, StyleSheet ,Button ,Image} from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import ProfileImage from '../../components/ProfileImage';
 import colors from '../../constants/Colors'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { NavigationActions, StackActions } from 'react-navigation'
 
 const ParentProfile = props => {
+
+    const [user, setUser] = useState()
+
+    useEffect(() => {
+        AsyncStorage.getItem('ParentFullname')
+                .then(value => {
+                    if(value!= null) {
+                        setUser(value)
+                    }
+                })
+    }, []); 
+
     return (
         <View style={styles.screen}>
             <Text>Parent Profile Screen</Text>
+            <Text>Hello {(user)}</Text> 
             <View style={styles.ImageContainer}>
                 <Image
                     source={require('../../assets/images/ParentIcon.jpg')}
@@ -21,10 +36,31 @@ const ParentProfile = props => {
                 style={styles.buttoncontainer}
             />
             <Button
-                title="Child profile"
+                title="Child profiles"
                 onPress={() => {props.navigation.navigate({routeName:'ChildProfile'})}}
                 style={styles.buttoncontainer}
             />
+            <Button
+                title="Watch School Details"
+                onPress={() => props.navigation.navigate({routeName:'SchoolDetails'})}
+            />
+            <Button
+                title="Health Declaration"
+                onPress={() => props.navigation.navigate({routeName:'GreenTav'})}
+            />
+            <Button
+                title="Personal Details"
+                onPress={() => props.navigation.navigate({routeName:'PPersonalDetails'})}
+            />  
+                    <Button
+                        title="Logout"
+                        onPress={() =>props.navigation.dispatch(StackActions.reset({
+                            index: 0,
+                            actions: [
+                              NavigationActions.navigate({
+                                routeName: 'FirstScreen',}),],}))}
+                    />
+            
         {/*} <Button title='Logout' onPress={this.handleSignout} /> */}
         </View>  
     /*<ScrollView>

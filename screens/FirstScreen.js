@@ -1,12 +1,12 @@
 import React ,{useState} from 'react'
 import {View ,Alert , Text, StyleSheet, Button, TouchableWithoutFeedback, Keyboard} from 'react-native'
 import Card from '../components/Card';
+import { Platform } from 'react-native';
 import colors from '../constants/Colors';
 import Input from '../components/Input';
 //import ParentSignUp from './Parent/ParentSignUp';
 
 const FirstScreen = props => {
-
     return(
             <View style={styles.screen}>
                 {/*<Text style={styles.title}>Welcome</Text>*/}
@@ -26,6 +26,7 @@ const FirstScreen = props => {
                     </View>    
                     <View style={styles.buttoncontainer}>
                         <Button title="Sign In" onPress={() => {
+                            console.log('wtf?!')
                              props.navigation.navigate({routeName: 'TypeSignin'});
                         }} color={colors.secondery} />
                     </View>

@@ -6,7 +6,7 @@ import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { createGrade } from '../../actions/Grades';
 import Firebase ,{db} from '../../firebase/fire';
 
-const EnterPresence = props => {
+const ScoreCorrection = props => {
     const signup = async() =>{ 
         try{
             const response = await Firebase.auth().signInWithEmailAndPassword(Email, Pass)
@@ -14,12 +14,12 @@ const EnterPresence = props => {
                 const Presence = {
                     fullname: FullnameInput,
                     class:ClassInput,
-                    lesson:lessonInput,    
-                    Presence: PresenceInput   
+                    lesson:lessonInput,
+                    grade: gradeInput
                 }
-                db.collection('Presence')
+                db.collection('Grades')
                     .doc(FullnameInput)
-                    .set(Presence)
+                    .set(grade)
 
                 props.navigation.navigate({routeName: 'TeacherProfile'});
             }
@@ -48,14 +48,14 @@ const EnterPresence = props => {
     const lessonHandler = lessonText => {
         setlesson(lessonText.replace(/[^A-Za-z]/))
     }
-    const [PresenceInput,setPresence]= useState('');
-    const PresenceHandler = PresenceText => {
-        setPresence(PresenceText.replace(/[^A-Za-z]/))
+    const [gradeInput,setgrade]= useState('');
+    const gradeHandler = gradeText => {
+        setgrade(gradeText.replace(/[^A-Za-z]/))
     }
 
 return(
     <View style={styles.InputContainer}>
-                <Text>Enter Presence</Text>
+                <Text>Score Correction</Text>
                 <Input
                     style={styles.inputField}
                     blurOnSubmit
@@ -87,10 +87,10 @@ return(
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
-                    placeholder='Present / not present'
+                    placeholder=' New Grade'
                     keyboardType="ascii-capable"
-                    onChangeText={PresenceHandler}
-                    value={PresenceInput}
+                    onChangeText={gradeHandler}
+                    value={gradeInput}
                     
                 />
                 
@@ -147,4 +147,4 @@ return(
             })
             
             
-            export default EnterPresence
+            export default ScoreCorrection

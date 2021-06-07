@@ -4,32 +4,109 @@ import colors from '../../constants/Colors';
 import Input from '../../components/Input';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import Firebase ,{db} from '../../firebase/fire';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ChildSignUp = props => {
+
+    const [Parentemail, setParentEmail] = useState()
+    const [id, setId] = useState()
+    const [fullname, setFullname] = useState()
+    const [phone, setParentPhone] = useState()
+    const ChildAr= [];
+    
+    const AddItem = async (saveas,save) =>{
+        try{
+            console.log("saving to async storage: "+ save)
+            await AsyncStorage.setItem(saveas,save)
+        } catch (error){
+            console.warn(error)
+        }
+    }
+
+    useEffect(() => {
+        _retrieveData();
+    }, []); 
+
+    _retrieveData= async () => {
+        try{
+            AsyncStorage.getItem('ParentFullname')
+                .then(value => {
+                    if(value!= null) {
+                        setFullname(value)
+                        console.log("ParentFullname: "+value)
+                    }
+                })
+            AsyncStorage.getItem('ParentEmail')
+                .then(value => {
+                    if(value!= null) {
+                        setParentEmail(value)
+                        console.log("ParentEmail: "+value)
+                    }
+                })
+            AsyncStorage.getItem('ParentId')
+                .then(value => {
+                    if(value!= null) {
+                        setId(value)
+                        console.log("ParentId: "+value)
+                    }
+                })
+            AsyncStorage.getItem('ParentPhone')
+                .then(value => {
+                    if(value!= null) {
+                        setParentPhone(value)
+                        console.log("ParentPhone: "+value)
+                    }
+                })
+        } catch (error){
+            console.warn(error)
+        }
+    } 
+
     const signup = async() =>{ 
         try{
-            const response = await Firebase.auth().createUserWithEmailAndPassword(EmailInput, PassInput)
+            const response = await Firebase.auth().createUserWithEmailAndPassword(IDInput+"@gmail.com", PassInput)
             if (response.user.uid) {
                 const user = {
                     uid: response.user.uid,
-                    email: EmailInput,
+                    email: email,
                     fullname: FullnameInput,
                     phonenum: PhoneInput,
-                    id:IDInput,
-                    Role: 'Child', 
-                    ChildOf: ChildofUser,
-                    Grade: GradeInput
-                   
+                    id: IDInput,
+                    Role: 'Child',      
+                    ChildOf: fullname,
+                    class: null,
+                    checked: false
                 }
                 db.collection('Child')
-                    .doc(response.user.uid)
+                    .doc(FullnameInput)
                     .set(user)
-
-                props.navigation.navigate({routeName: 'ChildProfile'});
+                AddItem('ChildFullname',user.fullname);
+                AddItem('ChildId', user.id)
+                AddItem('ChildPhone', user.phonenum)
+                
+                db.collection('Parent').doc(fullname).update({Children:ChildAr});
+                Alert.alert(
+                    "Created Succesfully",
+                    "Your Child User has been created succesfully!",
+                    [
+                      { text: "OK", onPress: () => props.navigation.navigate({routeName: 'ParentProfile'}) }
+                    ]
+                  );
             }
 
         } catch (e){
-            console.log(e);
+            if(e.code == 'auth/invalid-email'){
+                Alert.alert("Bad Email!", e.message)
+                console.log(e);
+            }
+            if(e.code == 'auth/email-already-in-use'){
+                Alert.alert("This Email is already Registered!", "The email address is already in use by another account.")
+                console.log(e);
+            }
+            else{
+                Alert.alert(e.code,e.message)
+                console.log(e);
+            }
         }
     }
 
@@ -39,16 +116,10 @@ const ChildSignUp = props => {
         setFname(FullnameText.replace(/[^A-Za-z]+[^A-Za-z]/))
     }
 
-    const [EmailInput,setEmail]= useState('');
+    const [email, setEmail] = useState('')
 
     const EmailHandler = EmailText => {
-        setEmail(EmailText.replace(/^[0-9](9,12)/))
-    }
-
-    const [PhoneInput,setPhone]= useState('');
-
-    const PhoneHandler = PhoneText => {
-        setPhone(PhoneText.replace(/^[0-9](9,12)/))
+        setEmail(EmailText)
     }
     
     const [PassInput,setPass]= useState('');
@@ -73,16 +144,20 @@ const ChildSignUp = props => {
         setenteredInput=('');
     }
 
-    const submitHandler = useCallback(() =>{
-        console.log("Submit!");
-    },[]);
+    const [EmailInput, SetEmailInput] = useState('');
 
+    const [PhoneInput,setPhone]= useState('');
+
+    const PhoneHandler = PhoneText => {
+        setPhone(PhoneText.replace(/^[0-9](9,12)/))
+    }
 
     return (
         //<TouchableWithoutFeedback  onPress={Keyboard.dismiss}>
             <View style={styles.InputContainer}>
-                <Text>Register your child</Text>
+                <Text>Please Register your child, {(fullname)}</Text>
                 <Input
+                    testID={'fullname'}
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
@@ -91,45 +166,39 @@ const ChildSignUp = props => {
                     onChangeText={FullnameHandler}
                     value={FullnameInput}
                 />
-                {/*<Input 
-                    style={styles.inputField}
-                    blurOnSubmit
-                    autoCorrect={false}
-                    placeholder='Email'
-                    keyboardType="email-address"
-                    onChangeText={EmailHandler}
-                    value={EmailInput}
-                />*/}
                 <Input 
+                    testID={'phonenum'}
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
-                    placeholder='Phone'
+                    placeholder='Phone Number'
                     keyboardType="phone-pad"
                     onChangeText={PhoneHandler}
                     value={PhoneInput}
-                />
-                <Input 
-                    style={styles.inputField}
-                    blurOnSubmit
-                    autoCorrect={false}
-                    placeholder='Password'
-                    keyboardType="visible-password"
-                    onChangeText={PassHandler}
-                    value={PassInput}
                     secureTextEntry={false}
                 />
                 <Input 
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
+                    placeholder='Password'
+                    keyboardType="phone-pad"
+                    onChangeText={PassHandler}
+                    value={PassInput}
+                    secureTextEntry={true}
+                />
+                <Input 
+                    style={styles.inputField}
+                    blurOnSubmit
+                    autoCorrect={false}
                     placeholder='Verify Password'
-                    keyboardType="visible-password"
+                    keyboardType="phone-pad"
                     onChangeText={VerifyHandler}
                     value={VerifyPass}
                     secureTextEntry={true}
                 />
                 <Input
+                    testID={'id'}
                     style={styles.inputField}
                     blurOnSubmit
                     autoCorrect={false}
@@ -138,11 +207,11 @@ const ChildSignUp = props => {
                     onChangeText={IDHandler}
                     value={IDInput}
                 />
+                <Text>Updates will be send to : {(Parentemail)}</Text>
                 <View style={styles.buttoncontainer}>
                         <Button title="Sign Up" onPress={() => {
                             if(PassInput!=''){
                                 if(VerifyPass==PassInput){
-                                    submitHandler();
                                     signup();
                                 }
                                 else{
@@ -166,7 +235,7 @@ const ChildSignUp = props => {
                                     ],
                                     {cancelable: false},
                                   );
-                                  console.log(VerifyPass);
+                                  console.log("No Password!");
                             }
                         }} color={colors.secondery} />
                 </View>

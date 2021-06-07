@@ -7,7 +7,7 @@ const TypeSignin= props => {
         <View style={styles.screen}>
             <View style={styles.buttonContainer}>
                 <Button title="Sign In as Teacher" onPress={() => {
-                    props.navigation.navigate({routeName: 'TeacherLogin'})
+                    props.navigation.navigate({routeName: 'TeacherSignIn'})
                     }} color={colors.secondery} />
             </View>
             <View style={styles.buttonContainer}>
@@ -17,7 +17,7 @@ const TypeSignin= props => {
             </View>
             <View style={styles.buttonContainer}>
                 <Button title="Sign In as Child" onPress={() => {
-                    props.navigation.navigate({routeName: 'ChildLogin'});
+                    props.navigation.navigate({routeName: 'ChildSignIn'});
                     }} color={colors.secondery}/>
             </View>
         </View>
